@@ -1,3 +1,5 @@
+import 'package:brando/src/features/booking/views/home_screen.dart';
+import 'package:brando/src/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class BrandoApp extends StatelessWidget {
@@ -9,15 +11,8 @@ class BrandoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Michelle Yuen Jewelry',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const Scaffold(
-        body: Center(
-          child: Text('Michelle Yuen Jewelry'),
-        ),
-      ),
+      theme: AppTheme.defaultTheme(),
+      home: const HomeScreen(),
     );
   }
 }
