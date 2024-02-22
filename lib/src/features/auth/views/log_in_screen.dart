@@ -1,5 +1,9 @@
 import 'dart:ui';
 
+import 'package:brando/src/features/auth/widgets/auth_field.dart';
+import 'package:brando/src/features/auth/widgets/forgot_password.dart';
+import 'package:brando/src/features/auth/widgets/remember_me.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +19,9 @@ class _LogInScreenState extends State<LogInScreen> {
   final TextEditingController _accountNumberController =
       TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  final FocusNode _accountNumberFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
 
   @override
   void dispose() {
@@ -44,7 +51,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.libreBaskerville(
                         textStyle: Theme.of(context).textTheme.displaySmall,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w100,
                         fontStyle: FontStyle.italic,
                       ),
                     ),
@@ -67,106 +74,61 @@ class _LogInScreenState extends State<LogInScreen> {
           ),
           Flexible(
               flex: 5,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20.0),
-                    child: Text(
-                      'Log In',
-                      style: GoogleFonts.openSans(
-                        textStyle: Theme.of(context).textTheme.displaySmall,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                  ),
-                  TextField(
-                    controller: _accountNumberController,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium!
-                        .copyWith(height: 1),
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(35.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(35.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(35.0),
-                      ),
-                      // labelText: 'Account Number',
-                      labelStyle: GoogleFonts.openSans(
-                        textStyle: Theme.of(context).textTheme.titleMedium,
-                        fontWeight: FontWeight.w400,
-                        height: 1.5,
-                        color: Theme.of(context).colorScheme.surfaceVariant,
-                      ),
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12.0,
-                        ),
-                        child: Icon(
-                          Icons.person,
-                          color: Theme.of(context).colorScheme.primary,
+              child: Center(
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 30),
+                        child: Text(
+                          'Log In',
+                          style: GoogleFonts.openSans(
+                            textStyle: Theme.of(context).textTheme.displaySmall,
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
                       ),
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 20.0,
-                        vertical: 15.0,
+                      AuthField(
+                        controller: _accountNumberController,
+                        currentFocusNode: _accountNumberFocusNode,
+                        nextFocusNode: _passwordFocusNode,
+                        hintText: 'Account Number',
+                        // icon: Icons.person_rounded,
+                        icon: CupertinoIcons.person_fill,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
                       ),
-                      // contentPadding: const EdgeInsets.fromLTRB(
-                      //   20,
-                      //   30,
-                      //   20,
-                      //   0,
-                      // ),
-                    ),
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      AuthField(
+                        controller: _passwordController,
+                        currentFocusNode: _passwordFocusNode,
+                        hintText: 'Password',
+                        // icon: Icons.lock_rounded,
+                        icon: CupertinoIcons.lock_fill,
+                        obscureText: true,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 5.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            RememberMe(),
+                            ForgotPassword(),
+                          ],
+                        ),
+                      ),
+                      FilledButton(
+                        onPressed: () {},
+                        child: const Text('LOGIN'),
+                      ),
                     ],
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextField(
-                    controller: _accountNumberController,
-                    style: Theme.of(context).textTheme.titleMedium,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(35.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(35.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(35.0),
-                      ),
-                      labelText: 'Account Number',
-                      labelStyle: GoogleFonts.openSans(
-                        textStyle: Theme.of(context).textTheme.titleMedium,
-                        fontWeight: FontWeight.w400,
-                        // height: 1.5,
-                        color: Theme.of(context).colorScheme.surfaceVariant,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.person,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 20.0,
-                        vertical: 15.0,
-                      ),
-                    ),
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                    ],
-                  ),
-                ],
+                ),
               )),
         ],
       ),

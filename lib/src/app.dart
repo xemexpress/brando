@@ -50,8 +50,8 @@ class _BrandoAppState extends ConsumerState<BrandoApp>
       title: 'Michelle Yuen Jewelry',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.currentTheme(
-        brightness: themeState.appBrightness,
-      ),
+          // brightness: themeState.appBrightness,
+          ),
       home: const LogInScreen(),
     );
   }
