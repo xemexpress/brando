@@ -11,6 +11,7 @@ class AuthField extends StatefulWidget {
     required this.icon,
     this.nextFocusNode,
     this.inputFormatters,
+    this.signInUser,
     this.obscureText = false,
   });
 
@@ -21,6 +22,7 @@ class AuthField extends StatefulWidget {
   final IconData icon;
   final List<TextInputFormatter>? inputFormatters;
   final bool obscureText;
+  final void Function()? signInUser;
 
   @override
   State<AuthField> createState() => _AuthFieldState();
@@ -29,6 +31,26 @@ class AuthField extends StatefulWidget {
 class _AuthFieldState extends State<AuthField> {
   bool isEmpty = true;
 
+  @override
+  void initState() {
+    super.initState();
+
+    widget.currentFocusNode.addListener(_onFocusChange);
+  }
+
+  @override
+  void dispose() {
+    widget.currentFocusNode.removeListener(_onFocusChange);
+
+    super.dispose();
+  }
+
+  void _onFocusChange() {
+    if (!widget.currentFocusNode.hasFocus) {
+      setState(() {});
+    }
+  }
+
   void onChange(_) {
     setState(() {
       isEmpty = widget.controller.text.isEmpty;
@@ -36,14 +58,19 @@ class _AuthFieldState extends State<AuthField> {
   }
 
   void onSubmitted() {
+    widget.currentFocusNode.unfocus();
+
     if (widget.nextFocusNode != null) {
+      print('next!');
       setState(() {
-        widget.currentFocusNode.unfocus();
         FocusScope.of(context).requestFocus(widget.nextFocusNode);
       });
-    } else {
-      // Log the user in.
-      print('Log in user');
+    }
+
+    print('hi');
+    if (widget.signInUser != null) {
+      print('hello');
+      widget.signInUser!();
     }
   }
 
@@ -63,6 +90,7 @@ class _AuthFieldState extends State<AuthField> {
         focusNode: widget.currentFocusNode,
         onChanged: onChange,
         onEditingComplete: onSubmitted,
+        cursorColor: Theme.of(context).colorScheme.onPrimary,
         style: Theme.of(context).textTheme.titleMedium!.copyWith(height: 1),
         decoration: InputDecoration(
           border: OutlineInputBorder(
@@ -76,7 +104,7 @@ class _AuthFieldState extends State<AuthField> {
           ),
           hintText: widget.hintText,
           hintStyle: GoogleFonts.openSans(
-            textStyle: Theme.of(context).textTheme.titleMedium,
+            textStyle: Theme.of(context).textTheme.labelLarge,
             fontWeight: FontWeight.w400,
             color: Theme.of(context).colorScheme.surfaceVariant,
             height: 1,
@@ -85,16 +113,15 @@ class _AuthFieldState extends State<AuthField> {
             padding: const EdgeInsets.fromLTRB(10, 5, 5, 5),
             child: Icon(
               widget.icon,
-              // size: 30,
               size: 27,
               color: Theme.of(context).colorScheme.primary,
             ),
           ),
           suffixIcon: isEmpty || !widget.currentFocusNode.hasFocus
               ? null
-              : IconButton(
-                  onPressed: onClear,
-                  icon: Icon(
+              : GestureDetector(
+                  onTap: onClear,
+                  child: Icon(
                     Icons.cancel,
                     color: Theme.of(context).colorScheme.surfaceVariant,
                     size: 20,

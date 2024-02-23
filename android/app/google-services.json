@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1063177860443",
+    "project_id": "michelleyuenjewelry-booking",
+    "storage_bucket": "michelleyuenjewelry-booking.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063177860443:android:a38544ccdafefef9cad67e",
+        "android_client_info": {
+          "package_name": "com.charmnsparkle.brando"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdnjbYb7p94qA6Fk4EVU0V48zXUQYw-dk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
