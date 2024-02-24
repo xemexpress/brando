@@ -6,9 +6,11 @@ class AppTheme {
     Brightness brightness = Brightness.light,
   }) =>
       brightness == Brightness.light
-          ? ThemeData(
-              brightness: Brightness.light,
-              colorScheme: const ColorScheme.light(
+          ? ThemeData.from(
+              colorScheme: ColorScheme.fromSeed(
+                brightness: Brightness.light,
+                seedColor: Pallete.primary,
+              ).copyWith(
                 primary: Pallete.primary,
                 onPrimary: Pallete.onPrimary,
                 surfaceVariant: Pallete.surfaceVariant,

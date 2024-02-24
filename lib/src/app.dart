@@ -1,4 +1,4 @@
-import 'package:brando/src/features/auth/views/log_in_screen.dart';
+import 'package:brando/src/features/auth/view/auth_screen.dart';
 import 'package:brando/src/themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -52,7 +52,7 @@ class _BrandoAppState extends ConsumerState<BrandoApp>
       theme: AppTheme.currentTheme(
           // brightness: themeState.appBrightness,
           ),
-      home: const LogInScreen(),
+      home: const AuthScreen(),
     );
   }
 }

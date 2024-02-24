@@ -13,6 +13,7 @@ class AuthField extends StatefulWidget {
     this.inputFormatters,
     this.signInUser,
     this.obscureText = false,
+    this.textInputType = TextInputType.text,
   });
 
   final TextEditingController controller;
@@ -23,6 +24,7 @@ class AuthField extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool obscureText;
   final void Function()? signInUser;
+  final TextInputType textInputType;
 
   @override
   State<AuthField> createState() => _AuthFieldState();
@@ -61,15 +63,12 @@ class _AuthFieldState extends State<AuthField> {
     widget.currentFocusNode.unfocus();
 
     if (widget.nextFocusNode != null) {
-      print('next!');
       setState(() {
         FocusScope.of(context).requestFocus(widget.nextFocusNode);
       });
     }
 
-    print('hi');
     if (widget.signInUser != null) {
-      print('hello');
       widget.signInUser!();
     }
   }
@@ -83,6 +82,7 @@ class _AuthFieldState extends State<AuthField> {
 
   @override
   Widget build(BuildContext context) {
+    print('textInputType ${widget.textInputType}');
     return SizedBox(
       height: 40,
       child: TextField(
@@ -129,7 +129,7 @@ class _AuthFieldState extends State<AuthField> {
                 ),
           contentPadding: const EdgeInsets.only(top: 30),
         ),
-        keyboardType: TextInputType.number,
+        keyboardType: widget.textInputType,
         obscureText: widget.obscureText,
         inputFormatters: widget.inputFormatters,
       ),
