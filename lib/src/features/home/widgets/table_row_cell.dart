@@ -26,9 +26,16 @@ class TableRowCell extends StatelessWidget {
             ? Text(
                 child,
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: isHeader ? FontWeight.w600 : FontWeight.normal,
-                ),
+                style: isHeader
+                    ? Theme.of(context).textTheme.labelSmall!.copyWith(
+                          fontWeight: FontWeight.w600,
+                        )
+                    : Theme.of(context).textTheme.labelMedium!.copyWith(
+                          fontWeight: FontWeight.normal,
+                        ),
+                // style: TextStyle(
+                //   fontWeight: isHeader ? FontWeight.w600 : FontWeight.normal,
+                // ),
               )
             : child,
       ),

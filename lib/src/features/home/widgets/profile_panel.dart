@@ -15,12 +15,15 @@ class ProfilePanel extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         // Profile picture
-        const CircleAvatar(
-          radius: 40,
-          // backgroundImage: NetworkImage(
-          //   'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
-          // ),
-          child: Icon(Icons.person_rounded, size: 60),
+        CircleAvatar(
+          backgroundColor: Colors.black,
+          radius: 41.0,
+          child: CircleAvatar(
+            radius: 40,
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            foregroundColor: Theme.of(context).colorScheme.primary,
+            child: const Icon(Icons.person_rounded, size: 60),
+          ),
         ),
 
         const SizedBox(width: 20),
@@ -31,20 +34,28 @@ class ProfilePanel extends StatelessWidget {
           children: [
             ShowAndEdit(
               displayText: 'Mary Cheung',
-              onEdit: () {},
+              onEdit: () {
+                print('Edit username.');
+              },
             ),
             ShowAndEdit(
               displayText: user.email!,
-              onEdit: () {},
+              onEdit: () {
+                print('Edit username.');
+              },
               isVerified: true,
             ),
             ShowAndEdit(
               displayText: '57372948',
-              onEdit: () {},
+              onEdit: () {
+                print('Edit mobile number.');
+              },
             ),
             ShowAndEdit(
               displayText: 'pw: ******',
-              onEdit: () {},
+              onEdit: () {
+                print('Edit password.');
+              },
             ),
           ],
         ),

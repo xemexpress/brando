@@ -37,26 +37,24 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Profile info
-                ProfilePanel(),
-                const SizedBox(height: 50),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 50.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Profile info
+              ProfilePanel(),
+              const SizedBox(height: 50),
 
-                // Appointment Table
-                Text(
-                  'Appointment time slot:',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 4),
-                const AppointmentTimeSlot(),
-              ],
-            ),
+              // Appointment Table
+              Text(
+                'Appointment time slot:',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 4),
+              const AppointmentTimeSlot(),
+            ],
           ),
         ),
       ),

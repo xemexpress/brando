@@ -32,12 +32,16 @@ class AppointmentTimeSlot extends StatelessWidget {
                 children: [
                   StateButton(
                     text: 'Change',
-                    onPressed: () {},
+                    onPressed: () {
+                      print('Change booking.');
+                    },
                     backgroundColor: Theme.of(context).colorScheme.primary,
                   ),
                   StateButton(
                     text: 'Cancel',
-                    onPressed: () {},
+                    onPressed: () {
+                      print('Cancel booking.');
+                    },
                     backgroundColor:
                         Theme.of(context).colorScheme.surfaceVariant,
                   ),
