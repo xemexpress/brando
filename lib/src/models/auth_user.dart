@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 class AuthUser {
   final String id;
   final String email;
@@ -13,6 +15,13 @@ class AuthUser {
     return AuthUser(
       id: id ?? this.id,
       email: email ?? this.email,
+    );
+  }
+
+  factory AuthUser.fromFirebaseUser(User user) {
+    return AuthUser(
+      id: user.uid,
+      email: user.email!,
     );
   }
 

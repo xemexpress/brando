@@ -1,9 +1,9 @@
 import 'package:brando/src/models/models.dart' show AuthUser;
 
-abstract class AuthApiInterface {
-  Future<AuthUser> currentUser();
+abstract class AuthAPIInterface {
+  AuthUser? get currentUser;
 
-  Future<AuthUser> signIn({
+  Future<AuthUser> signInEmailAndPassword({
     required String email,
     required String password,
   });
