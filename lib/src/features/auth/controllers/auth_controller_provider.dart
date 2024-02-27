@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final authControllerProvider = StateNotifierProvider<AuthController, bool>(
   (ref) {
     final authAPI = ref.watch(authAPIProvider);
+
     return AuthController(authAPI: authAPI);
   },
 );

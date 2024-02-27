@@ -1,5 +1,5 @@
-import 'package:brando/src/apis/auth/auth_api_interface.dart';
-import 'package:brando/src/models/auth_user.dart';
+import 'package:brando/src/apis/apis.dart';
+import 'package:brando/src/models/models.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthAPI implements AuthAPIInterface {
@@ -26,26 +26,39 @@ class AuthAPI implements AuthAPIInterface {
     required String password,
   }) async {
     try {
-      final UserCredential userCredential =
-          await _firebaseAuth.signInWithEmailAndPassword(
+      await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      return AuthUser.fromFirebaseUser(userCredential.user!);
-    } on FirebaseAuthException {
-    } catch (e) {}
+      final user = currentUser;
+      if (user != null) {
+        return user;
+      } else {
+        throw UserNotLoggedInException();
+      }
+    } on FirebaseAuthException catch (e) {
+      print('Met when signing in: ${e.code} ${e.message}');
+      throw GenericAuthException(
+        message:
+            'Met a FirebaseAuthException when signing in. Please set an exception for the error code ${e.code}.',
+      );
+    } catch (e) {
+      throw GenericAuthException(
+        message: 'Unexpected error when signing in. ${e.toString()}',
+      );
+    }
   }
 
   @override
-  Future<void> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<AuthUser> signUp({required String email, required String password}) {
-    // TODO: implement signUp
-    throw UnimplementedError();
+  Future<void> signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+    } on FirebaseAuthException catch (e) {
+      print('Met when signing out: ${e.code} ${e.message}');
+    } catch (e) {
+      throw GenericAuthException(
+          message: 'Unexpected error when signing out. ${e.toString()}');
+    }
   }
 }

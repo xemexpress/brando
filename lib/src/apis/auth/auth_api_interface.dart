@@ -8,10 +8,10 @@ abstract class AuthAPIInterface {
     required String password,
   });
 
-  Future<AuthUser> signUp({
-    required String email,
-    required String password,
-  });
+  // Future<AuthUser> signUp({
+  //   required String email,
+  //   required String password,
+  // });
 
   Future<void> signOut();
 }
