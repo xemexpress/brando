@@ -82,7 +82,6 @@ class _AuthFieldState extends State<AuthField> {
 
   @override
   Widget build(BuildContext context) {
-    print('textInputType ${widget.textInputType}');
     return SizedBox(
       height: 40,
       child: TextField(

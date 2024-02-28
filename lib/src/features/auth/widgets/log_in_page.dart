@@ -16,24 +16,45 @@ class LogInPage extends ConsumerStatefulWidget {
 }
 
 class _LogInPageState extends ConsumerState<LogInPage> {
-  final TextEditingController _emailNumberController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  final FocusNode _accountNumberFocusNode = FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
-
-  void showFeedback({
-    required String message,
-  }) {
-    showSnackBar(context: context, message: message);
-  }
 
   void signInUser() async {
     try {
       await ref.read(authControllerProvider.notifier).signInEmailAndPassword(
-            email: _emailNumberController.text,
+            email: _emailController.text,
             password: _passwordController.text,
           );
+    } on InvalidEmailAuthException catch (_) {
+      _emailFocusNode.requestFocus();
+
+      _emailController.selection = TextSelection(
+        baseOffset: 0,
+        extentOffset: _emailController.text.length,
+      );
+
+      showFeedback(
+        message: 'Invalid email. Please try again.',
+      );
+    } on InvalidCredentialsAuthException catch (_) {
+      _passwordFocusNode.requestFocus();
+
+      _passwordController.selection = TextSelection(
+        baseOffset: 0,
+        extentOffset: _passwordController.text.length,
+      );
+
+      showFeedback(
+        message: 'Invalid password. Please try again.',
+      );
+    } on NetworkRequestAuthException catch (_) {
+      showFeedback(
+        message:
+            'Network request temporarily failed. Please try logging in again.',
+      );
     } on GenericAuthException catch (e) {
       showFeedback(message: e.message);
     } catch (e) {
@@ -43,10 +64,10 @@ class _LogInPageState extends ConsumerState<LogInPage> {
 
   @override
   void dispose() {
-    _emailNumberController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
 
-    _accountNumberFocusNode.dispose();
+    _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
 
     super.dispose();
@@ -75,8 +96,8 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                   ),
                 ),
                 AuthField(
-                  controller: _emailNumberController,
-                  currentFocusNode: _accountNumberFocusNode,
+                  controller: _emailController,
+                  currentFocusNode: _emailFocusNode,
                   nextFocusNode: _passwordFocusNode,
                   hintText: 'Email',
                   // icon: Icons.person_rounded,
@@ -122,6 +143,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                     ThirdPartyLogInButton(
                       imagePath: 'images/meta_icon.png',
                       labelText: 'Meta',
+                      hasBorder: false,
                     ),
                     SizedBox(width: 25),
                     ThirdPartyLogInButton(

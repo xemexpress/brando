@@ -24,8 +24,9 @@ class AuthController extends StateNotifier<bool> {
         email: email,
         password: password,
       );
-    } catch (e) {
-      print('Error recognised in authController: ${e.toString()}');
+      // } on GenericAuthException catch (e) {
+      //   print('Error recognised in authController: ${e.message}');
+      //   rethrow;
     } finally {
       isLoading(false);
     }
@@ -35,13 +36,9 @@ class AuthController extends StateNotifier<bool> {
     isLoading(true);
 
     try {
-      print('Start signing out.');
       await _authAPI.signOut();
-      print('waiting');
-      await Future.delayed(const Duration(seconds: 2));
-      print('done');
-    } catch (e) {
-      print('Error recognised in authController: ${e.toString()}');
+      // } catch (e) {
+      //   print('Error recognised in authController: ${e.toString()}');
     } finally {
       isLoading(false);
     }

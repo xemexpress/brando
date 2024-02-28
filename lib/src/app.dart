@@ -44,7 +44,7 @@ class _BrandoAppState extends ConsumerState<BrandoApp>
 
   @override
   Widget build(BuildContext context) {
-    final themeState = ref.watch(themeControllerProvider);
+    // final themeState = ref.watch(themeControllerProvider);
 
     return MaterialApp(
       title: 'Michelle Yuen Jewelry | Booking',

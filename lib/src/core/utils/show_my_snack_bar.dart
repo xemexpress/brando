@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void showSnackBar({
+void showMySnackBar({
   required BuildContext context,
   required String message,
   String dismissText = '',

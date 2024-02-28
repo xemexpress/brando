@@ -1,4 +1,5 @@
 import 'package:brando/src/apis/apis.dart';
+import 'package:brando/src/core/extensions.dart';
 import 'package:brando/src/models/models.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -38,7 +39,14 @@ class AuthAPI implements AuthAPIInterface {
         throw UserNotLoggedInException();
       }
     } on FirebaseAuthException catch (e) {
-      print('Met when signing in: ${e.code} ${e.message}');
+      if (e.checkFirebaseException('auth/invalid-credential')) {
+        throw InvalidCredentialsAuthException();
+      } else if (e.checkFirebaseException('auth/invalid-email')) {
+        throw InvalidEmailAuthException();
+      } else if (e.checkFirebaseException('auth/network-request-failed')) {
+        throw NetworkRequestAuthException();
+      }
+
       throw GenericAuthException(
         message:
             'Met a FirebaseAuthException when signing in. Please set an exception for the error code ${e.code}.',
@@ -56,6 +64,7 @@ class AuthAPI implements AuthAPIInterface {
       await FirebaseAuth.instance.signOut();
     } on FirebaseAuthException catch (e) {
       print('Met when signing out: ${e.code} ${e.message}');
+      rethrow;
     } catch (e) {
       throw GenericAuthException(
           message: 'Unexpected error when signing out. ${e.toString()}');

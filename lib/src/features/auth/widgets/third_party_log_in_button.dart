@@ -9,6 +9,7 @@ class ThirdPartyLogInButton extends StatelessWidget {
     this.height = 40,
     this.offsetX = 0,
     this.offsetY = 0,
+    this.hasBorder = true,
   });
   final String imagePath;
   final String labelText;
@@ -16,6 +17,7 @@ class ThirdPartyLogInButton extends StatelessWidget {
   final double height;
   final double offsetX;
   final double offsetY;
+  final bool hasBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +33,11 @@ class ThirdPartyLogInButton extends StatelessWidget {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(35),
-            border: Border.all(
-              width: 1,
-            ),
+            border: hasBorder
+                ? Border.all(
+                    width: 1,
+                  )
+                : null,
           ),
           child: Transform.translate(
             offset: Offset(offsetX, offsetY),
@@ -45,11 +49,13 @@ class ThirdPartyLogInButton extends StatelessWidget {
                 alignment: Alignment.center,
                 height: 40,
                 width: 40,
-                child: Text(labelText,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 12,
-                    )),
+                child: Text(
+                  labelText,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
               ),
             ),
           ),
