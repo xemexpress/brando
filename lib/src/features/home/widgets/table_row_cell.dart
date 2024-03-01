@@ -6,39 +6,39 @@ class TableRowCell extends StatelessWidget {
     required this.child,
     this.isHeader = false,
   });
-  final double verticalPaddingForHeaderCell = 3;
-  final double verticalPaddingForRowCell = 9;
-
   final bool isHeader;
+  final double verticalPaddingForHeaderCell = 3;
+
   final dynamic child;
 
   @override
   Widget build(BuildContext context) {
+    final Widget childWidget = child is String
+        ? Text(
+            child,
+            textAlign: TextAlign.center,
+            style: isHeader
+                ? Theme.of(context).textTheme.labelSmall!.copyWith(
+                      fontWeight: FontWeight.w600,
+                    )
+                : Theme.of(context).textTheme.labelMedium!.copyWith(
+                      fontWeight: FontWeight.normal,
+                    ),
+          )
+        : child;
+
     return TableCell(
-      verticalAlignment: TableCellVerticalAlignment.middle,
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: isHeader
-              ? verticalPaddingForHeaderCell
-              : verticalPaddingForRowCell,
-        ),
-        child: child is String
-            ? Text(
-                child,
-                textAlign: TextAlign.center,
-                style: isHeader
-                    ? Theme.of(context).textTheme.labelSmall!.copyWith(
-                          fontWeight: FontWeight.w600,
-                        )
-                    : Theme.of(context).textTheme.labelMedium!.copyWith(
-                          fontWeight: FontWeight.normal,
-                        ),
-                // style: TextStyle(
-                //   fontWeight: isHeader ? FontWeight.w600 : FontWeight.normal,
-                // ),
-              )
-            : child,
-      ),
-    );
+        verticalAlignment: TableCellVerticalAlignment.middle,
+        child: Container(
+          padding: isHeader
+              ? EdgeInsets.symmetric(vertical: verticalPaddingForHeaderCell)
+              : null,
+          child: SizedBox(
+            height: isHeader ? null : 35,
+            child: Center(
+              child: childWidget,
+            ),
+          ),
+        ));
   }
 }

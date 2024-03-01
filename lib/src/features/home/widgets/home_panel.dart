@@ -2,6 +2,7 @@ import 'package:brando/src/apis/apis.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/auth/controllers/controllers.dart';
 import 'package:brando/src/features/home/widgets/widgets.dart';
+import 'package:brando/src/models/time_slot.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,6 +26,25 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // Create a sample date (today's date)
+    final DateTime appointmentDate = DateTime.now();
+
+    // Create a start time (e.g., 2 hours from now)
+    final DateTime appointmentStartTime =
+        DateTime.now().add(const Duration(hours: 2));
+
+    // Create an end time (e.g., 30 minutes after the start time)
+    final DateTime appointmentEndTime =
+        appointmentStartTime.add(const Duration(minutes: 30));
+
+    // Create the Appointment object
+    final Appointment myAppointment = Appointment(
+      userId: ref.watch(authControllerProvider.notifier).currentUser!.id,
+      date: appointmentDate,
+      startTime: appointmentStartTime,
+      endTime: appointmentEndTime,
+    );
+
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 80,
@@ -63,7 +83,9 @@ class _HomePageState extends ConsumerState<HomePage> {
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 4),
-            const AppointmentTimeSlot(),
+            AppointmentTimeSlot(
+              appointment: myAppointment,
+            ),
           ],
         ),
       ),
