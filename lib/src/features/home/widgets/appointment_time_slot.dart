@@ -1,3 +1,4 @@
+import 'package:brando/src/features/booking/views/booking_screen.dart';
 import 'package:brando/src/features/home/widgets/widgets.dart';
 import 'package:brando/src/models/models.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    StateButton(
+                    MyButton(
                       text: 'No',
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -54,7 +55,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                     const SizedBox(
                       width: 22,
                     ),
-                    StateButton(
+                    MyButton(
                       text: 'Yes',
                       onPressed: confrimCancellation,
                       backgroundColor:
@@ -75,8 +76,8 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
     print('Yes');
   }
 
-  bookAppointment() {
-    print('Book appointment.');
+  goToBookingScreen() {
+    Navigator.of(context).pushReplacement(BookingScreen.route());
   }
 
   @override
@@ -104,12 +105,12 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  StateButton(
+                  MyButton(
                     text: 'Change',
                     onPressed: reschedule,
                     backgroundColor: Theme.of(context).colorScheme.primary,
                   ),
-                  StateButton(
+                  MyButton(
                     text: 'Cancel',
                     onPressed: cancelAppointment,
                     backgroundColor:
@@ -124,9 +125,9 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
               child: 'you don\'t have an appointment yet.',
             ),
             TableRowCell(
-              child: StateButton(
+              child: MyButton(
                 text: 'make an appointment',
-                onPressed: bookAppointment,
+                onPressed: goToBookingScreen,
                 backgroundColor: Theme.of(context).colorScheme.primary,
               ),
             ),

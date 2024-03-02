@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class StateButton extends StatelessWidget {
-  const StateButton({
+class MyButton extends StatelessWidget {
+  const MyButton({
     super.key,
     required this.text,
     required this.onPressed,
@@ -32,7 +32,6 @@ class StateButton extends StatelessWidget {
           text,
           style: Theme.of(context).textTheme.labelSmall,
         ),
-        // style: Theme.of(context).textTheme.labelMedium,
       ),
     );
   }

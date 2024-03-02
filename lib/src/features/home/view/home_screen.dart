@@ -8,7 +8,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const DesktopLayout(
-      leftSide: WelcomeSign(),
+      leftSide: PrimarySection(
+        isShadowed: true,
+        child: WelcomeSign(),
+      ),
       rightSide: HomePage(),
     );
   }
