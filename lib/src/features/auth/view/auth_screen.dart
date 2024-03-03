@@ -1,6 +1,6 @@
 import 'package:brando/src/features/auth/view/log_in_screen.dart';
 import 'package:brando/src/features/booking/views/booking_screen.dart';
-import 'package:brando/src/features/home/view/home_screen.dart';
+// import 'package:brando/src/features/home/view/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

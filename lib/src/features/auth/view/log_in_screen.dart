@@ -1,5 +1,4 @@
 import 'package:brando/src/common/common.dart';
-import 'package:brando/src/common/welcome_sign.dart';
 import 'package:brando/src/features/auth/widgets/log_in_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
