@@ -1,4 +1,4 @@
-import 'package:brando/src/models/models.dart' show AuthUser;
+import 'package:brando/src/models/models.dart';
 
 abstract class AuthAPIInterface {
   AuthUser? get currentUser;

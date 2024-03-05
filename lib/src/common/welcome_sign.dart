@@ -13,8 +13,9 @@ class WelcomeSign extends StatelessWidget {
       textAlign: TextAlign.center,
       style: GoogleFonts.libreBaskerville(
         textStyle: Theme.of(context).textTheme.displaySmall,
-        fontWeight: FontWeight.w100,
         fontStyle: FontStyle.italic,
+        // fontWeight: FontWeight.w100,
+        fontWeight: FontWeight.bold,
       ),
     );
   }

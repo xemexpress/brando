@@ -1,49 +1,36 @@
+import 'package:brando/src/features/booking/controllers/controllers.dart';
+import 'package:brando/src/features/booking/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TimeslotPicker extends StatefulWidget {
+class TimeslotPicker extends ConsumerWidget {
   const TimeslotPicker({
     super.key,
   });
 
-  static const List<String> timeslots = [
-    '10:00 - 11:00',
-    '11:00 - 12:00',
-    '12:00 - 13:00',
-    '13:00 - 14:00',
-    '14:00 - 15:00',
-    '15:00 - 16:00',
-    '16:00 - 17:00',
-    '17:00 - 18:00',
-  ];
-
   @override
-  State<TimeslotPicker> createState() => _TimeslotPickerState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isSelectingTimeslot = ref.watch(bookingProvider).isSelectingTimeslot;
 
-class _TimeslotPickerState extends State<TimeslotPicker> {
-  int index = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: TimeslotPicker.timeslots
-          .map(
-            (timeslot) => Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
-              ),
-              child: Text(timeslot),
+    return SizedBox(
+      height: 250,
+      width: 140,
+      child: Column(
+        children: [
+          const CurrentlySelectedSection(),
+          Divider(
+            color: Theme.of(context).colorScheme.onSurface,
+            height: 0,
+          ),
+          Expanded(
+            child: AnimatedOpacity(
+              opacity: isSelectingTimeslot ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 300),
+              child: const SectionPicker(),
             ),
-          )
-          .toList(),
-
-      // [
-      //   Text(
-      //     '10:00 - 11:00',
-      //   )
-      // ],
+          ),
+        ],
+      ),
     );
   }
 }

@@ -2,8 +2,9 @@ import 'package:brando/src/apis/apis.dart';
 import 'package:brando/src/common/common.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/auth/controllers/controllers.dart';
+import 'package:brando/src/features/booking/controllers/booking_provider.dart';
 import 'package:brando/src/features/home/widgets/widgets.dart';
-import 'package:brando/src/models/time_slot.dart';
+import 'package:brando/src/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -27,51 +28,12 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // Create a sample date (today's date)
-    final DateTime appointmentDate = DateTime.now();
+    final Appointment? myAppointment = ref.watch(bookingProvider).appointment;
 
-    // Create a start time (e.g., 2 hours from now)
-    final DateTime appointmentStartTime =
-        DateTime.now().add(const Duration(hours: 2));
-
-    // Create an end time (e.g., 30 minutes after the start time)
-    final DateTime appointmentEndTime =
-        appointmentStartTime.add(const Duration(minutes: 30));
-
-    // Create the Appointment object
-    final Appointment myAppointment = Appointment(
-      userId: ref.watch(authControllerProvider.notifier).currentUser!.id,
-      date: appointmentDate,
-      startTime: appointmentStartTime,
-      endTime: appointmentEndTime,
-    );
+    print('test: $myAppointment');
 
     return Column(
       children: [
-        //  AppBar(
-        //     backgroundColor:
-        //         getCompensatedColor(Theme.of(context).colorScheme.primary)
-        //             .withOpacity(0.5),
-        //     leadingWidth: 80,
-        //     leading: TextButton(
-        //       style: TextButton.styleFrom(padding: EdgeInsets.zero),
-        //       onPressed: logOut,
-        //       child: Text(
-        //         'Log Out',
-        //         style: Theme.of(context).textTheme.labelLarge!.copyWith(
-        //               color: Theme.of(context).colorScheme.onPrimary,
-        //               fontWeight: FontWeight.bold,
-        //             ),
-        //       ),
-        //     ),
-        //     actions: [
-        //       Icon(
-        //         Icons.person_rounded,
-        //         color: Theme.of(context).colorScheme.surface,
-        //         size: 40,
-        //       ),
-        //     ],
-        //   ),
         MyAppBar(
           leading: TextButton(
             style: TextButton.styleFrom(padding: EdgeInsets.zero),
@@ -107,8 +69,8 @@ class _HomePageState extends ConsumerState<HomePage> {
               ),
               const SizedBox(height: 4),
               AppointmentTimeSlot(
-                  // appointment: myAppointment,
-                  ),
+                appointment: myAppointment,
+              ),
             ],
           ),
         )

@@ -5,8 +5,10 @@ class TableRowCell extends StatelessWidget {
     super.key,
     required this.child,
     this.isHeader = false,
+    this.rightBordered = false,
   });
   final bool isHeader;
+  final bool rightBordered;
   final double verticalPaddingForHeaderCell = 3;
 
   final dynamic child;
@@ -30,6 +32,13 @@ class TableRowCell extends StatelessWidget {
     return TableCell(
         verticalAlignment: TableCellVerticalAlignment.middle,
         child: Container(
+          decoration: rightBordered
+              ? const BoxDecoration(
+                  border: Border(
+                    right: BorderSide(),
+                  ),
+                )
+              : null,
           padding: isHeader
               ? EdgeInsets.symmetric(vertical: verticalPaddingForHeaderCell)
               : null,

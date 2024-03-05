@@ -3,6 +3,10 @@ import 'package:brando/src/features/home/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
+  static route() => MaterialPageRoute(
+        builder: (context) => const HomeScreen(),
+      );
+
   const HomeScreen({super.key});
 
   @override

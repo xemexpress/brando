@@ -1,6 +1,7 @@
 import 'package:brando/src/features/booking/views/booking_screen.dart';
 import 'package:brando/src/features/home/widgets/widgets.dart';
 import 'package:brando/src/models/models.dart';
+
 import 'package:flutter/material.dart';
 
 class AppointmentTimeSlot extends StatefulWidget {
@@ -15,8 +16,8 @@ class AppointmentTimeSlot extends StatefulWidget {
 }
 
 class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
-  reschedule() {
-    print('Reschedule');
+  changeAppointment() {
+    Navigator.of(context).push(BookingScreen.route());
   }
 
   cancelAppointment() {
@@ -88,10 +89,9 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
               children: [
                 TableRow(
                   children: [
-                    RightBordered(
-                      child: TableRowCell(
-                        child: widget.appointment!.formattedDate,
-                      ),
+                    TableRowCell(
+                      rightBordered: true,
+                      child: widget.appointment!.formattedDate,
                     ),
                     TableRowCell(
                       child:
@@ -107,7 +107,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                 children: [
                   MyButton(
                     text: 'Change',
-                    onPressed: reschedule,
+                    onPressed: changeAppointment,
                     backgroundColor: Theme.of(context).colorScheme.primary,
                   ),
                   MyButton(
@@ -146,8 +146,9 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
               children: const [
                 TableRow(
                   children: [
-                    RightBordered(
-                      child: TableHeaderCell(child: 'Date'),
+                    TableHeaderCell(
+                      rightBordered: true,
+                      child: 'Date',
                     ),
                     TableHeaderCell(child: 'Time Slot'),
                   ],

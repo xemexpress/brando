@@ -1,5 +1,5 @@
 import 'package:brando/src/apis/apis.dart';
-import 'package:brando/src/core/extensions.dart';
+import 'package:brando/src/core/core.dart';
 import 'package:brando/src/models/models.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
