@@ -18,6 +18,7 @@ final bookingProvider =
         startTime: const TimeOfDay(hour: 10, minute: 0),
         endTime: const TimeOfDay(hour: 11, minute: 0),
         userId: authAPI.currentUser!.id,
+        title: '',
         name: '',
         phoneNumber: '',
       ),

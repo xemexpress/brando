@@ -37,8 +37,34 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
     super.dispose();
   }
 
+  void onSubmitted(value) {
+    final String name = _nameController.text;
+    final String phoneNumber = _phoneNumberController.text;
+
+    if (name.isEmpty || phoneNumber.isEmpty) {
+      if (name.isEmpty) {
+        ref
+            .read(bookingProvider.notifier)
+            .raiseError(ContactPanelInputType.name);
+      }
+
+      if (phoneNumber.isEmpty) {
+        ref
+            .read(bookingProvider.notifier)
+            .raiseError(ContactPanelInputType.phoneNumber);
+      }
+
+      showMySnackBar(context: context, message: 'Please fill in all fields.');
+      return;
+    }
+    ref.read(bookingProvider.notifier).nextStage();
+  }
+
   @override
   Widget build(BuildContext context) {
+    bool phoneNumberError = ref.watch(bookingProvider).phoneNumberError;
+    bool nameError = ref.watch(bookingProvider).nameError;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,23 +79,23 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
             wordSpacing: BorderSide.strokeAlignOutside,
           ),
         ),
-        const SizedBox(
-          height: 20,
-        ),
+        const SizedBox(height: 20),
         ContactPanelInput(
+          label: 'Phone number*',
+          type: ContactPanelInputType.phoneNumber,
           controller: _phoneNumberController,
           focusNode: _phoneNumberFocusNode,
           onChanged: (value) => ref
               .read(bookingProvider.notifier)
               .updateAppointmentPhoneNumber(value),
           onSubmitted: (value) => _nameFocusNode.requestFocus(),
-          label: 'Phone number',
-          isPhoneNumber: true,
+          hasError: phoneNumberError,
+          errorHintText: 'required',
         ),
-        const SizedBox(
-          height: 20,
-        ),
+        const SizedBox(height: 20),
         ContactPanelInput(
+          label: 'How may I address you?*',
+          type: ContactPanelInputType.name,
           controller: _nameController,
           focusNode: _nameFocusNode,
           onChanged: (value) {
@@ -85,9 +111,9 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
 
             ref.read(bookingProvider.notifier).updateAppointmentName(value);
           },
-          onSubmitted: (value) =>
-              ref.read(bookingProvider.notifier).nextStage(),
-          label: 'How may I address you?',
+          onSubmitted: onSubmitted,
+          hasError: nameError,
+          errorHintText: 'required',
         ),
       ],
     );

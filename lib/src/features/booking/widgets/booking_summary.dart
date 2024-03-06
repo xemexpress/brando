@@ -50,7 +50,14 @@ class BookingSummary extends ConsumerWidget {
                 ),
               ],
             )
-          : const Text('See you there!'),
+          : Text(
+              'See you there!',
+              style: GoogleFonts.libreBaskerville(
+                textStyle: Theme.of(context).textTheme.headlineMedium,
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
     );
   }
 }

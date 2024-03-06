@@ -6,14 +6,16 @@ class Appointment {
   final DateTime date;
   final TimeOfDay startTime;
   final TimeOfDay endTime;
-  final String phoneNumber;
+  final String title;
   final String name;
+  final String phoneNumber;
   final String userId;
 
   Appointment({
     required DateTime date,
     required this.startTime,
     required this.endTime,
+    required this.title,
     required this.name,
     required this.phoneNumber,
     required this.userId,
@@ -38,6 +40,7 @@ class Appointment {
     DateTime? date,
     TimeOfDay? startTime,
     TimeOfDay? endTime,
+    String? title,
     String? name,
     String? phoneNumber,
     String? userId,
@@ -46,6 +49,7 @@ class Appointment {
       date: date ?? this.date,
       startTime: startTime ?? this.startTime,
       endTime: endTime ?? this.endTime,
+      title: title ?? this.title,
       name: name ?? this.name,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       userId: userId ?? this.userId,
@@ -64,6 +68,9 @@ class Appointment {
     return other.date == date &&
         other.startTime == startTime &&
         other.endTime == endTime &&
+        other.title == title &&
+        other.name == name &&
+        other.phoneNumber == phoneNumber &&
         other.userId == userId;
   }
 
@@ -86,6 +93,7 @@ class Appointment {
         'hour': endTime.hour,
         'minute': endTime.minute,
       },
+      'title': title,
       'name': name,
       'phoneNumber': phoneNumber,
       'userId': userId,
@@ -99,6 +107,7 @@ class Appointment {
           hour: map['startTime']['hour'], minute: map['startTime']['minute']),
       endTime: TimeOfDay(
           hour: map['endTime']['hour'], minute: map['endTime']['minute']),
+      title: map['title'] as String,
       name: map['name'] as String,
       phoneNumber: map['phoneNumber'] as String,
       userId: map['userId'] as String,

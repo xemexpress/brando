@@ -1,26 +1,72 @@
+import 'package:brando/src/core/core.dart';
+import 'package:brando/src/features/booking/controllers/controllers.dart';
+import 'package:brando/src/features/booking/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ContactPanelInput extends StatelessWidget {
+class ContactPanelInput extends ConsumerWidget {
   const ContactPanelInput({
     super.key,
+    required this.label,
+    required this.type,
     required this.controller,
     required this.focusNode,
-    required this.label,
     required this.onChanged,
     required this.onSubmitted,
-    this.isPhoneNumber = false,
+    required this.hasError,
+    required this.errorHintText,
   });
 
+  final String label;
+  final ContactPanelInputType type;
   final TextEditingController controller;
   final FocusNode focusNode;
-  final String label;
-  final bool isPhoneNumber;
-  final void Function(String) onSubmitted;
   final void Function(String) onChanged;
+  final void Function(String) onSubmitted;
+  final bool hasError;
+  final String errorHintText;
+
+  Function(String) updateTitle(WidgetRef ref) {
+    return (value) =>
+        ref.read(bookingProvider.notifier).updateAppointmentTitle(value);
+  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    Widget? prefixWidget;
+
+    if (type == ContactPanelInputType.phoneNumber) {
+      prefixWidget = Text(
+        '+852',
+        style: Theme.of(context).textTheme.titleMedium,
+      );
+    } else if (type == ContactPanelInputType.name) {
+      final String title = ref.watch(bookingProvider).appointment.title;
+
+      prefixWidget = MenuBar(
+        style: const MenuStyle(
+          padding: MaterialStatePropertyAll(EdgeInsets.zero),
+        ),
+        children: [
+          SubmenuButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              alignment: Alignment.center,
+              padding: EdgeInsets.zero,
+            ),
+            menuChildren: [
+              TitleMenuButton(value: 'Mr.', onPressed: updateTitle(ref)),
+              TitleMenuButton(value: 'Mrs.', onPressed: updateTitle(ref)),
+              TitleMenuButton(value: 'Miss', onPressed: updateTitle(ref)),
+              TitleMenuButton(value: 'Dr.', onPressed: updateTitle(ref)),
+            ],
+            child: Text(title.isEmpty ? 'Title' : title),
+          ),
+        ],
+      );
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -30,20 +76,23 @@ class ContactPanelInput extends StatelessWidget {
           controller: controller,
           focusNode: focusNode,
           decoration: InputDecoration(
-            prefix: isPhoneNumber ? const SizedBox(width: 8) : null,
-            prefixIconConstraints: const BoxConstraints.tightFor(height: 25),
-            prefixIcon: isPhoneNumber
-                ? Container(
-                    width: 60,
-                    alignment: Alignment.center,
-                    decoration: const BoxDecoration(
-                      border: Border(right: BorderSide()),
-                      // color: Colors.red,
-                    ),
-                    child: Text(
-                      '+852',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
+            prefix: const SizedBox(width: 8),
+            prefixIconConstraints:
+                const BoxConstraints.tightForFinite(height: 25),
+            prefixIcon: Container(
+              width: 60,
+              alignment: Alignment.center,
+              decoration: const BoxDecoration(
+                border: Border(
+                  right: BorderSide(),
+                ),
+              ),
+              child: prefixWidget,
+            ),
+            hintText: hasError ? errorHintText : null,
+            hintStyle: hasError
+                ? TextStyle(
+                    color: Theme.of(context).colorScheme.error,
                   )
                 : null,
             border: const OutlineInputBorder(borderRadius: BorderRadius.zero),
@@ -57,17 +106,20 @@ class ContactPanelInput extends StatelessWidget {
               horizontal: 10.0,
             ),
           ),
-          keyboardType:
-              isPhoneNumber ? TextInputType.phone : TextInputType.text,
-          inputFormatters: isPhoneNumber
+          keyboardType: type == ContactPanelInputType.phoneNumber
+              ? TextInputType.phone
+              : type == ContactPanelInputType.name
+                  ? TextInputType.text
+                  : null,
+          inputFormatters: type == ContactPanelInputType.phoneNumber
               ? [
                   LengthLimitingTextInputFormatter(8),
                   FilteringTextInputFormatter.digitsOnly,
                 ]
               : null,
-          textCapitalization: isPhoneNumber
-              ? TextCapitalization.none
-              : TextCapitalization.words,
+          textCapitalization: type == ContactPanelInputType.name
+              ? TextCapitalization.words
+              : TextCapitalization.none,
           onChanged: onChanged,
           onSubmitted: onSubmitted,
         ),

@@ -1,4 +1,5 @@
 import 'package:brando/src/common/common.dart';
+import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/booking/controllers/controllers.dart';
 import 'package:brando/src/features/booking/widgets/widgets.dart';
 import 'package:brando/src/features/home/view/home_screen.dart';
@@ -10,7 +11,30 @@ class AppointmentPage extends ConsumerWidget {
     super.key,
   });
 
-  void nextStage(WidgetRef ref) {
+  void nextStage(BuildContext context, WidgetRef ref, int currentStage) {
+    if (currentStage == 1) {
+      final String name = ref.read(bookingProvider).appointment.name;
+      final String phoneNumber =
+          ref.read(bookingProvider).appointment.phoneNumber;
+
+      if (name.isEmpty || phoneNumber.isEmpty) {
+        if (name.isEmpty) {
+          ref
+              .read(bookingProvider.notifier)
+              .raiseError(ContactPanelInputType.name);
+        }
+
+        if (phoneNumber.isEmpty) {
+          ref
+              .read(bookingProvider.notifier)
+              .raiseError(ContactPanelInputType.phoneNumber);
+        }
+
+        showMySnackBar(context: context, message: 'Please fill in all fields.');
+        return;
+      }
+    }
+
     ref.read(bookingProvider.notifier).nextStage();
   }
 
@@ -30,10 +54,12 @@ class AppointmentPage extends ConsumerWidget {
                 ref.read(bookingProvider.notifier).previousStage();
               }
             },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
-            ),
+            icon: Container(
+                padding: const EdgeInsets.only(left: 10),
+                child: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.black,
+                )),
           ),
           trailing: Icon(
             Icons.person_rounded,
@@ -47,7 +73,6 @@ class AppointmentPage extends ConsumerWidget {
           child: Center(
             child: IndexedStack(
               index: stage,
-              // index: 1,
               children: const [
                 DateTimePanel(),
                 ContactPanel(),
@@ -56,38 +81,10 @@ class AppointmentPage extends ConsumerWidget {
             ),
           ),
         ),
-        if (stage < 2)
-          Positioned(
-            bottom: 40,
-            right: 90,
-            child: MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: GestureDetector(
-                onTap: () => nextStage(ref),
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 40,
-                  width: 270,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    stage == 0
-                        ? 'NEXT'
-                        : stage == 1
-                            ? 'CONFIRM'
-                            : '',
-                  ),
-                ),
-              ),
-            ),
-          ),
-        if (stage == 2)
-          const Positioned(
-            bottom: 40,
-            child: Text('change time'),
-          ),
+        ActionSection(
+          stage: stage,
+          next: () => nextStage(context, ref, stage),
+        ),
       ],
     );
   }

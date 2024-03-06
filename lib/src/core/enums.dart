@@ -1,0 +1,4 @@
+enum ContactPanelInputType {
+  phoneNumber,
+  name,
+}
