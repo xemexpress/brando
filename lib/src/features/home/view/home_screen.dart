@@ -11,12 +11,29 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DesktopLayout(
-      leftSide: PrimarySection(
-        isShadowed: true,
-        child: WelcomeSign(),
+    // return const DesktopLayout(
+    // leftSide: PrimarySection(
+    //   isShadowed: true,
+    //   child: WelcomeSign(),
+    // ),
+    // rightSide: HomePage(),
+    // );
+
+    return const ResponsiveLayout(
+      mobileScaffold: DesktopScaffold(
+        leftSide: PrimarySection(
+          isShadowed: true,
+          child: WelcomeSign(),
+        ),
+        rightSide: HomePage(),
       ),
-      rightSide: HomePage(),
+      desktopScaffold: DesktopScaffold(
+        leftSide: PrimarySection(
+          isShadowed: true,
+          child: WelcomeSign(),
+        ),
+        rightSide: HomePage(),
+      ),
     );
   }
 }

@@ -13,11 +13,26 @@ class LogInScreen extends StatefulWidget {
 class _LogInScreenState extends State<LogInScreen> {
   @override
   Widget build(BuildContext context) {
-    return const DesktopLayout(
-      leftSide: PrimarySection(
-        child: WelcomeSign(),
+    // return const DesktopLayout(
+    // leftSide: PrimarySection(
+    //   child: WelcomeSign(),
+    // ),
+    //   rightSide: LogInPage(),
+    // );
+
+    return const ResponsiveLayout(
+      mobileScaffold: DesktopScaffold(
+        leftSide: PrimarySection(
+          child: WelcomeSign(),
+        ),
+        rightSide: LogInPage(),
       ),
-      rightSide: LogInPage(),
+      desktopScaffold: DesktopScaffold(
+        leftSide: PrimarySection(
+          child: WelcomeSign(),
+        ),
+        rightSide: LogInPage(),
+      ),
     );
   }
 }

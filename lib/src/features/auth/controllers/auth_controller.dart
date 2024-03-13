@@ -16,6 +16,14 @@ class AuthController extends StateNotifier<bool> {
 
   AuthUser? get currentUser => _authAPI.currentUser;
 
+  Stream<AuthUser?> authStateChanges() {
+    return _authAPI.authStateChanges();
+  }
+
+  Stream<AuthUser?> userChanges() {
+    return _authAPI.userChanges();
+  }
+
   Future<void> signInEmailAndPassword({
     required String email,
     required String password,
@@ -27,9 +35,36 @@ class AuthController extends StateNotifier<bool> {
         email: email,
         password: password,
       );
-      // } on GenericAuthException catch (e) {
-      //   print('Error recognised in authController: ${e.message}');
-      //   rethrow;
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<void> signInWithGoogle() async {
+    isLoading(true);
+
+    try {
+      await _authAPI.signInWithGoogle();
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<void> signInWithFacebook() async {
+    isLoading(true);
+
+    try {
+      await _authAPI.signInWithFacebook();
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<void> signInWithApple() async {
+    isLoading(true);
+
+    try {
+      await _authAPI.signInWithApple();
     } finally {
       isLoading(false);
     }
@@ -40,8 +75,8 @@ class AuthController extends StateNotifier<bool> {
 
     try {
       await _authAPI.signOut();
-      // } catch (e) {
-      //   print('Error recognised in authController: ${e.toString()}');
+    } catch (e) {
+      print('Error recognised in authController: ${e.toString()}');
     } finally {
       isLoading(false);
     }

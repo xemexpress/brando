@@ -2,7 +2,6 @@ import 'package:brando/src/apis/apis.dart';
 import 'package:brando/src/common/common.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/auth/controllers/controllers.dart';
-import 'package:brando/src/features/booking/controllers/booking_provider.dart';
 import 'package:brando/src/features/home/widgets/widgets.dart';
 import 'package:brando/src/models/models.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +15,11 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
+  Appointment? myAppointment;
+
+  AuthUser get currentUser =>
+      ref.read(authControllerProvider.notifier).currentUser!;
+
   void logOut() async {
     try {
       await ref.read(authControllerProvider.notifier).signOut();
@@ -28,53 +32,49 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final Appointment? myAppointment = ref.watch(bookingProvider).appointment;
-
-    print('test: $myAppointment');
-
-    return Column(
-      children: [
-        MyAppBar(
-          leading: TextButton(
-            style: TextButton.styleFrom(padding: EdgeInsets.zero),
-            onPressed: logOut,
-            child: Text(
-              'Log Out',
-              style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    fontWeight: FontWeight.bold,
-                  ),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          MyAppBar(
+            leading: TextButton(
+              style: TextButton.styleFrom(padding: EdgeInsets.zero),
+              onPressed: logOut,
+              child: Text(
+                'Log Out',
+                style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+            ),
+            trailing: Icon(
+              Icons.person_rounded,
+              color: Theme.of(context).colorScheme.surface,
+              size: 40,
             ),
           ),
-          trailing: Icon(
-            Icons.person_rounded,
-            color: Theme.of(context).colorScheme.surface,
-            size: 40,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 50.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Profile info
-              ProfilePanel(),
-              const SizedBox(height: 50),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 50.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Profile info
+                ProfilePanel(currentUser: currentUser),
+                const SizedBox(height: 50),
 
-              // Appointment Table
-              Text(
-                'Appointment time slot:',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 4),
-              AppointmentTimeSlot(
-                appointment: myAppointment,
-              ),
-            ],
-          ),
-        )
-      ],
+                // Appointment Table
+                Text(
+                  'Appointment time slot:',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 4),
+                const AppointmentTimeSlot(),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

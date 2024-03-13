@@ -1,13 +1,14 @@
 import 'package:brando/src/features/home/widgets/widgets.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:brando/src/models/models.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePanel extends StatelessWidget {
-  ProfilePanel({
+  const ProfilePanel({
     super.key,
+    required this.currentUser,
   });
 
-  final user = FirebaseAuth.instance.currentUser!;
+  final AuthUser? currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,17 @@ class ProfilePanel extends StatelessWidget {
             radius: 40,
             backgroundColor: Theme.of(context).colorScheme.surface,
             foregroundColor: Theme.of(context).colorScheme.primary,
-            child: const Icon(Icons.person_rounded, size: 60),
+            backgroundImage: currentUser?.photoURL != null
+                ? NetworkImage(
+                    currentUser!.photoURL!,
+                  )
+                : null,
+            child: currentUser?.photoURL != null
+                ? null
+                : const Icon(
+                    Icons.person_rounded,
+                    size: 60,
+                  ),
           ),
         ),
 
@@ -33,20 +44,23 @@ class ProfilePanel extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ShowAndEdit(
-              displayText: 'Mary Cheung',
+              displayText: currentUser?.displayName ?? 'How may I address you?',
               onEdit: () {
                 print('Edit username.');
               },
             ),
             ShowAndEdit(
-              displayText: user.email!,
+              displayText: currentUser?.email ?? 'Email',
               onEdit: () {
                 print('Edit username.');
               },
               isVerified: true,
             ),
             ShowAndEdit(
-              displayText: '57372948',
+              displayText: currentUser?.phoneNumber != null
+                  ? "+852 ${currentUser?.phoneNumber}"
+                  : "Phone number not available",
+              // '+ 852 '
               onEdit: () {
                 print('Edit mobile number.');
               },

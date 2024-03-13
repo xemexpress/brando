@@ -2,6 +2,52 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>GIDClientID</key>
+	<string>1063177860443-7k10krkjapm8llek4lhm8gad1js0vmfn</string>
+
+	<!-- Google Sign-in Section partly merged with Facebook -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.1063177860443-7k10krkjapm8llek4lhm8gad1js0vmfn</string>
+				<string>fb1795026430921225</string>
+			</array>
+		</dict>
+	</array>
+	<!-- End of the Google Sign-in Section -->
+
+	<!-- Facebook Sign-in Section -->
+
+	<!--    <key>CFBundleURLTypes</key>-->
+	<!--    <array>-->
+	<!--      <dict>-->
+	<!--      <key>CFBundleURLSchemes</key>-->
+	<!--      <array>-->
+	<!--        <string>fb1795026430921225</string>-->
+	<!--      </array>-->
+	<!--      </dict>-->
+	<!--    </array>-->
+    <key>FacebookAppID</key>
+    <string>1795026430921225</string>
+    <key>FacebookClientToken</key>
+    <string>6e4ea469d17738ebe486bcb311486717</string>
+    <key>FacebookDisplayName</key>
+    <string>Brando</string>
+    
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>fbapi</string>
+      <string>fb-messenger-share-api</string>
+    </array>
+    
+    <key>FacebookAutoLogAppEventsEnabled</key>
+    <false/>
+    <!-- End of the Facebook Sign-in Section -->
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -28,5 +74,7 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>com.apple.security.network.server</key>
+	<true/>
 </dict>
 </plist>

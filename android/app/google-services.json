@@ -12,7 +12,12 @@
           "package_name": "com.charmnsparkle.brando"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1063177860443-ifo271v1d562f97a8a2k9knir36leb9c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCdnjbYb7p94qA6Fk4EVU0V48zXUQYw-dk"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1063177860443-ifo271v1d562f97a8a2k9knir36leb9c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1063177860443-7k10krkjapm8llek4lhm8gad1js0vmfn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.charmnsparkle.brando"
+              }
+            }
+          ]
         }
       }
     }

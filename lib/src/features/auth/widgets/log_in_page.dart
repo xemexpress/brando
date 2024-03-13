@@ -22,7 +22,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
 
-  void signInUser() async {
+  void signInUserWithEmailAndPassword() async {
     try {
       await ref.read(authControllerProvider.notifier).signInEmailAndPassword(
             email: _emailController.text,
@@ -57,8 +57,30 @@ class _LogInPageState extends ConsumerState<LogInPage> {
       );
     } on GenericAuthException catch (e) {
       showFeedback(message: e.message);
-    } catch (e) {
-      showFeedback(message: e.toString());
+    }
+  }
+
+  void signInUserWithGoogle() async {
+    try {
+      await ref.read(authControllerProvider.notifier).signInWithGoogle();
+    } on GenericAuthException catch (e) {
+      showFeedback(message: e.message);
+    }
+  }
+
+  void signInUserWithFacebook() async {
+    try {
+      await ref.read(authControllerProvider.notifier).signInWithFacebook();
+    } on GenericAuthException catch (e) {
+      showFeedback(message: e.message);
+    }
+  }
+
+  void signInUserWithApple() async {
+    try {
+      await ref.read(authControllerProvider.notifier).signInWithApple();
+    } on GenericAuthException catch (e) {
+      showFeedback(message: e.message);
     }
   }
 
@@ -82,86 +104,93 @@ class _LogInPageState extends ConsumerState<LogInPage> {
         Center(
           child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.3,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 30),
-                  child: Text(
-                    'Log In',
-                    style: GoogleFonts.openSans(
-                      textStyle: Theme.of(context).textTheme.displaySmall,
-                      fontWeight: FontWeight.w300,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 30),
+                    child: Text(
+                      'Log In',
+                      style: GoogleFonts.openSans(
+                        textStyle: Theme.of(context).textTheme.displaySmall,
+                        fontWeight: FontWeight.w300,
+                      ),
                     ),
                   ),
-                ),
-                AuthField(
-                  controller: _emailController,
-                  currentFocusNode: _emailFocusNode,
-                  nextFocusNode: _passwordFocusNode,
-                  hintText: 'Email',
-                  // icon: Icons.person_rounded,
-                  icon: CupertinoIcons.person_fill,
-                  textInputType: TextInputType.emailAddress,
-                ),
-                const SizedBox(height: 15),
-                AuthField(
-                  controller: _passwordController,
-                  currentFocusNode: _passwordFocusNode,
-                  signInUser: signInUser,
-                  hintText: 'Password',
-                  // icon: Icons.lock_rounded,
-                  icon: CupertinoIcons.lock_fill,
-                  obscureText: true,
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 5.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  AuthField(
+                    controller: _emailController,
+                    currentFocusNode: _emailFocusNode,
+                    nextFocusNode: _passwordFocusNode,
+                    hintText: 'Email',
+                    // icon: Icons.person_rounded,
+                    icon: CupertinoIcons.person_fill,
+                    textInputType: TextInputType.emailAddress,
+                  ),
+                  const SizedBox(height: 15),
+                  AuthField(
+                    controller: _passwordController,
+                    currentFocusNode: _passwordFocusNode,
+                    signInUser: signInUserWithEmailAndPassword,
+                    hintText: 'Password',
+                    // icon: Icons.lock_rounded,
+                    icon: CupertinoIcons.lock_fill,
+                    obscureText: true,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        RememberMe(),
+                        ForgotPassword(),
+                      ],
+                    ),
+                  ),
+                  LogInButton(
+                    onClick: signInUserWithEmailAndPassword,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: Text(
+                      'or\nlog in with',
+                      style: GoogleFonts.openSans(
+                        textStyle: Theme.of(context).textTheme.labelLarge,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      RememberMe(),
-                      ForgotPassword(),
+                      ThirdPartyLogInButton(
+                        onTap: signInUserWithFacebook,
+                        imagePath: 'images/meta_icon.png',
+                        labelText: 'Meta',
+                        hasBorder: false,
+                      ),
+                      const SizedBox(width: 25),
+                      ThirdPartyLogInButton(
+                        onTap: signInUserWithGoogle,
+                        imagePath: 'images/google_icon.png',
+                        labelText: 'Google',
+                      ),
+                      const SizedBox(width: 25),
+                      ThirdPartyLogInButton(
+                        onTap: signInUserWithApple,
+                        imagePath: 'images/apple_icon.png',
+                        labelText: 'Apple',
+                        width: 29,
+                        height: 29,
+                        offsetX: 0.5,
+                        offsetY: -1,
+                      ),
                     ],
                   ),
-                ),
-                LogInButton(
-                  onClick: signInUser,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Text(
-                    'or\nlog in with',
-                    style: GoogleFonts.openSans(
-                      textStyle: Theme.of(context).textTheme.labelLarge,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ThirdPartyLogInButton(
-                      imagePath: 'images/meta_icon.png',
-                      labelText: 'Meta',
-                      hasBorder: false,
-                    ),
-                    SizedBox(width: 25),
-                    ThirdPartyLogInButton(
-                      imagePath: 'images/google_icon.png',
-                      labelText: 'Google',
-                    ),
-                    SizedBox(width: 25),
-                    ThirdPartyLogInButton(
-                      imagePath: 'images/apple_icon.png',
-                      labelText: 'Apple',
-                      width: 29,
-                      height: 29,
-                      offsetX: 0.5,
-                      offsetY: -1,
-                    ),
-                  ],
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

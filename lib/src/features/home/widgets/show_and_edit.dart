@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ShowAndEdit extends StatelessWidget {
+class ShowAndEdit extends StatefulWidget {
   const ShowAndEdit({
     super.key,
     required this.displayText,
@@ -13,11 +13,24 @@ class ShowAndEdit extends StatelessWidget {
   final bool isVerified;
 
   @override
+  State<ShowAndEdit> createState() => _ShowAndEditState();
+}
+
+class _ShowAndEditState extends State<ShowAndEdit> {
+  bool isHovered = false;
+
+  void onHovering(e) {
+    setState(() {
+      isHovered = !isHovered;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(displayText),
-        if (isVerified) ...[
+        Text(widget.displayText),
+        if (widget.isVerified) ...[
           const SizedBox(width: 2),
           const Icon(
             Icons.verified,
@@ -25,12 +38,19 @@ class ShowAndEdit extends StatelessWidget {
           ),
         ],
         const SizedBox(width: 7),
-        GestureDetector(
-          onTap: onEdit,
-          child: Icon(
-            Icons.edit,
-            size: 15,
-            color: Theme.of(context).colorScheme.surfaceVariant,
+        MouseRegion(
+          cursor: SystemMouseCursors.click,
+          onEnter: onHovering,
+          onExit: onHovering,
+          child: GestureDetector(
+            onTap: widget.onEdit,
+            child: Icon(
+              Icons.edit,
+              size: 15,
+              color: isHovered
+                  ? Theme.of(context).colorScheme.onSurfaceVariant
+                  : Theme.of(context).colorScheme.surfaceVariant,
+            ),
           ),
         ),
       ],

@@ -66,6 +66,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1063177860443',
     projectId: 'michelleyuenjewelry-booking',
     storageBucket: 'michelleyuenjewelry-booking.appspot.com',
+    iosClientId: '1063177860443-7k10krkjapm8llek4lhm8gad1js0vmfn.apps.googleusercontent.com',
     iosBundleId: 'com.charmnsparkle.brando',
   );
 
@@ -75,6 +76,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1063177860443',
     projectId: 'michelleyuenjewelry-booking',
     storageBucket: 'michelleyuenjewelry-booking.appspot.com',
+    iosClientId: '1063177860443-am9vq65td94jg13s5d83b7gov8b2ltsi.apps.googleusercontent.com',
     iosBundleId: 'com.charmnsparkle.brando.RunnerTests',
   );
 }

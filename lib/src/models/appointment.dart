@@ -1,6 +1,5 @@
 import 'package:brando/src/core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class Appointment {
   final DateTime date;
@@ -9,7 +8,7 @@ class Appointment {
   final String title;
   final String name;
   final String phoneNumber;
-  final String userId;
+  final DateTime? createdAt;
 
   Appointment({
     required DateTime date,
@@ -18,12 +17,17 @@ class Appointment {
     required this.title,
     required this.name,
     required this.phoneNumber,
-    required this.userId,
+    this.createdAt,
   }) : date = DateTime(date.year, date.month, date.day);
 
 // Get formatted date
   String get formattedDate {
-    return DateFormat('yyyy MMM. dd').format(date);
+    return date.formattedDate;
+    // return DateFormat('yyyy MMM dd').format(date);
+  }
+
+  String get formattedTimeslot {
+    return '$formattedStartTime - $formattedEndTime';
   }
 
   // Get formatted start time
@@ -52,13 +56,12 @@ class Appointment {
       title: title ?? this.title,
       name: name ?? this.name,
       phoneNumber: phoneNumber ?? this.phoneNumber,
-      userId: userId ?? this.userId,
     );
   }
 
   @override
   String toString() {
-    return 'Appointment(date: $date, startTime: $startTime, endTime: $endTime, userId: $userId)';
+    return 'Appointment(date: $date, startTime: $startTime, endTime: $endTime, title: $title, name: $name, phone: $phoneNumber)';
   }
 
   @override
@@ -70,16 +73,12 @@ class Appointment {
         other.endTime == endTime &&
         other.title == title &&
         other.name == name &&
-        other.phoneNumber == phoneNumber &&
-        other.userId == userId;
+        other.phoneNumber == phoneNumber;
   }
 
   @override
   int get hashCode {
-    return date.hashCode ^
-        startTime.hashCode ^
-        endTime.hashCode ^
-        userId.hashCode;
+    return date.hashCode ^ startTime.hashCode ^ endTime.hashCode;
   }
 
   Map<String, dynamic> toMap() {
@@ -96,7 +95,7 @@ class Appointment {
       'title': title,
       'name': name,
       'phoneNumber': phoneNumber,
-      'userId': userId,
+      'createdAt': DateTime.now().millisecondsSinceEpoch,
     };
   }
 
@@ -104,13 +103,17 @@ class Appointment {
     return Appointment(
       date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
       startTime: TimeOfDay(
-          hour: map['startTime']['hour'], minute: map['startTime']['minute']),
+        hour: map['startTime']['hour'],
+        minute: map['startTime']['minute'],
+      ),
       endTime: TimeOfDay(
-          hour: map['endTime']['hour'], minute: map['endTime']['minute']),
+        hour: map['endTime']['hour'],
+        minute: map['endTime']['minute'],
+      ),
       title: map['title'] as String,
       name: map['name'] as String,
       phoneNumber: map['phoneNumber'] as String,
-      userId: map['userId'] as String,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
     );
   }
 }

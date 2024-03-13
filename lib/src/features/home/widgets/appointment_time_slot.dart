@@ -1,22 +1,30 @@
-import 'package:brando/src/features/booking/views/booking_screen.dart';
+import 'package:brando/src/apis/appointment/appointment.dart';
+import 'package:brando/src/common/common.dart';
+import 'package:brando/src/core/core.dart';
+import 'package:brando/src/features/appointment/controllers/controllers.dart';
+import 'package:brando/src/features/appointment/views/booking_screen.dart';
+import 'package:brando/src/features/home/controllers/controllers.dart';
 import 'package:brando/src/features/home/widgets/widgets.dart';
 import 'package:brando/src/models/models.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AppointmentTimeSlot extends StatefulWidget {
+class AppointmentTimeSlot extends ConsumerStatefulWidget {
   const AppointmentTimeSlot({
     super.key,
-    this.appointment,
   });
-  final Appointment? appointment;
 
   @override
-  State<AppointmentTimeSlot> createState() => _AppointmentTimeSlotState();
+  ConsumerState<AppointmentTimeSlot> createState() =>
+      _AppointmentTimeSlotState();
 }
 
-class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
-  changeAppointment() {
+class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
+  changeAppointment(Appointment? appointment) {
+    ref
+        .read(appointmentControllerProvider.notifier)
+        .updateAppointment(appointment);
+
     Navigator.of(context).push(BookingScreen.route());
   }
 
@@ -74,7 +82,13 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
   }
 
   confrimCancellation() {
-    print('Yes');
+    try {
+      Navigator.of(context).pop();
+
+      ref.read(appointmentControllerProvider.notifier).cancelAppointment();
+    } on GenericAppointmentException catch (e) {
+      showFeedback(message: e.message);
+    }
   }
 
   goToBookingScreen() {
@@ -83,56 +97,6 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> rowChildren = widget.appointment != null
-        ? [
-            Table(
-              children: [
-                TableRow(
-                  children: [
-                    TableRowCell(
-                      rightBordered: true,
-                      child: widget.appointment!.formattedDate,
-                    ),
-                    TableRowCell(
-                      child:
-                          '${widget.appointment!.formattedStartTime} - ${widget.appointment!.formattedEndTime}',
-                    ),
-                  ],
-                )
-              ],
-            ),
-            TableRowCell(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  MyButton(
-                    text: 'Change',
-                    onPressed: changeAppointment,
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                  ),
-                  MyButton(
-                    text: 'Cancel',
-                    onPressed: cancelAppointment,
-                    backgroundColor:
-                        Theme.of(context).colorScheme.surfaceVariant,
-                  ),
-                ],
-              ),
-            )
-          ]
-        : [
-            const TableRowCell(
-              child: 'you don\'t have an appointment yet.',
-            ),
-            TableRowCell(
-              child: MyButton(
-                text: 'make an appointment',
-                onPressed: goToBookingScreen,
-                backgroundColor: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-          ];
-
     return Table(
       columnWidths: const {
         0: FlexColumnWidth(2),
@@ -159,7 +123,82 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
           ],
         ),
         TableRow(
-          children: rowChildren,
+          children: ref.watch(currentAppointmentStreamProvider).when(
+                data: (appointment) {
+                  final List<Widget> rowChildren = appointment != null
+                      ? [
+                          Table(
+                            children: [
+                              TableRow(
+                                children: [
+                                  TableRowCell(
+                                    rightBordered: true,
+                                    child: appointment.formattedDate,
+                                  ),
+                                  TableRowCell(
+                                    child:
+                                        '${appointment.formattedStartTime} - ${appointment.formattedEndTime}',
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          TableRowCell(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                MyButton(
+                                  text: 'Change',
+                                  onPressed: () =>
+                                      changeAppointment(appointment),
+                                  backgroundColor:
+                                      Theme.of(context).colorScheme.primary,
+                                ),
+                                MyButton(
+                                  text: 'Cancel',
+                                  onPressed: cancelAppointment,
+                                  backgroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .surfaceVariant,
+                                ),
+                              ],
+                            ),
+                          )
+                        ]
+                      : [
+                          const TableRowCell(
+                            child: 'you don\'t have an appointment yet.',
+                          ),
+                          TableRowCell(
+                            child: MyButton(
+                              text: 'make an appointment',
+                              onPressed: goToBookingScreen,
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                        ];
+
+                  return rowChildren;
+                },
+                loading: () => [
+                  const Loader(),
+                  const Loader(),
+                ],
+                error: (error, stackTrace) {
+                  return [
+                    Expanded(
+                      child: Text(
+                        'Error: ${error.toString()}',
+                        style: Theme.of(context).textTheme.labelLarge,
+                      ),
+                    ),
+                    Container(
+                      width: 0,
+                    ),
+                  ];
+                },
+              ),
         ),
       ],
     );

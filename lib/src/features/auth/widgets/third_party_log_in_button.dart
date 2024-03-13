@@ -1,16 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ThirdPartyLogInButton extends StatelessWidget {
-  const ThirdPartyLogInButton({
-    super.key,
-    required this.imagePath,
-    required this.labelText,
-    this.width = 40,
-    this.height = 40,
-    this.offsetX = 0,
-    this.offsetY = 0,
-    this.hasBorder = true,
-  });
+  final void Function() onTap;
   final String imagePath;
   final String labelText;
   final double width;
@@ -19,14 +10,24 @@ class ThirdPartyLogInButton extends StatelessWidget {
   final double offsetY;
   final bool hasBorder;
 
+  const ThirdPartyLogInButton({
+    super.key,
+    required this.onTap,
+    required this.imagePath,
+    required this.labelText,
+    this.width = 40,
+    this.height = 40,
+    this.offsetX = 0,
+    this.offsetY = 0,
+    this.hasBorder = true,
+  });
+
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: () {
-          print('Log in with $labelText');
-        },
+        onTap: onTap,
         child: Container(
           width: 40,
           height: 40,
