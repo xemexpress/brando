@@ -25,7 +25,8 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
         .read(appointmentControllerProvider.notifier)
         .updateAppointment(appointment);
 
-    Navigator.of(context).push(BookingScreen.route());
+    // Navigator.of(context).push(BookingScreen.route());
+    Navigator.of(context).pushNamed(BookingScreen.routeName);
   }
 
   cancelAppointment() {
@@ -98,10 +99,16 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
   @override
   Widget build(BuildContext context) {
     return Table(
-      columnWidths: const {
-        0: FlexColumnWidth(2),
-        1: FlexColumnWidth(1.2),
-      },
+      columnWidths: context.responsive(
+        const {
+          0: FlexColumnWidth(2.4),
+          1: FlexColumnWidth(2),
+        },
+        md: const {
+          0: FlexColumnWidth(2),
+          1: FlexColumnWidth(1.2),
+        },
+      ),
       border: TableBorder.all(),
       children: [
         TableRow(
@@ -148,14 +155,14 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 MyButton(
-                                  text: 'Change',
+                                  text: 'change',
                                   onPressed: () =>
                                       changeAppointment(appointment),
                                   backgroundColor:
                                       Theme.of(context).colorScheme.primary,
                                 ),
                                 MyButton(
-                                  text: 'Cancel',
+                                  text: 'cancel',
                                   onPressed: cancelAppointment,
                                   backgroundColor: Theme.of(context)
                                       .colorScheme

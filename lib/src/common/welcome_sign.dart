@@ -1,3 +1,4 @@
+import 'package:brando/src/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,12 +10,14 @@ class WelcomeSign extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Welcome to\nMichelle Yuen Jewelry\nBooking System',
+      greetings,
       textAlign: TextAlign.center,
       style: GoogleFonts.libreBaskerville(
-        textStyle: Theme.of(context).textTheme.displaySmall,
+        textStyle: context.responsive(
+          Theme.of(context).textTheme.titleLarge!.copyWith(height: 1.5),
+          md: Theme.of(context).textTheme.displaySmall,
+        ),
         fontStyle: FontStyle.italic,
-        // fontWeight: FontWeight.w100,
         fontWeight: FontWeight.bold,
       ),
     );

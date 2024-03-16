@@ -1,3 +1,4 @@
+import 'package:brando/src/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -93,13 +94,16 @@ class _AuthFieldState extends State<AuthField> {
         style: Theme.of(context).textTheme.titleMedium!.copyWith(height: 1),
         decoration: InputDecoration(
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(35.0),
+            borderRadius:
+                BorderRadius.circular(context.responsive(7, md: 35.0)),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(35.0),
+            borderRadius:
+                BorderRadius.circular(context.responsive(7, md: 35.0)),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(35.0),
+            borderRadius:
+                BorderRadius.circular(context.responsive(7, md: 35.0)),
           ),
           hintText: widget.hintText,
           hintStyle: GoogleFonts.openSans(

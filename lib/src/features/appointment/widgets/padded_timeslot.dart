@@ -3,6 +3,7 @@ import 'package:brando/src/features/appointment/controllers/controllers.dart';
 import 'package:brando/src/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PaddedTimeslot extends ConsumerStatefulWidget {
   const PaddedTimeslot(
@@ -49,22 +50,28 @@ class _PaddedTimeslotState extends ConsumerState<PaddedTimeslot> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           curve: Curves.bounceInOut,
-          padding: EdgeInsets.only(
-            left: 15,
-            top: verticalPadding,
-            bottom: verticalPadding,
-            right: widget.highlightable ? 25 : 0,
-          ),
+          padding: const EdgeInsets.symmetric(vertical: verticalPadding),
           decoration: BoxDecoration(
-              color: isHovered && widget.highlightable
-                  ? Theme.of(context).colorScheme.primary.withOpacity(0.5)
-                  : null),
-          child: Container(
             color: isSelected && widget.highlightable
                 ? Theme.of(context).colorScheme.primary
-                : null,
+                : isHovered && widget.highlightable
+                    ? Theme.of(context).colorScheme.primary.withOpacity(0.5)
+                    : null,
+          ),
+          child: Container(
+            padding: context.responsive(
+              null,
+              md: const EdgeInsets.only(right: 15),
+            ),
             child: Text(
               '${widget.timeslot.$1.formattedTime} - ${widget.timeslot.$2.formattedTime}',
+              style: GoogleFonts.cabin(
+                textStyle: context.responsive(
+                  Theme.of(context).textTheme.titleLarge,
+                  md: Theme.of(context).textTheme.titleMedium,
+                ),
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
         ),

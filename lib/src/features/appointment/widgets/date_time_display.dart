@@ -17,7 +17,10 @@ class DateTimeDisplay extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        DisplayTextBox(date?.formattedDate ?? '', width: 230),
+        DisplayTextBox(
+          date?.formattedDate ?? '',
+          width: context.responsive(200, lg: 230),
+        ),
         const SizedBox(width: 10),
         DisplayTextBox(time?.formattedHour ?? '', width: 50),
         const SizedBox(width: 5),

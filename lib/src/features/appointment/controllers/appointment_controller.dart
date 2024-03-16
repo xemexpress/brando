@@ -84,8 +84,15 @@ class AppointmentController extends StateNotifier<AppointmentState> {
   Stream<Appointment?> currentAppointmentStream() => _appointmentAPI
       .currentAppointmentStream(userId: _authAPI.currentUser!.id);
 
-  Future<Appointment?> currentAppointment() =>
-      _appointmentAPI.currentAppointment(userId: _authAPI.currentUser!.id);
+  Future<Appointment?> currentAppointment() async {
+    isLoading(true);
+
+    final Appointment? appointment = await _appointmentAPI.currentAppointment(
+        userId: _authAPI.currentUser!.id);
+
+    isLoading(false);
+    return appointment;
+  }
 
   Future<void> bookAppointment() async {
     isLoading(true);

@@ -5,7 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ActionSection extends ConsumerWidget {
-  const ActionSection({super.key, required this.stage, required this.next});
+  const ActionSection({
+    super.key,
+    required this.stage,
+    required this.next,
+  });
 
   final BookingStage stage;
   final Function()? next;
@@ -17,6 +21,26 @@ class ActionSection extends ConsumerWidget {
       case BookingStage.contact:
         final String text = stage == BookingStage.datetime ? 'NEXT' : 'CONFIRM';
 
+        // return Positioned(
+        //   bottom: 40,
+        //   right: 90,
+        //   child: MouseRegion(
+        //     cursor: SystemMouseCursors.click,
+        //     child: GestureDetector(
+        //       onTap: next,
+        //       child: Container(
+        //         alignment: Alignment.center,
+        //         height: 40,
+        //         width: 270,
+        //         decoration: BoxDecoration(
+        //           color: Theme.of(context).colorScheme.primary,
+        //           borderRadius: BorderRadius.circular(20),
+        //         ),
+        //         child: Text(text),
+        //       ),
+        //     ),
+        //   ),
+        // );
         return Positioned(
           bottom: 40,
           right: 90,
@@ -27,10 +51,12 @@ class ActionSection extends ConsumerWidget {
               child: Container(
                 alignment: Alignment.center,
                 height: 40,
-                width: 270,
+                width: context.responsive(double.infinity, md: 270),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.primary,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(
+                    context.responsive(7, md: 20),
+                  ),
                 ),
                 child: Text(text),
               ),

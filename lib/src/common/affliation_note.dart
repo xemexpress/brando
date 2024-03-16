@@ -1,3 +1,4 @@
+import 'package:brando/src/core/core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,10 +22,14 @@ class AffiliationNote extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RichText(
+      textAlign: TextAlign.center,
       text: TextSpan(
         text: 'Powered by ',
         style: GoogleFonts.ebGaramond(
-          textStyle: Theme.of(context).textTheme.titleSmall,
+          textStyle: context.responsive(
+            Theme.of(context).textTheme.labelMedium,
+            md: Theme.of(context).textTheme.titleSmall,
+          ),
         ),
         children: [
           TextSpan(

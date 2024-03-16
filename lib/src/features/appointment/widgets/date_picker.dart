@@ -1,3 +1,4 @@
+import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/appointment/controllers/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:brando/src/features/appointment/widgets/widgets.dart';
@@ -13,8 +14,12 @@ class DatePicker extends ConsumerWidget {
     final isSelectingDate =
         ref.watch(appointmentControllerProvider).isSelectingDate;
 
-    return SizedBox(
-      width: 250,
+    return Container(
+      width: context.responsive(null, md: 250),
+      padding: context.responsive(
+        const EdgeInsets.only(bottom: 25),
+        md: EdgeInsets.zero,
+      ),
       child: Column(
         children: [
           const CurrentlySelectedDate(),

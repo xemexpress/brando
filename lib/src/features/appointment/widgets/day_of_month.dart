@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DayOfMonth extends StatefulWidget {
   const DayOfMonth({
@@ -10,6 +11,7 @@ class DayOfMonth extends StatefulWidget {
     required this.enabled,
     required this.isSecondary,
     required this.onSelectDate,
+    required this.borderWidth,
   });
 
   final DateTime date;
@@ -19,6 +21,7 @@ class DayOfMonth extends StatefulWidget {
   final bool enabled;
   final bool isSecondary;
   final Function(DateTime) onSelectDate;
+  final double borderWidth;
 
   @override
   State<DayOfMonth> createState() => _DayOfMonthState();
@@ -49,8 +52,8 @@ class _DayOfMonthState extends State<DayOfMonth> {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               border: Border.all(
-                color: Theme.of(context).colorScheme.primary,
-                width: 0.75,
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.9),
+                width: widget.borderWidth,
               ),
               color: widget.enabled && isHovered
                   ? Theme.of(context).colorScheme.primary.withOpacity(0.5)
@@ -73,10 +76,12 @@ class _DayOfMonthState extends State<DayOfMonth> {
               alignment: Alignment.center,
               child: Text(
                 '${widget.date.day}',
-                style: TextStyle(
+                style: GoogleFonts.cabin(
+                  textStyle: Theme.of(context).textTheme.titleMedium,
                   color: widget.isSecondary
                       ? Theme.of(context).colorScheme.onSurface.withOpacity(0.5)
                       : Theme.of(context).colorScheme.onSurface,
+                  fontWeight: widget.enabled ? FontWeight.bold : null,
                 ),
                 textAlign: TextAlign.center,
               ),

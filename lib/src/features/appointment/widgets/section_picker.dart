@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SectionPicker extends ConsumerWidget {
-  const SectionPicker({super.key});
+  const SectionPicker({
+    super.key,
+    required this.borderWidth,
+  });
+
+  final double borderWidth;
+  final double endIndent = 11.5;
 
   static const List<(TimeOfDay, TimeOfDay)> timeslots = [
     (TimeOfDay(hour: 10, minute: 0), TimeOfDay(hour: 11, minute: 0)),
@@ -19,11 +25,11 @@ class SectionPicker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         border: Border(
-          left: BorderSide(width: 1.2),
-          right: BorderSide(width: 1.2),
-          bottom: BorderSide(width: 1.2),
+          left: BorderSide(width: borderWidth),
+          right: BorderSide(width: borderWidth),
+          bottom: BorderSide(width: borderWidth),
         ),
       ),
       child: SingleChildScrollView(
@@ -33,15 +39,19 @@ class SectionPicker extends ConsumerWidget {
             final paddedTimeslot = PaddedTimeslot(timeslot);
 
             return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                paddedTimeslot,
+                Padding(
+                  padding: EdgeInsets.only(right: endIndent),
+                  child: paddedTimeslot,
+                ),
                 Divider(
                   color: timeslots.indexOf(timeslot) != timeslots.length - 1
                       ? Theme.of(context).colorScheme.onSurface
                       : Theme.of(context).colorScheme.surface,
-                  endIndent: 15,
+                  endIndent: endIndent,
                   height: 0,
+                  thickness: borderWidth,
                 ),
               ],
             );

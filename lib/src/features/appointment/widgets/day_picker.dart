@@ -31,11 +31,13 @@ class _MyCalendarPickerState extends ConsumerState<DayPicker> {
         ref.watch(appointmentControllerProvider).currentlyViewingMonth;
     calendarGrid = getCalendarGrid(currentMonth.year, currentMonth.month);
     final DateTime today = DateTime.now();
+    const double borderWidth = 0.7;
 
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
           color: Theme.of(context).colorScheme.primary,
+          width: borderWidth,
         ),
       ),
       child: Column(
@@ -72,6 +74,7 @@ class _MyCalendarPickerState extends ConsumerState<DayPicker> {
                         enabled: !isPast,
                         isSecondary: beyondCurrentMonth || isPast,
                         onSelectDate: updateSelectedDate,
+                        borderWidth: borderWidth,
                       );
                     },
                   ).toList(),

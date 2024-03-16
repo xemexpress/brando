@@ -7,7 +7,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class CurrentlySelectedSection extends ConsumerWidget {
   const CurrentlySelectedSection({
     super.key,
+    required this.borderWidth,
   });
+
+  final double borderWidth;
 
   void toggleSectionPicker(WidgetRef ref) {
     ref.read(appointmentControllerProvider.notifier).toggleTimeslotPicker();
@@ -29,15 +32,24 @@ class CurrentlySelectedSection extends ConsumerWidget {
         onTap: () => toggleSectionPicker(ref),
         child: Container(
           decoration: BoxDecoration(
-            border: Border.all(width: 1.2),
+            border: Border.all(width: borderWidth),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.max,
+          child: Stack(
+            alignment: Alignment.centerRight,
             children: [
-              PaddedTimeslot(
-                selectedTimeslot,
-                highlightable: false,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: PaddedTimeslot(
+                        selectedTimeslot,
+                        highlightable: false,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               AnimatedRotation(
                 duration: const Duration(milliseconds: 200),

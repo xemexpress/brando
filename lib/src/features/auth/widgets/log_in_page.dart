@@ -5,6 +5,7 @@ import 'package:brando/src/features/auth/controllers/controllers.dart';
 import 'package:brando/src/features/auth/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -101,31 +102,50 @@ class _LogInPageState extends ConsumerState<LogInPage> {
 
     return Stack(
       children: [
+        context.responsive(
+          const Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 38.0),
+                child: WelcomeSign(),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 20.0),
+                child: AffiliationNote(),
+              ),
+            ],
+          ),
+          md: Container(),
+        ),
         Center(
           child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.3,
+            width: context.responsive(
+              MediaQuery.of(context).size.width * 0.9,
+              lg: MediaQuery.of(context).size.width * 0.35,
+              md: MediaQuery.of(context).size.width * 0.4,
+              sm: MediaQuery.of(context).size.width * 0.9,
+            ),
             child: SingleChildScrollView(
               child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 30),
-                    child: Text(
-                      'Log In',
-                      style: GoogleFonts.openSans(
-                        textStyle: Theme.of(context).textTheme.displaySmall,
-                        fontWeight: FontWeight.w300,
+                  Text(
+                    'Log In',
+                    style: GoogleFonts.openSans(
+                      textStyle: context.responsive(
+                        Theme.of(context).textTheme.headlineLarge,
+                        md: Theme.of(context).textTheme.displaySmall,
                       ),
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
+                  const SizedBox(height: 30),
                   AuthField(
                     controller: _emailController,
                     currentFocusNode: _emailFocusNode,
                     nextFocusNode: _passwordFocusNode,
                     hintText: 'Email',
-                    // icon: Icons.person_rounded,
                     icon: CupertinoIcons.person_fill,
                     textInputType: TextInputType.emailAddress,
                   ),
@@ -135,33 +155,36 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                     currentFocusNode: _passwordFocusNode,
                     signInUser: signInUserWithEmailAndPassword,
                     hintText: 'Password',
-                    // icon: Icons.lock_rounded,
                     icon: CupertinoIcons.lock_fill,
                     obscureText: true,
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  const SizedBox(height: 10),
+                  const SizedBox(
+                    width: double.infinity,
+                    child: Wrap(
+                      direction: Axis.horizontal,
+                      alignment: WrapAlignment.spaceBetween,
+                      runAlignment: WrapAlignment.spaceBetween,
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
                         RememberMe(),
                         ForgotPassword(),
                       ],
                     ),
                   ),
+                  const SizedBox(height: 10),
                   LogInButton(
                     onClick: signInUserWithEmailAndPassword,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: Text(
-                      'or\nlog in with',
-                      style: GoogleFonts.openSans(
-                        textStyle: Theme.of(context).textTheme.labelLarge,
-                      ),
-                      textAlign: TextAlign.center,
+                  const SizedBox(height: 20),
+                  Text(
+                    'or\nlog in with',
+                    style: GoogleFonts.openSans(
+                      textStyle: Theme.of(context).textTheme.labelLarge,
                     ),
+                    textAlign: TextAlign.center,
                   ),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

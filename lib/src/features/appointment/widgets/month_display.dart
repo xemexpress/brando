@@ -14,12 +14,21 @@ class MonthDisplay extends ConsumerWidget {
     final selectedDate =
         ref.watch(appointmentControllerProvider).appointment.date;
 
-    return Text(
-      selectedDate.formattedMonth,
-      style: GoogleFonts.libreBaskerville(
-        textStyle: Theme.of(context).textTheme.headlineMedium,
-        fontStyle: FontStyle.italic,
-        fontWeight: FontWeight.bold,
+    return Padding(
+      padding: context.responsive(
+        const EdgeInsets.symmetric(vertical: 20.0),
+        md: const EdgeInsets.only(bottom: 30),
+      ),
+      child: Text(
+        selectedDate.formattedMonth,
+        style: GoogleFonts.libreBaskerville(
+          textStyle: context.responsive(
+            Theme.of(context).textTheme.headlineSmall,
+            md: Theme.of(context).textTheme.headlineMedium,
+          ),
+          fontStyle: FontStyle.italic,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }

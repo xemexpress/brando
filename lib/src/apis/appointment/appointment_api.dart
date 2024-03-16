@@ -59,7 +59,6 @@ class AppointmentAPI implements AppointmentAPIInterface {
     try {
       DocumentSnapshot documentSnapshot =
           await _firebaseCollectionRef.doc(userId).get();
-
       if (documentSnapshot.exists) {
         return Appointment.fromMap(
           documentSnapshot.data() as Map<String, dynamic>,

@@ -4,6 +4,7 @@ import 'package:brando/src/features/appointment/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class BookingScreen extends StatelessWidget {
+  static const String routeName = 'booking';
   static route() => MaterialPageRoute(
         builder: (context) => const BookingScreen(),
       );
@@ -14,15 +15,11 @@ class BookingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return const ResponsiveLayout(
-    // leftSide: PrimarySection(
-    //   child: BookingSummary(),
-    // ),
-    // rightSide: AppointmentPage(),
-    // );
-
     return const ResponsiveLayout(
-      mobileScaffold: DesktopScaffold(
+      mobileScaffold: MobileScaffold(
+        body: AppointmentPage(),
+      ),
+      tabletScaffold: DesktopScaffold(
         leftSide: PrimarySection(
           child: BookingSummary(),
         ),

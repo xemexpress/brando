@@ -18,7 +18,7 @@ class ForgotPassword extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           children: [
             Text(
-              'Forgotten Password?',
+              'Forgotten Password? ',
               style: GoogleFonts.openSans(
                 textStyle: Theme.of(context).textTheme.labelMedium,
                 fontWeight: FontWeight.w400,

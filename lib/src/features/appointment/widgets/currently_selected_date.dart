@@ -1,3 +1,4 @@
+import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/appointment/controllers/controllers.dart';
 import 'package:brando/src/features/appointment/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class CurrentlySelectedDate extends ConsumerWidget {
               padding: const EdgeInsets.only(right: 7),
               decoration: BoxDecoration(
                 border: Border.all(
-                  width: 1.2,
+                  width: context.responsive(0.4, md: 1.2),
                 ),
               ),
               child: Row(

@@ -55,6 +55,7 @@ class _RememberMeState extends State<RememberMe> {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Radio(
           value: 0,
@@ -79,6 +80,7 @@ class _RememberMeState extends State<RememberMe> {
             ),
           ),
         ),
+        const SizedBox(width: 10),
       ],
     );
   }

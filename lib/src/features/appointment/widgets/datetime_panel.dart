@@ -1,3 +1,4 @@
+import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/appointment/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -8,26 +9,35 @@ class DateTimePanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          MonthDisplay(),
-          SizedBox(height: 30),
-          SizedBox(
-            height: 280,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                DatePicker(),
-                TimeslotPicker(),
+    const List<Widget> mainBodyChildren = [
+      DatePicker(),
+      TimeslotPicker(),
+    ];
+
+    return Center(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const MonthDisplay(),
+            ...context.responsive(
+              [
+                ...mainBodyChildren,
+                const SizedBox(height: 30),
+              ],
+              md: [
+                const SizedBox(
+                  height: 280,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: mainBodyChildren,
+                  ),
+                ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

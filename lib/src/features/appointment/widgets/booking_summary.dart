@@ -41,6 +41,7 @@ class BookingSummary extends ConsumerWidget {
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 DateTimeDisplay(
                   date: date,

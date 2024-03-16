@@ -36,25 +36,41 @@ class _HomePageState extends ConsumerState<HomePage> {
       child: Column(
         children: [
           MyAppBar(
-            leading: TextButton(
-              style: TextButton.styleFrom(padding: EdgeInsets.zero),
-              onPressed: logOut,
-              child: Text(
-                'Log Out',
-                style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
+            title: context.responsive(
+              'Personal Pannel',
+              md: '',
+            ),
+            leading: context.responsive(
+              const MenuButton(),
+              md: TextButton(
+                style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                onPressed: logOut,
+                child: Text(
+                  'Log Out',
+                  style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
               ),
             ),
-            trailing: Icon(
-              Icons.person_rounded,
-              color: Theme.of(context).colorScheme.surface,
-              size: 40,
+            trailing: context.responsive(
+              null,
+              md: Icon(
+                Icons.person_rounded,
+                color: Theme.of(context).colorScheme.surface,
+                size: 40,
+              ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 50.0),
+            padding: EdgeInsets.symmetric(
+              vertical: 40,
+              horizontal: context.responsive(
+                20,
+                md: 50.0,
+              ),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -70,6 +86,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 ),
                 const SizedBox(height: 4),
                 const AppointmentTimeSlot(),
+                // const Row(),
               ],
             ),
           )
