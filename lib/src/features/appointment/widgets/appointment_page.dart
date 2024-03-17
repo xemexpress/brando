@@ -1,9 +1,11 @@
 import 'package:brando/src/common/common.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/appointment/controllers/controllers.dart';
+import 'package:brando/src/features/appointment/widgets/datetime_page.dart';
 import 'package:brando/src/features/appointment/widgets/widgets.dart';
 import 'package:brando/src/features/auth/view/auth_screen.dart';
 import 'package:brando/src/models/models.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -83,6 +85,37 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
     Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
   }
 
+  Widget _buildAppBar({required String title}) {
+    return MyAppBar(
+      title: context.responsive(
+        title,
+        md: '',
+      ),
+      leading: context.responsive(
+        const MenuButton(),
+        md: Container(),
+      ),
+      trailing: context.responsive(
+        null,
+        md: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: goToHomePage,
+            child: Icon(
+              Icons.person_rounded,
+              color: Theme.of(context).colorScheme.primary,
+              size: 40,
+            ),
+          ),
+        ),
+      ),
+      backgroundColor: context.responsive(
+        null,
+        md: Theme.of(context).colorScheme.surface,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final AppointmentState appointmentState =
@@ -91,100 +124,18 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
     final BookingStage stage = appointmentState.stage;
     final bool isLoading = appointmentState.isLoading;
 
-    final List<Widget> mainBodyChildren = [
-      MyAppBar(
-        title: context.responsive(
-            stage == BookingStage.datetime
-                ? 'Book your appointment'
-                : stage == BookingStage.contact
-                    ? 'You are almost there!'
-                    : 'See you there!',
-            md: ''),
-        leading: context.responsive(
-          const MenuButton(),
-          md: [BookingStage.datetime, BookingStage.confirmation].contains(stage)
-              ? null
-              : IconButton(
-                  onPressed: () => previousStage(stage),
-                  icon: Container(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-        ),
-        trailing: context.responsive(
-          null,
-          md: MouseRegion(
-            cursor: SystemMouseCursors.click,
-            child: GestureDetector(
-              onTap: goToHomePage,
-              child: Icon(
-                Icons.person_rounded,
-                color: Theme.of(context).colorScheme.primary,
-                size: 40,
-              ),
-            ),
-          ),
-        ),
-        backgroundColor: context.responsive(
-          null,
-          md: Theme.of(context).colorScheme.surface,
-        ),
-      ),
-      Padding(
-        padding: context.responsive(
-          const EdgeInsets.symmetric(horizontal: 30),
-          sm: const EdgeInsets.symmetric(horizontal: 20),
-          md: const EdgeInsets.symmetric(horizontal: 15),
-          lg: const EdgeInsets.symmetric(horizontal: 80),
-        ),
-        child: IndexedStack(
-          index: stage.code,
-          children: const [
-            DateTimePanel(),
-            ContactPanel(),
-            ConfirmationPanel(),
-          ],
-        ),
-      ),
+    final stages = [
+      DateTimePage(appBar: _buildAppBar(title: 'Book your appointment')),
+      ContactPage(appBar: _buildAppBar(title: 'You are almost there!')),
+      ConfirmationPage(appBar: _buildAppBar(title: 'See you there!')),
     ];
 
     return Stack(
+      alignment: Alignment.center,
       children: [
-        ...context.responsive(
-          [
-            SingleChildScrollView(
-              child: Column(
-                children: mainBodyChildren +
-                    [
-                      Padding(
-                        padding: context.responsive(
-                          const EdgeInsets.symmetric(horizontal: 30),
-                          sm: const EdgeInsets.symmetric(horizontal: 20),
-                          md: const EdgeInsets.symmetric(horizontal: 15),
-                          lg: const EdgeInsets.symmetric(horizontal: 80),
-                        ),
-                        child: ActionSection(
-                          stage: stage,
-                          next: () => nextStage(stage),
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                    ],
-              ),
-            ),
-          ],
-          md: mainBodyChildren,
-        ),
-        context.responsive(
-          Container(),
-          md: ActionSection(
-            stage: stage,
-            next: () => nextStage(stage),
-          ),
+        Align(
+          alignment: Alignment.topCenter,
+          child: stages[stage.code],
         ),
         if (isLoading) ...[
           const LoaderBackground(),

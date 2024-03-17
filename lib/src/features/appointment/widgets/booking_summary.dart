@@ -37,7 +37,7 @@ class BookingSummary extends ConsumerWidget {
                 Text(
                   'Your booking time slot is',
                   style: GoogleFonts.libreBaskerville(
-                    textStyle: Theme.of(context).textTheme.headlineMedium,
+                    textStyle: Theme.of(context).textTheme.displaySmall,
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.bold,
                   ),

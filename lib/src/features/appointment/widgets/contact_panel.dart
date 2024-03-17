@@ -1,9 +1,10 @@
-import 'package:brando/src/apis/appointment/appointment.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/appointment/controllers/controllers.dart';
 import 'package:brando/src/features/appointment/widgets/widgets.dart';
 import 'package:brando/src/models/models.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -80,6 +81,35 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
     }
 
     await ref.read(appointmentControllerProvider.notifier).bookAppointment();
+
+    ref.read(appointmentControllerProvider.notifier).nextStage();
+  }
+
+  void nextStage() async {
+    final Appointment appointment =
+        ref.read(appointmentControllerProvider).appointment;
+    final String name = appointment.name;
+    final String phoneNumber = appointment.phoneNumber;
+
+    if (name.isEmpty || phoneNumber.isEmpty) {
+      if (name.isEmpty) {
+        ref
+            .read(appointmentControllerProvider.notifier)
+            .raiseError(ContactPanelInputType.name);
+      }
+
+      if (phoneNumber.isEmpty) {
+        ref
+            .read(appointmentControllerProvider.notifier)
+            .raiseError(ContactPanelInputType.phoneNumber);
+      }
+
+      showMySnackBar(context: context, message: 'Please fill in all fields.');
+      return;
+    }
+
+    await ref.read(appointmentControllerProvider.notifier).bookAppointment();
+
     ref.read(appointmentControllerProvider.notifier).nextStage();
   }
 
@@ -108,47 +138,81 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
       ); // Place cursor at the end
     }
 
-    return Center(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'Please enter your phone:',
-              style: GoogleFonts.libreBaskerville(
-                textStyle: Theme.of(context).textTheme.headlineMedium,
-                fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.bold,
-                letterSpacing: BorderSide.strokeAlignInside,
-                wordSpacing: BorderSide.strokeAlignOutside,
-              ),
-            ),
-            const SizedBox(height: 20),
-            ContactPanelInput(
-              label: 'Phone number*',
-              type: ContactPanelInputType.phoneNumber,
-              controller: _phoneNumberController,
-              focusNode: _phoneNumberFocusNode,
-              onChanged: onChangePhoneNumber,
-              onSubmitted: onSubmitPhoneNumber,
-              hasError: phoneNumberError,
-              errorHintText: 'required',
-            ),
-            const SizedBox(height: 20),
-            ContactPanelInput(
-              label: 'How may I address you?*',
-              type: ContactPanelInputType.name,
-              controller: _nameController,
-              focusNode: _nameFocusNode,
-              onChanged: onChangeName,
-              onSubmitted: onSubmitContact,
-              hasError: nameError,
-              errorHintText: 'required',
-            ),
-          ],
+    Widget button = ActionButton(
+      text: 'CONFIRM',
+      next: nextStage,
+    );
+
+    Widget title = Text(
+      'Please enter your phone:',
+      style: GoogleFonts.libreBaskerville(
+        textStyle: context.responsive(
+          Theme.of(context).textTheme.headlineMedium,
+          md: Theme.of(context).textTheme.displaySmall,
         ),
+        fontStyle: FontStyle.italic,
+        fontWeight: FontWeight.bold,
+        letterSpacing: BorderSide.strokeAlignInside,
+        wordSpacing: BorderSide.strokeAlignOutside,
+      ),
+    );
+
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          context.responsive(
+            const SizedBox(height: 150),
+            md: const SizedBox(height: 110),
+          ),
+          context.responsive(
+            title,
+            md: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                title,
+                Positioned(
+                  right: 0,
+                  bottom: -260,
+                  child: button,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+          ContactPanelInput(
+            label: 'Phone number*',
+            type: ContactPanelInputType.phoneNumber,
+            controller: _phoneNumberController,
+            focusNode: _phoneNumberFocusNode,
+            onChanged: onChangePhoneNumber,
+            onSubmitted: onSubmitPhoneNumber,
+            hasError: phoneNumberError,
+            errorHintText: 'required',
+          ),
+          const SizedBox(height: 20),
+          ContactPanelInput(
+            label: 'How may I address you?*',
+            type: ContactPanelInputType.name,
+            controller: _nameController,
+            focusNode: _nameFocusNode,
+            onChanged: onChangeName,
+            onSubmitted: onSubmitContact,
+            hasError: nameError,
+            errorHintText: 'required',
+          ),
+          context.responsive(
+            const SizedBox(height: 100),
+            md: const SizedBox(height: 110),
+          ),
+          context.responsive(
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30),
+              child: button,
+            ),
+            md: const SizedBox(),
+          ),
+        ],
       ),
     );
   }

@@ -1,7 +1,5 @@
 import 'package:brando/src/features/appointment/views/booking_screen.dart';
 import 'package:brando/src/features/auth/view/auth_screen.dart';
-import 'package:brando/src/features/auth/view/log_in_screen.dart';
-import 'package:brando/src/features/home/view/home_screen.dart';
 import 'package:brando/src/themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

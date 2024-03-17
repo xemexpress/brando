@@ -26,10 +26,16 @@ class MyAppBar extends StatelessWidget {
             getCompensatedColor(Theme.of(context).colorScheme.primary)
                 .withOpacity(0.5),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Stack(
+        alignment: Alignment.center,
         children: [
-          leading ?? Container(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              leading ?? Container(),
+              trailing ?? Container(),
+            ],
+          ),
           if (title != null)
             Text(
               title!,
@@ -41,7 +47,6 @@ class MyAppBar extends StatelessWidget {
                     ),
               ),
             ),
-          trailing ?? Container(),
         ],
       ),
     );

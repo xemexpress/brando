@@ -37,19 +37,17 @@ class CurrentlySelectedSection extends ConsumerWidget {
           child: Stack(
             alignment: Alignment.centerRight,
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: PaddedTimeslot(
-                        selectedTimeslot,
-                        highlightable: false,
-                      ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: PaddedTimeslot(
+                      selectedTimeslot,
+                      highlightable: false,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               AnimatedRotation(
                 duration: const Duration(milliseconds: 200),

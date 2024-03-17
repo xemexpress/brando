@@ -57,75 +57,97 @@ class ContactPanelInput extends ConsumerWidget {
               alignment: Alignment.center,
               padding: EdgeInsets.zero,
             ),
+            menuStyle: const MenuStyle(
+              padding: MaterialStatePropertyAll(EdgeInsets.zero),
+            ),
             menuChildren: [
               TitleMenuButton(value: 'Mr.', onPressed: updateTitle(ref)),
               TitleMenuButton(value: 'Mrs.', onPressed: updateTitle(ref)),
               TitleMenuButton(value: 'Miss', onPressed: updateTitle(ref)),
               TitleMenuButton(value: 'Dr.', onPressed: updateTitle(ref)),
             ],
-            child: Text(title.isEmpty ? 'Title' : title),
+            child: Text(
+              title.isEmpty ? 'Title' : title,
+            ),
           ),
         ],
       );
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(label),
-        TextField(
-          controller: controller,
-          focusNode: focusNode,
-          decoration: InputDecoration(
-            prefix: const SizedBox(width: 8),
-            prefixIconConstraints:
-                const BoxConstraints.tightForFinite(height: 25),
-            prefixIcon: Container(
-              width: 60,
-              alignment: Alignment.center,
-              decoration: const BoxDecoration(
-                border: Border(
-                  right: BorderSide(),
+    return SizedBox(
+      width: context.responsive(null, md: 270),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: Theme.of(context).textTheme.titleMedium),
+          TextField(
+            controller: controller,
+            focusNode: focusNode,
+            decoration: InputDecoration(
+              prefix: const SizedBox(width: 8),
+              prefixIconConstraints:
+                  const BoxConstraints.tightForFinite(height: 25),
+              prefixIcon: Container(
+                width: 60,
+                padding: const EdgeInsets.only(left: 1),
+                alignment: Alignment.center,
+                decoration: const BoxDecoration(
+                  border: Border(
+                    right: BorderSide(),
+                  ),
+                  color: Colors.transparent,
+                ),
+                child: prefixWidget,
+              ),
+              hintText: hasError ? errorHintText : null,
+              hintStyle: hasError
+                  ? TextStyle(
+                      color: Theme.of(context).colorScheme.error,
+                    )
+                  : null,
+              border: OutlineInputBorder(
+                borderRadius: context.responsive(
+                  BorderRadius.circular(inputBorderRadiusMobile),
+                  md: BorderRadius.zero,
                 ),
               ),
-              child: prefixWidget,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: context.responsive(
+                  BorderRadius.circular(inputBorderRadiusMobile),
+                  md: BorderRadius.zero,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: context.responsive(
+                  BorderRadius.circular(inputBorderRadiusMobile),
+                  md: BorderRadius.zero,
+                ),
+              ),
+              isDense: true,
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 12.0,
+                horizontal: 10.0,
+              ),
             ),
-            hintText: hasError ? errorHintText : null,
-            hintStyle: hasError
-                ? TextStyle(
-                    color: Theme.of(context).colorScheme.error,
-                  )
+            keyboardType: type == ContactPanelInputType.phoneNumber
+                ? TextInputType.phone
+                : type == ContactPanelInputType.name
+                    ? TextInputType.text
+                    : null,
+            inputFormatters: type == ContactPanelInputType.phoneNumber
+                ? [
+                    LengthLimitingTextInputFormatter(8),
+                    FilteringTextInputFormatter.digitsOnly,
+                  ]
                 : null,
-            border: const OutlineInputBorder(borderRadius: BorderRadius.zero),
-            enabledBorder:
-                const OutlineInputBorder(borderRadius: BorderRadius.zero),
-            focusedBorder:
-                const OutlineInputBorder(borderRadius: BorderRadius.zero),
-            isDense: true,
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 12.0,
-              horizontal: 10.0,
-            ),
+            textCapitalization: type == ContactPanelInputType.name
+                ? TextCapitalization.words
+                : TextCapitalization.none,
+            onChanged: onChanged,
+            onSubmitted: onSubmitted,
           ),
-          keyboardType: type == ContactPanelInputType.phoneNumber
-              ? TextInputType.phone
-              : type == ContactPanelInputType.name
-                  ? TextInputType.text
-                  : null,
-          inputFormatters: type == ContactPanelInputType.phoneNumber
-              ? [
-                  LengthLimitingTextInputFormatter(8),
-                  FilteringTextInputFormatter.digitsOnly,
-                ]
-              : null,
-          textCapitalization: type == ContactPanelInputType.name
-              ? TextCapitalization.words
-              : TextCapitalization.none,
-          onChanged: onChanged,
-          onSubmitted: onSubmitted,
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

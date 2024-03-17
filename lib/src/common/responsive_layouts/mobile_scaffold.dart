@@ -79,7 +79,9 @@ class _MobileScaffoldState extends ConsumerState<MobileScaffold> {
               thickness: 0.5,
             ),
             const SizedBox(height: 5),
-            const AffiliationNote(),
+            const Center(
+              child: AffiliationNote(),
+            ),
             const SizedBox(height: 20),
           ],
         ),

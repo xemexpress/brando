@@ -12,6 +12,7 @@ class AuthField extends StatefulWidget {
     required this.icon,
     this.nextFocusNode,
     this.inputFormatters,
+    this.textInputAction,
     this.signInUser,
     this.obscureText = false,
     this.textInputType = TextInputType.text,
@@ -23,6 +24,7 @@ class AuthField extends StatefulWidget {
   final String hintText;
   final IconData icon;
   final List<TextInputFormatter>? inputFormatters;
+  final TextInputAction? textInputAction;
   final bool obscureText;
   final void Function()? signInUser;
   final TextInputType textInputType;
@@ -135,6 +137,7 @@ class _AuthFieldState extends State<AuthField> {
         keyboardType: widget.textInputType,
         obscureText: widget.obscureText,
         inputFormatters: widget.inputFormatters,
+        textInputAction: widget.textInputAction,
       ),
     );
   }

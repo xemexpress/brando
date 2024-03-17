@@ -5,4 +5,6 @@ class ScreenSize {
   static const ultraScreenWidth = 1280;
 }
 
+const double inputBorderRadiusMobile = 5;
+
 const String greetings = 'Welcome to\nMichelle Yuen Jewelry\nBooking System';

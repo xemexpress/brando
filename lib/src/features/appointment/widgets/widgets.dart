@@ -22,3 +22,8 @@ export './contact_panel_input.dart';
 export './confirmation_panel.dart';
 export './title_menu_button.dart';
 export './action_section.dart';
+export './datetime_page.dart';
+export './contact_page.dart';
+export './action_button.dart';
+export './confirmation_page.dart';
+export './change_time_button.dart';

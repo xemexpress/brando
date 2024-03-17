@@ -20,47 +20,30 @@ class ActionSection extends ConsumerWidget {
       case BookingStage.datetime:
       case BookingStage.contact:
         final String text = stage == BookingStage.datetime ? 'NEXT' : 'CONFIRM';
-
-        // return Positioned(
-        //   bottom: 40,
-        //   right: 90,
-        //   child: MouseRegion(
-        //     cursor: SystemMouseCursors.click,
-        //     child: GestureDetector(
-        //       onTap: next,
-        //       child: Container(
-        //         alignment: Alignment.center,
-        //         height: 40,
-        //         width: 270,
-        //         decoration: BoxDecoration(
-        //           color: Theme.of(context).colorScheme.primary,
-        //           borderRadius: BorderRadius.circular(20),
-        //         ),
-        //         child: Text(text),
-        //       ),
-        //     ),
-        //   ),
-        // );
-        return Positioned(
-          bottom: 40,
-          right: 90,
-          child: MouseRegion(
-            cursor: SystemMouseCursors.click,
-            child: GestureDetector(
-              onTap: next,
-              child: Container(
-                alignment: Alignment.center,
-                height: 40,
-                width: context.responsive(double.infinity, md: 270),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary,
-                  borderRadius: BorderRadius.circular(
-                    context.responsive(7, md: 20),
-                  ),
+        final Widget nextButton = MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: next,
+            child: Container(
+              alignment: Alignment.center,
+              height: 40,
+              width: context.responsive(double.infinity, md: 270),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+                borderRadius: BorderRadius.circular(
+                  context.responsive(7, md: 20),
                 ),
-                child: Text(text),
               ),
+              child: Text(text),
             ),
+          ),
+        );
+        return context.responsive(
+          nextButton,
+          md: Positioned(
+            bottom: 40,
+            right: 90,
+            child: nextButton,
           ),
         );
       case BookingStage.confirmation:

@@ -35,27 +35,29 @@ class SectionPicker extends ConsumerWidget {
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: timeslots.map((timeslot) {
-            final paddedTimeslot = PaddedTimeslot(timeslot);
+          children: timeslots.map(
+            (timeslot) {
+              final paddedTimeslot = PaddedTimeslot(timeslot);
 
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(right: endIndent),
-                  child: paddedTimeslot,
-                ),
-                Divider(
-                  color: timeslots.indexOf(timeslot) != timeslots.length - 1
-                      ? Theme.of(context).colorScheme.onSurface
-                      : Theme.of(context).colorScheme.surface,
-                  endIndent: endIndent,
-                  height: 0,
-                  thickness: borderWidth,
-                ),
-              ],
-            );
-          }).toList(),
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(right: endIndent),
+                    child: paddedTimeslot,
+                  ),
+                  Divider(
+                    color: timeslots.indexOf(timeslot) != timeslots.length - 1
+                        ? Theme.of(context).colorScheme.onSurface
+                        : Theme.of(context).colorScheme.surface,
+                    endIndent: endIndent,
+                    height: 0,
+                    thickness: borderWidth,
+                  ),
+                ],
+              );
+            },
+          ).toList(),
         ),
       ),
     );

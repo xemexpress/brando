@@ -20,13 +20,17 @@ class AppointmentTimeSlot extends ConsumerStatefulWidget {
 }
 
 class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
-  changeAppointment(Appointment? appointment) {
+  void changeAppointment(Appointment? appointment) {
     ref
         .read(appointmentControllerProvider.notifier)
         .updateAppointment(appointment);
 
     // Navigator.of(context).push(BookingScreen.route());
     Navigator.of(context).pushNamed(BookingScreen.routeName);
+  }
+
+  void popOut() {
+    Navigator.of(context).pop();
   }
 
   cancelAppointment() {
@@ -50,17 +54,25 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const Text('Are you sure to cancel?'),
+                Text(
+                  'Are you sure to cancel?',
+                  style: context.responsive(
+                    Theme.of(context).textTheme.titleLarge,
+                    md: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     MyButton(
                       text: 'No',
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      onPressed: popOut,
                       horizontalPadding: 22,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      textStyle: context.responsive(
+                        Theme.of(context).textTheme.titleLarge,
+                        md: Theme.of(context).textTheme.titleMedium,
+                      ),
                     ),
                     const SizedBox(
                       width: 22,
@@ -82,7 +94,7 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
     );
   }
 
-  confrimCancellation() {
+  void confrimCancellation() {
     try {
       Navigator.of(context).pop();
 
@@ -92,7 +104,7 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
     }
   }
 
-  goToBookingScreen() {
+  void goToBookingScreen() {
     Navigator.of(context).pushReplacement(BookingScreen.route());
   }
 
