@@ -22,45 +22,47 @@ class BookingSummary extends ConsumerWidget {
 
     return SizedBox(
       height: 200,
-      child: stage == BookingStage.confirmation
-          ? Text(
-              'See you there!',
-              style: GoogleFonts.libreBaskerville(
-                textStyle: Theme.of(context).textTheme.headlineLarge,
-                fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.bold,
+      child: Center(
+        child: stage == BookingStage.confirmation
+            ? Text(
+                'See you there!',
+                style: GoogleFonts.libreBaskerville(
+                  textStyle: Theme.of(context).textTheme.headlineLarge,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Your booking time slot is',
+                    style: GoogleFonts.libreBaskerville(
+                      textStyle: Theme.of(context).textTheme.displaySmall,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  DateTimeDisplay(
+                    date: date,
+                    time: startTime,
+                  ),
+                  Text(
+                    'to',
+                    style: GoogleFonts.libreBaskerville(
+                      textStyle: Theme.of(context).textTheme.headlineMedium,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  DateTimeDisplay(
+                    date: date,
+                    time: endTime,
+                  ),
+                ],
               ),
-            )
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Your booking time slot is',
-                  style: GoogleFonts.libreBaskerville(
-                    textStyle: Theme.of(context).textTheme.displaySmall,
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                DateTimeDisplay(
-                  date: date,
-                  time: startTime,
-                ),
-                Text(
-                  'to',
-                  style: GoogleFonts.libreBaskerville(
-                    textStyle: Theme.of(context).textTheme.headlineMedium,
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                DateTimeDisplay(
-                  date: date,
-                  time: endTime,
-                ),
-              ],
-            ),
+      ),
     );
   }
 }

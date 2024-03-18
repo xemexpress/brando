@@ -16,7 +16,11 @@ class DateTimePanel extends ConsumerStatefulWidget {
 
 class _DateTimePanelState extends ConsumerState<DateTimePanel> {
   void nextStage() {
-    ref.read(appointmentControllerProvider.notifier).nextStage();
+    ref.read(appointmentControllerProvider.notifier).finishDateTimeSelection();
+
+    Future.delayed(const Duration(milliseconds: 300)).then(
+      (value) => ref.read(appointmentControllerProvider.notifier).nextStage(),
+    );
   }
 
   @override

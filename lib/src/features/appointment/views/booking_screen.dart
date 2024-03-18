@@ -31,6 +31,7 @@ class BookingScreen extends ConsumerWidget {
             ),
             md: const DesktopScaffold(
               leftSide: PrimarySection(
+                isShadowed: true,
                 child: BookingSummary(),
               ),
               rightSide: body,

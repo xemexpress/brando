@@ -82,7 +82,8 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
           ),
           backgroundColor: context.responsive(
             null,
-            md: Theme.of(context).colorScheme.surface,
+            // md: Theme.of(context).colorScheme.surface,
+            md: Colors.transparent,
           ),
         );
   }

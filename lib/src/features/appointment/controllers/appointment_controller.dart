@@ -223,6 +223,13 @@ class AppointmentController extends StateNotifier<AppointmentState> {
     );
   }
 
+  void finishDateTimeSelection() {
+    state = state.copyWith(
+      isSelectingDate: false,
+      isSelectingTimeslot: false,
+    );
+  }
+
   void nextStage() {
     state = state.copyWith(
       stage: state.stage.nextStage,
