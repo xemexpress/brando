@@ -1,29 +1,24 @@
 import 'package:brando/src/core/core.dart';
-import 'package:brando/src/features/appointment/controllers/controllers.dart';
 import 'package:brando/src/features/appointment/widgets/widgets.dart';
-import 'package:brando/src/features/auth/view/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ConfirmationPage extends ConsumerStatefulWidget {
   const ConfirmationPage({
     super.key,
-    required this.appBar,
+    required this.appBarBuilder,
   });
 
-  final Widget appBar;
+  final Widget Function({
+    required String title,
+    Function()? leadingFunction,
+  }) appBarBuilder;
 
   @override
   ConsumerState<ConfirmationPage> createState() => _ConfirmationPageState();
 }
 
 class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
-  void goToHomePage() {
-    ref.read(appointmentControllerProvider.notifier).resetStage();
-
-    Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
-  }
-
   @override
   Widget build(BuildContext context) {
     final confirmationBody = Container(
@@ -37,11 +32,15 @@ class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
       child: const ConfirmationPanel(),
     );
 
+    final Widget appBar = widget.appBarBuilder(
+      title: 'See you there!',
+    );
+
     return context.responsive(
       SingleChildScrollView(
         child: Column(
           children: [
-            widget.appBar,
+            appBar,
             confirmationBody,
           ],
         ),
@@ -50,7 +49,7 @@ class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
         children: [
           Align(
             alignment: Alignment.topCenter,
-            child: widget.appBar,
+            child: appBar,
           ),
           Align(
             alignment: Alignment.center,

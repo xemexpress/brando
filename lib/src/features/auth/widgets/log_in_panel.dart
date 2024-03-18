@@ -44,7 +44,7 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
       showFeedback(
         message: 'Invalid email. Please try again.',
       );
-    } on InvalidCredentialsAuthException catch (_) {
+    } on InvalidPasswordAuthException catch (_) {
       _passwordFocusNode.requestFocus();
 
       _passwordController.selection = TextSelection(

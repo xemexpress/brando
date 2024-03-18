@@ -16,7 +16,7 @@ class AuthScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return StreamBuilder<AuthUser?>(
-      stream: ref.read(authControllerProvider.notifier).userChanges(),
+      stream: ref.read(authControllerProvider.notifier).authStateChanges(),
       builder: (context, snapshot) {
         // if (snapshot.connectionState == ConnectionState.active) {
         // print('test snapshot.connectionState: ${snapshot.connectionState}');

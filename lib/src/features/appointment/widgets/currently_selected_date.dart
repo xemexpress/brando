@@ -26,7 +26,7 @@ class CurrentlySelectedDate extends ConsumerWidget {
           alignment: Alignment.center,
           children: [
             Container(
-              height: 40,
+              height: 45,
               padding: const EdgeInsets.only(right: 7),
               decoration: BoxDecoration(
                 border: Border.all(

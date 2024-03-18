@@ -4,12 +4,12 @@ class ShowAndEdit extends StatefulWidget {
   const ShowAndEdit({
     super.key,
     required this.displayText,
-    required this.onEdit,
+    this.onEdit,
     this.isVerified = false,
   });
 
   final String displayText;
-  final Function() onEdit;
+  final Function()? onEdit;
   final bool isVerified;
 
   @override
@@ -37,22 +37,24 @@ class _ShowAndEditState extends State<ShowAndEdit> {
             size: 12,
           ),
         ],
-        const SizedBox(width: 7),
-        MouseRegion(
-          cursor: SystemMouseCursors.click,
-          onEnter: onHovering,
-          onExit: onHovering,
-          child: GestureDetector(
-            onTap: widget.onEdit,
-            child: Icon(
-              Icons.edit,
-              size: 15,
-              color: isHovered
-                  ? Theme.of(context).colorScheme.onSurfaceVariant
-                  : Theme.of(context).colorScheme.surfaceVariant,
+        if (widget.onEdit != null) ...[
+          const SizedBox(width: 7),
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            onEnter: onHovering,
+            onExit: onHovering,
+            child: GestureDetector(
+              onTap: widget.onEdit,
+              child: Icon(
+                Icons.edit,
+                size: 15,
+                color: isHovered
+                    ? Theme.of(context).colorScheme.onSurfaceVariant
+                    : Theme.of(context).colorScheme.surfaceVariant,
+              ),
             ),
           ),
-        ),
+        ],
       ],
     );
   }

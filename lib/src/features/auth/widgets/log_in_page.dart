@@ -1,14 +1,11 @@
-import 'package:brando/src/apis/apis.dart';
 import 'package:brando/src/common/common.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/auth/controllers/controllers.dart';
-import 'package:brando/src/features/auth/view/auth_screen.dart';
 import 'package:brando/src/features/auth/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LogInPage extends ConsumerStatefulWidget {
   const LogInPage({super.key});
@@ -62,33 +59,6 @@ class _LogInPageState extends ConsumerState<LogInPage> {
           const LoaderBackground(),
           const Loader(),
         ],
-        // context.responsive(
-        //   const Column(
-        //     mainAxisAlignment: MainAxisAlignment.end,
-        //     crossAxisAlignment: CrossAxisAlignment.stretch,
-        //     children: [
-        //       // Padding(
-        //       //   padding: EdgeInsets.only(top: 38.0),
-        //       //   child: WelcomeSign(),
-        //       // ),
-        //       Padding(
-        //         padding: EdgeInsets.only(bottom: 20.0),
-        //         child: AffiliationNote(),
-        //       ),
-        //     ],
-        //   ),
-        //   md: Container(),
-        // ),
-
-        // SingleChildScrollView(
-        //   child: Column(
-        //     children: [
-        //       const SizedBox(height: 60),
-        // const WelcomeSign(),
-        //       const SizedBox(height: 60),
-        //     ],
-        //   ),
-        // ),
       ],
     );
   }

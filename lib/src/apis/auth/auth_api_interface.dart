@@ -6,7 +6,12 @@ abstract class AuthAPIInterface {
   // Profile related
 
   Future<void> updateDisplayName({
-    required String displayName,
+    required String newDisplayName,
+  });
+
+  Future<void> updatePassword({
+    required String oldPassword,
+    required String newPassword,
   });
 
   // Future<void> updatePhoneNumber({

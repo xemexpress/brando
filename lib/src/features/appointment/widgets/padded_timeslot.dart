@@ -59,19 +59,22 @@ class _PaddedTimeslotState extends ConsumerState<PaddedTimeslot> {
                     : null,
           ),
           child: Container(
+            height: 25,
             padding: context.responsive(
               null,
               md: const EdgeInsets.only(right: 15),
             ),
-            child: Text(
-              '${widget.timeslot.$1.formattedTime} - ${widget.timeslot.$2.formattedTime}',
-              style: GoogleFonts.cabin(
-                textStyle: context.responsive(
-                  Theme.of(context).textTheme.titleLarge,
-                  md: Theme.of(context).textTheme.titleMedium,
+            child: Center(
+              child: Text(
+                '${widget.timeslot.$1.formattedTime} - ${widget.timeslot.$2.formattedTime}',
+                style: GoogleFonts.cabin(
+                  textStyle: context.responsive(
+                    Theme.of(context).textTheme.titleLarge,
+                    md: Theme.of(context).textTheme.titleMedium,
+                  ),
                 ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
           ),
         ),

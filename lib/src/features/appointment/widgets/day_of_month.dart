@@ -1,3 +1,4 @@
+import 'package:brando/src/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -77,11 +78,12 @@ class _DayOfMonthState extends State<DayOfMonth> {
               child: Text(
                 '${widget.date.day}',
                 style: GoogleFonts.cabin(
-                  textStyle: Theme.of(context).textTheme.titleMedium,
+                  textStyle: context.responsive(
+                      Theme.of(context).textTheme.titleSmall,
+                      md: Theme.of(context).textTheme.titleMedium),
                   color: widget.isSecondary
                       ? Theme.of(context).colorScheme.onSurface.withOpacity(0.5)
                       : Theme.of(context).colorScheme.onSurface,
-                  fontWeight: widget.enabled ? FontWeight.bold : null,
                 ),
                 textAlign: TextAlign.center,
               ),

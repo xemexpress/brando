@@ -1,8 +1,8 @@
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/appointment/controllers/controllers.dart';
 import 'package:brando/src/features/appointment/widgets/widgets.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DateTimePanel extends ConsumerStatefulWidget {
@@ -15,7 +15,7 @@ class DateTimePanel extends ConsumerStatefulWidget {
 }
 
 class _DateTimePanelState extends ConsumerState<DateTimePanel> {
-  void nextStage() async {
+  void nextStage() {
     ref.read(appointmentControllerProvider.notifier).nextStage();
   }
 
@@ -42,9 +42,12 @@ class _DateTimePanelState extends ConsumerState<DateTimePanel> {
         Stack(
           clipBehavior: Clip.none,
           children: [
+            const SizedBox(
+              height: 350,
+            ),
             const TimeslotPicker(),
             Positioned(
-              bottom: -100,
+              bottom: 0,
               right: 0,
               child: button,
             ),
@@ -70,7 +73,7 @@ class _DateTimePanelState extends ConsumerState<DateTimePanel> {
               ),
             ],
           ),
-          context.responsive(const SizedBox(), md: const SizedBox(height: 110)),
+          context.responsive(const SizedBox(), md: const SizedBox(height: 31)),
         ],
       ),
     );

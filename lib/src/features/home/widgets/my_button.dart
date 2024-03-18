@@ -26,9 +26,9 @@ class MyButton extends StatelessWidget {
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
-          height: height,
           padding: EdgeInsets.symmetric(
-            horizontal: horizontalPadding ?? context.responsive(15, md: 10),
+            horizontal: horizontalPadding ?? context.responsive(10, md: 13),
+            vertical: context.responsive(2, md: 4),
           ),
           decoration: BoxDecoration(
             color: backgroundColor,
@@ -36,11 +36,11 @@ class MyButton extends StatelessWidget {
               context.responsive(5, md: 15),
             ),
           ),
-          child: Center(
-            child: Text(
-              text,
-              style: textStyle,
-            ),
+          child: Text(
+            text,
+            style: textStyle,
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.visible,
           ),
         ),
       ),

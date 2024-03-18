@@ -10,7 +10,8 @@ class TableRowCell extends StatelessWidget {
   final bool isHeader;
   final bool rightBordered;
   final double verticalPaddingForHeaderCell = 3;
-
+  final double horizontalPadding = 10;
+  final double cellHeight = 50;
   final dynamic child;
 
   @override
@@ -23,9 +24,7 @@ class TableRowCell extends StatelessWidget {
                 ? Theme.of(context).textTheme.labelSmall!.copyWith(
                       fontWeight: FontWeight.w600,
                     )
-                : Theme.of(context).textTheme.labelMedium!.copyWith(
-                      fontWeight: FontWeight.normal,
-                    ),
+                : Theme.of(context).textTheme.labelMedium,
           )
         : child;
 
@@ -41,9 +40,9 @@ class TableRowCell extends StatelessWidget {
               : null,
           padding: isHeader
               ? EdgeInsets.symmetric(vertical: verticalPaddingForHeaderCell)
-              : null,
+              : EdgeInsets.symmetric(horizontal: horizontalPadding),
           child: SizedBox(
-            height: isHeader ? null : 35,
+            height: isHeader ? null : cellHeight,
             child: Center(
               child: childWidget,
             ),

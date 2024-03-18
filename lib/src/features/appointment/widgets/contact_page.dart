@@ -8,20 +8,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class ContactPage extends ConsumerStatefulWidget {
   const ContactPage({
     super.key,
-    required this.appBar,
+    required this.appBarBuilder,
   });
 
-  final Widget appBar;
+  final Widget Function({
+    required String title,
+    required Function()? leadingFunction,
+  }) appBarBuilder;
 
   @override
   ConsumerState<ContactPage> createState() => _ContactPageState();
 }
 
 class _ContactPageState extends ConsumerState<ContactPage> {
-  void goToHomePage() {
-    ref.read(appointmentControllerProvider.notifier).resetStage();
-
-    Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
+  void goToPreviousPage() {
+    ref.read(appointmentControllerProvider.notifier).previousStage();
   }
 
   @override
@@ -37,11 +38,16 @@ class _ContactPageState extends ConsumerState<ContactPage> {
       child: const ContactPanel(),
     );
 
+    final Widget appBar = widget.appBarBuilder(
+      title: 'You are almost there!',
+      leadingFunction: goToPreviousPage,
+    );
+
     return context.responsive(
       SingleChildScrollView(
         child: Column(
           children: [
-            widget.appBar,
+            appBar,
             contactBody,
           ],
         ),
@@ -50,7 +56,7 @@ class _ContactPageState extends ConsumerState<ContactPage> {
         children: [
           Align(
             alignment: Alignment.topCenter,
-            child: widget.appBar,
+            child: appBar,
           ),
           Align(
             alignment: Alignment.center,

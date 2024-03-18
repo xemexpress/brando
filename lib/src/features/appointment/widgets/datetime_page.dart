@@ -8,10 +8,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class DateTimePage extends ConsumerStatefulWidget {
   const DateTimePage({
     super.key,
-    required this.appBar,
+    required this.appBarBuilder,
   });
 
-  final Widget appBar;
+  final Widget Function({
+    required String title,
+    required Function()? leadingFunction,
+  }) appBarBuilder;
 
   @override
   ConsumerState<DateTimePage> createState() => _DateTimePageState();
@@ -36,11 +39,16 @@ class _DateTimePageState extends ConsumerState<DateTimePage> {
       child: const DateTimePanel(),
     );
 
+    final Widget appBar = widget.appBarBuilder(
+      title: 'Book your appointment',
+      leadingFunction: goToHomePage,
+    );
+
     return context.responsive(
       SingleChildScrollView(
         child: Column(
           children: [
-            widget.appBar,
+            appBar,
             dateTimeBody,
           ],
         ),
@@ -49,7 +57,7 @@ class _DateTimePageState extends ConsumerState<DateTimePage> {
         children: [
           Align(
             alignment: Alignment.topCenter,
-            child: widget.appBar,
+            child: appBar,
           ),
           Align(
             alignment: Alignment.center,

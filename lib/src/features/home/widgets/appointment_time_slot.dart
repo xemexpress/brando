@@ -1,4 +1,3 @@
-import 'package:brando/src/apis/appointment/appointment.dart';
 import 'package:brando/src/common/common.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/appointment/controllers/controllers.dart';
@@ -20,6 +19,8 @@ class AppointmentTimeSlot extends ConsumerStatefulWidget {
 }
 
 class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
+  final double buttonHeight = 20;
+
   void changeAppointment(Appointment? appointment) {
     ref
         .read(appointmentControllerProvider.notifier)
@@ -29,79 +30,14 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
     Navigator.of(context).pushNamed(BookingScreen.routeName);
   }
 
-  void popOut() {
-    Navigator.of(context).pop();
-  }
-
-  cancelAppointment() {
+  void cancelAppointment() {
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (ctx) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            side: const BorderSide(
-              color: Colors.black,
-              width: 1.0,
-            ),
-          ),
-          elevation: 8.0,
-          shadowColor: Theme.of(context).colorScheme.surfaceVariant,
-          content: SizedBox(
-            height: 80,
-            width: 40,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  'Are you sure to cancel?',
-                  style: context.responsive(
-                    Theme.of(context).textTheme.titleLarge,
-                    md: Theme.of(context).textTheme.titleMedium,
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    MyButton(
-                      text: 'No',
-                      onPressed: popOut,
-                      horizontalPadding: 22,
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      textStyle: context.responsive(
-                        Theme.of(context).textTheme.titleLarge,
-                        md: Theme.of(context).textTheme.titleMedium,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 22,
-                    ),
-                    MyButton(
-                      text: 'Yes',
-                      onPressed: confrimCancellation,
-                      backgroundColor:
-                          Theme.of(context).colorScheme.surfaceVariant,
-                      horizontalPadding: 22,
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-        );
+        return const CancelAppointmentDialog();
       },
     );
-  }
-
-  void confrimCancellation() {
-    try {
-      Navigator.of(context).pop();
-
-      ref.read(appointmentControllerProvider.notifier).cancelAppointment();
-    } on GenericAppointmentException catch (e) {
-      showFeedback(message: e.message);
-    }
   }
 
   void goToBookingScreen() {
@@ -162,23 +98,33 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
                               )
                             ],
                           ),
-                          TableRowCell(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Wrap(
+                              alignment: WrapAlignment.spaceEvenly,
+                              runSpacing: 3,
+                              spacing: 3,
                               children: [
                                 MyButton(
                                   text: 'change',
                                   onPressed: () =>
                                       changeAppointment(appointment),
+                                  height: buttonHeight,
                                   backgroundColor:
                                       Theme.of(context).colorScheme.primary,
+                                  textStyle:
+                                      Theme.of(context).textTheme.labelMedium,
                                 ),
                                 MyButton(
                                   text: 'cancel',
                                   onPressed: cancelAppointment,
+                                  height: buttonHeight,
                                   backgroundColor: Theme.of(context)
                                       .colorScheme
                                       .surfaceVariant,
+                                  textStyle:
+                                      Theme.of(context).textTheme.labelMedium,
                                 ),
                               ],
                             ),
@@ -191,7 +137,10 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
                           TableRowCell(
                             child: MyButton(
                               text: 'make an appointment',
+                              textStyle:
+                                  Theme.of(context).textTheme.labelMedium,
                               onPressed: goToBookingScreen,
+                              height: buttonHeight,
                               backgroundColor:
                                   Theme.of(context).colorScheme.primary,
                             ),
@@ -200,10 +149,7 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
 
                   return rowChildren;
                 },
-                loading: () => [
-                  const Loader(),
-                  const Loader(),
-                ],
+                loading: () => [const Loader(), const Loader()],
                 error: (error, stackTrace) {
                   return [
                     Expanded(
@@ -212,9 +158,7 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                     ),
-                    Container(
-                      width: 0,
-                    ),
+                    Container(width: 0),
                   ];
                 },
               ),

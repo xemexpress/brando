@@ -20,6 +20,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       md: const DesktopScaffold(
         leftSide: PrimarySection(
+          isShadowed: true,
           child: WelcomeSign(),
         ),
         rightSide: HomePage(),

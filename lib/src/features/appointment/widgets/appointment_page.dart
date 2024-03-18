@@ -40,80 +40,51 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
     );
   }
 
-  void nextStage(BookingStage currentStage) async {
-    if (currentStage == BookingStage.contact) {
-      final Appointment appointment =
-          ref.read(appointmentControllerProvider).appointment;
-      final String name = appointment.name;
-      final String phoneNumber = appointment.phoneNumber;
-
-      if (name.isEmpty || phoneNumber.isEmpty) {
-        if (name.isEmpty) {
-          ref
-              .read(appointmentControllerProvider.notifier)
-              .raiseError(ContactPanelInputType.name);
-        }
-
-        if (phoneNumber.isEmpty) {
-          ref
-              .read(appointmentControllerProvider.notifier)
-              .raiseError(ContactPanelInputType.phoneNumber);
-        }
-
-        showMySnackBar(context: context, message: 'Please fill in all fields.');
-        return;
-      }
-
-      await ref.read(appointmentControllerProvider.notifier).bookAppointment();
-    }
-
-    ref.read(appointmentControllerProvider.notifier).nextStage();
-  }
-
-  void previousStage(BookingStage stage) {
-    if (stage == BookingStage.datetime) {
-      ref.read(appointmentControllerProvider.notifier).resetStage();
-      Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
-    } else {
-      ref.read(appointmentControllerProvider.notifier).previousStage();
-    }
-  }
-
   void goToHomePage() {
     ref.read(appointmentControllerProvider.notifier).resetStage();
 
     Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
   }
 
-  Widget _buildAppBar({required String title}) {
-    return MyAppBar(
-      title: context.responsive(
-        title,
-        md: '',
-      ),
-      leading: context.responsive(
-        const MenuButton(),
-        md: Container(),
-      ),
-      trailing: context.responsive(
-        null,
-        md: MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: GestureDetector(
-            onTap: goToHomePage,
-            child: Icon(
-              Icons.person_rounded,
-              color: Theme.of(context).colorScheme.primary,
-              size: 40,
+  Widget Function({required String title, Function()? leadingFunction})
+      _buildAppBar() {
+    return ({required String title, Function()? leadingFunction}) => MyAppBar(
+          title: context.responsive(
+            title,
+            md: '',
+          ),
+          leading: context.responsive(
+            const MenuButton(),
+            md: leadingFunction != null
+                ? IconButton(
+                    style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                    onPressed: leadingFunction,
+                    icon: Transform.translate(
+                      offset: const Offset(-1, 0),
+                      child: const Icon(Icons.arrow_back_ios_rounded),
+                    ),
+                  )
+                : null,
+          ),
+          trailing: context.responsive(
+            null,
+            md: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: goToHomePage,
+                child: Icon(
+                  Icons.person_rounded,
+                  color: Theme.of(context).colorScheme.primary,
+                  size: 40,
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-      backgroundColor: context.responsive(
-        null,
-        md: Theme.of(context).colorScheme.surface,
-      ),
-    );
+          backgroundColor: context.responsive(
+            null,
+            md: Theme.of(context).colorScheme.surface,
+          ),
+        );
   }
 
   @override
@@ -125,9 +96,9 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
     final bool isLoading = appointmentState.isLoading;
 
     final stages = [
-      DateTimePage(appBar: _buildAppBar(title: 'Book your appointment')),
-      ContactPage(appBar: _buildAppBar(title: 'You are almost there!')),
-      ConfirmationPage(appBar: _buildAppBar(title: 'See you there!')),
+      DateTimePage(appBarBuilder: _buildAppBar()),
+      ContactPage(appBarBuilder: _buildAppBar()),
+      ConfirmationPage(appBarBuilder: _buildAppBar()),
     ];
 
     return Stack(

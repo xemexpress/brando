@@ -5,3 +5,6 @@ export './show_and_edit.dart';
 export './my_button.dart';
 export './table_header_cell.dart';
 export './table_row_cell.dart';
+export './cancel_appointment_dialog.dart';
+export './edit_profile_dialog.dart';
+export './profile_edit_field.dart';

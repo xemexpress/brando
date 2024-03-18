@@ -24,6 +24,30 @@ class AuthController extends StateNotifier<bool> {
     return _authAPI.userChanges();
   }
 
+  Future<void> updateDisplayName({required String displayName}) async {
+    isLoading(true);
+
+    try {
+      await _authAPI.updateDisplayName(newDisplayName: displayName);
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<void> updatePassword(
+      {required String oldPassword, required String newPassword}) async {
+    isLoading(true);
+
+    try {
+      await _authAPI.updatePassword(
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+      );
+    } finally {
+      isLoading(false);
+    }
+  }
+
   Future<void> signInEmailAndPassword({
     required String email,
     required String password,

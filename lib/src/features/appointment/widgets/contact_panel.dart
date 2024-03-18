@@ -2,7 +2,6 @@ import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/appointment/controllers/controllers.dart';
 import 'package:brando/src/features/appointment/widgets/widgets.dart';
 import 'package:brando/src/models/models.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -165,20 +164,7 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
             const SizedBox(height: 150),
             md: const SizedBox(height: 110),
           ),
-          context.responsive(
-            title,
-            md: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                title,
-                Positioned(
-                  right: 0,
-                  bottom: -260,
-                  child: button,
-                ),
-              ],
-            ),
-          ),
+          title,
           const SizedBox(height: 20),
           ContactPanelInput(
             label: 'Phone number*',
@@ -203,7 +189,17 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
           ),
           context.responsive(
             const SizedBox(height: 100),
-            md: const SizedBox(height: 110),
+            md: Stack(children: [
+              const SizedBox(
+                height: 110,
+                width: double.infinity,
+              ),
+              Positioned(
+                right: 0,
+                bottom: 20,
+                child: button,
+              ),
+            ]),
           ),
           context.responsive(
             Padding(

@@ -17,9 +17,6 @@ class HomePage extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePage> {
   Appointment? myAppointment;
 
-  AuthUser get currentUser =>
-      ref.read(authControllerProvider.notifier).currentUser!;
-
   void logOut() async {
     try {
       await ref.read(authControllerProvider.notifier).signOut();
@@ -32,66 +29,76 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          MyAppBar(
-            title: context.responsive(
-              'Personal Pannel',
-              md: '',
-            ),
-            leading: context.responsive(
-              const MenuButton(),
-              md: TextButton(
-                style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                onPressed: logOut,
-                child: Text(
-                  'Log Out',
-                  style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-              ),
-            ),
-            trailing: context.responsive(
-              null,
-              md: Icon(
-                Icons.person_rounded,
-                color: Theme.of(context).colorScheme.surface,
-                size: 40,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: 40,
-              horizontal: context.responsive(
-                20,
-                md: 50.0,
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Profile info
-                ProfilePanel(currentUser: currentUser),
-                const SizedBox(height: 50),
+    final bool isLoading = ref.watch(authControllerProvider);
 
-                // Appointment Table
-                Text(
-                  'Appointment time slot:',
-                  style: Theme.of(context).textTheme.titleLarge,
+    return Stack(
+      children: [
+        SingleChildScrollView(
+          child: Column(
+            children: [
+              MyAppBar(
+                title: context.responsive(
+                  'Personal Pannel',
+                  md: '',
                 ),
-                const SizedBox(height: 4),
-                const AppointmentTimeSlot(),
-                // const Row(),
-              ],
-            ),
-          )
+                leading: context.responsive(
+                  const MenuButton(),
+                  md: TextButton(
+                    style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                    onPressed: logOut,
+                    child: Text(
+                      'Log Out',
+                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  ),
+                ),
+                trailing: context.responsive(
+                  null,
+                  md: Icon(
+                    Icons.person_rounded,
+                    color: Theme.of(context).colorScheme.surface,
+                    size: 40,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 40,
+                  horizontal: context.responsive(
+                    20,
+                    md: 50.0,
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Profile info
+                    const ProfilePanel(),
+                    const SizedBox(height: 50),
+
+                    // Appointment Table
+                    Text(
+                      'Appointment time slot:',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const SizedBox(height: 4),
+                    const AppointmentTimeSlot(),
+                    // const Row(),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+        if (isLoading) ...[
+          const LoaderBackground(),
+          const Loader(),
         ],
-      ),
+      ],
     );
   }
 }

@@ -79,7 +79,7 @@ class AppointmentController extends StateNotifier<AppointmentState> {
     state = state.copyWith(isLoading: value);
   }
 
-  // Firestore related
+  // ************** Firestore related **************
 
   Stream<Appointment?> currentAppointmentStream() => _appointmentAPI
       .currentAppointmentStream(userId: _authAPI.currentUser!.id);
@@ -108,7 +108,7 @@ class AppointmentController extends StateNotifier<AppointmentState> {
       // Update the user's profile
       if (currentUser.displayName == null) {
         await _authAPI.updateDisplayName(
-          displayName: state.appointment.name,
+          newDisplayName: state.appointment.name,
         );
       }
     } finally {
@@ -125,6 +125,7 @@ class AppointmentController extends StateNotifier<AppointmentState> {
       isLoading(false);
     }
   }
+// ************** Firestore related (above) **************
 
   // Local edits
   void updateAppointment(Appointment? appointment) {
@@ -142,6 +143,7 @@ class AppointmentController extends StateNotifier<AppointmentState> {
       appointment: state.appointment.copyWith(
         date: date,
       ),
+      currentlyViewingMonth: date,
       isSelectingDate: false,
     );
   }

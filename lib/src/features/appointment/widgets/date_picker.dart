@@ -23,15 +23,21 @@ class DatePicker extends ConsumerWidget {
       child: Column(
         children: [
           const CurrentlySelectedDate(),
-          AnimatedOpacity(
-            opacity: isSelectingDate ? 1.0 : 0.0,
+          AnimatedContainer(
+            height: isSelectingDate ? 240 : 0.0,
             duration: const Duration(milliseconds: 300),
-            child: const MonthPicker(),
-          ),
-          AnimatedOpacity(
-            opacity: isSelectingDate ? 1.0 : 0.0,
-            duration: const Duration(milliseconds: 300),
-            child: const DayPicker(),
+            child: AnimatedOpacity(
+              opacity: isSelectingDate ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 200),
+              child: const SingleChildScrollView(
+                child: Column(
+                  children: [
+                    MonthPicker(),
+                    DayPicker(),
+                  ],
+                ),
+              ),
+            ),
           ),
         ],
       ),

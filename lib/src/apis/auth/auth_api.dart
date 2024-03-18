@@ -26,14 +26,44 @@ class AuthAPI implements AuthAPIInterface {
   // Profile related
 
   @override
-  Future<void> updateDisplayName({required String displayName}) async {
+  Future<void> updateDisplayName({required String newDisplayName}) async {
     try {
-      await _firebaseAuth.currentUser?.updateDisplayName(displayName);
+      await _firebaseAuth.currentUser?.updateDisplayName(newDisplayName);
     } on FirebaseAuthException catch (e) {
       throw GenericAuthException(
         message:
-            'Met when signing in. Please set an exception for FirebaseAuthException of code ${e.code}.',
+            'Met when updating the display name. Please set an exception for FirebaseAuthException of code ${e.code}.',
       );
+    } catch (e) {
+      throw GenericAuthException(
+        message: 'Unexpected error when signing in. ${e.toString()}',
+      );
+    }
+  }
+
+  @override
+  Future<void> updatePassword({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    try {
+      final AuthCredential credential = EmailAuthProvider.credential(
+        email: currentUser!.email,
+        password: oldPassword,
+      );
+      await _firebaseAuth.currentUser?.reauthenticateWithCredential(credential);
+      await _firebaseAuth.currentUser?.updatePassword(newPassword);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-credential') {
+        throw InvalidPasswordAuthException();
+      } else if (e.code == 'weak-password') {
+        throw WeakPasswordAuthException();
+      } else {
+        throw GenericAuthException(
+          message:
+              'Met when signing in. Please set an exception for FirebaseAuthException of code ${e.code}.',
+        );
+      }
     } catch (e) {
       throw GenericAuthException(
         message: 'Unexpected error when signing in. ${e.toString()}',
@@ -68,6 +98,7 @@ class AuthAPI implements AuthAPIInterface {
     });
   }
 
+  @override
   Stream<AuthUser?> userChanges() {
     return _firebaseAuth.userChanges().map((firebaseUser) {
       return firebaseUser == null
@@ -95,7 +126,7 @@ class AuthAPI implements AuthAPIInterface {
       }
     } on FirebaseAuthException catch (e) {
       if (e.checkFirebaseException('auth/invalid-credential')) {
-        throw InvalidCredentialsAuthException();
+        throw InvalidPasswordAuthException();
       } else if (e.checkFirebaseException('auth/invalid-email')) {
         throw InvalidEmailAuthException();
       } else if (e.checkFirebaseException('auth/network-request-failed')) {
