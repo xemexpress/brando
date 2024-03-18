@@ -49,11 +49,11 @@ class ContactPanelInput extends ConsumerWidget {
       prefixWidget = MenuBar(
         style: const MenuStyle(
           padding: MaterialStatePropertyAll(EdgeInsets.zero),
+          elevation: MaterialStatePropertyAll<double>(0),
         ),
         children: [
           SubmenuButton(
             style: TextButton.styleFrom(
-              backgroundColor: Theme.of(context).colorScheme.surface,
               alignment: Alignment.center,
               padding: EdgeInsets.zero,
             ),

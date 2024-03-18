@@ -78,9 +78,14 @@ class _DayOfMonthState extends State<DayOfMonth> {
               child: Text(
                 '${widget.date.day}',
                 style: GoogleFonts.cabin(
-                  textStyle: context.responsive(
-                      Theme.of(context).textTheme.titleSmall,
-                      md: Theme.of(context).textTheme.titleMedium),
+                  textStyle: context
+                      .responsive(
+                        Theme.of(context).textTheme.titleSmall,
+                        md: Theme.of(context).textTheme.titleMedium,
+                      )!
+                      .copyWith(
+                        fontWeight: FontWeight.normal,
+                      ),
                   color: widget.isSecondary
                       ? Theme.of(context).colorScheme.onSurface.withOpacity(0.5)
                       : Theme.of(context).colorScheme.onSurface,

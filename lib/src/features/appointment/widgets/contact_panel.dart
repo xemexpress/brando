@@ -127,14 +127,14 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
       _phoneNumberController.text = phoneNumber;
       _phoneNumberController.selection = TextSelection.collapsed(
         offset: _phoneNumberController.text.length,
-      ); // Place cursor at the end
+      );
     }
 
     if (_nameController.text.isEmpty) {
       _nameController.text = name;
       _nameController.selection = TextSelection.collapsed(
         offset: _nameController.text.length,
-      ); // Place cursor at the end
+      );
     }
 
     Widget button = ActionButton(
@@ -160,10 +160,7 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          context.responsive(
-            const SizedBox(height: 150),
-            md: const SizedBox(height: 110),
-          ),
+          const SizedBox(height: 110),
           title,
           const SizedBox(height: 20),
           ContactPanelInput(
@@ -188,18 +185,20 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
             errorHintText: 'required',
           ),
           context.responsive(
-            const SizedBox(height: 100),
-            md: Stack(children: [
-              const SizedBox(
-                height: 110,
-                width: double.infinity,
-              ),
-              Positioned(
-                right: 0,
-                bottom: 20,
-                child: button,
-              ),
-            ]),
+            const SizedBox(height: 60),
+            md: Stack(
+              children: [
+                const SizedBox(
+                  height: 110,
+                  width: double.infinity,
+                ),
+                Positioned(
+                  right: 0,
+                  bottom: 20,
+                  child: button,
+                ),
+              ],
+            ),
           ),
           context.responsive(
             Padding(
