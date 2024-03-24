@@ -65,6 +65,12 @@
         <!-- This script adds the flutter initialization JS code -->
         <script src="flutter.js" defer></script>
 
+        <!-- Lottie Player -->
+        <script
+            src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"
+            defer
+        ></script>
+
         <!-- Splash Screen related -->
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <style>
@@ -83,26 +89,8 @@
                 z-index: 1000;
             }
             #splash img {
-                /* Adjust the size of the logo as needed */
                 width: 100px; /* Example size - adjust as needed */
                 height: auto;
-            }
-            #splash-text {
-                margin-top: 20px; /* Space between logo and text */
-                font-size: 12px; /* Adjust based on your design preference */
-                color: #333; /* Text color, choose what fits your design */
-                font-family: Arial, sans-serif; /* Use a font that matches your branding */
-                animation: shine 1.5s linear infinite; /* Apply the animation */
-            }
-            /* Keyframes for the shining (blinking) effect */
-            @keyframes shine {
-                0%,
-                100% {
-                    opacity: 1;
-                }
-                50% {
-                    opacity: 0;
-                }
             }
         </style>
     </head>
@@ -112,7 +100,16 @@
                 src="icons/michelle-yuen-jewelry-logo.png"
                 alt="Michelle Yuen Jewelry Logo"
             />
-            <div id="splash-text">.</div>
+            <lottie-player
+                src="animations/loading.json"
+                background="#fddabe"
+                speed="0.5"
+                style="width: 70px; height: 70px"
+                loop
+                autoplay
+                direction="1"
+                mode="normal"
+            ></lottie-player>
         </div>
 
         <script>
