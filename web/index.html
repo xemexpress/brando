@@ -22,14 +22,41 @@
         <!-- iOS meta tags & icons -->
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <meta name="apple-mobile-web-app-title" content="brando" />
-        <link rel="apple-touch-icon" href="icons/Icon-192.png" />
+        <meta name="apple-mobile-web-app-title" content="MYJ Booking" />
+        <!-- <link rel="apple-touch-icon" href="icons/Icon-192.png" /> -->
 
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="favicon.ico" />
 
-        <title>brando</title>
+        <title>Booking | Michelle Yuen Jewelry</title>
         <link rel="manifest" href="manifest.json" />
+
+        <!-- Customisation: duplicates will be commented out correspondingly -->
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="icons/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="icons/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="icons/favicon-16x16.png"
+        />
+        <!-- <link rel="manifest" href="/site.webmanifest"> -->
+        <link
+            rel="mask-icon"
+            href="icons/safari-pinned-tab.svg"
+            color="#fddabe"
+        />
+        <meta name="msapplication-TileColor" content="#fddabe" />
+        <meta name="theme-color" content="#fddabe" />
 
         <script>
             // The value below is injected by flutter build, do not touch.
@@ -37,8 +64,58 @@
         </script>
         <!-- This script adds the flutter initialization JS code -->
         <script src="flutter.js" defer></script>
+
+        <!-- Splash Screen related -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+            /* Splash screen styles */
+            #splash {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #fddabe;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column; /* Ensure logo and text are vertically aligned */
+                z-index: 1000;
+            }
+            #splash img {
+                /* Adjust the size of the logo as needed */
+                width: 100px; /* Example size - adjust as needed */
+                height: auto;
+            }
+            #splash-text {
+                margin-top: 20px; /* Space between logo and text */
+                font-size: 12px; /* Adjust based on your design preference */
+                color: #333; /* Text color, choose what fits your design */
+                font-family: Arial, sans-serif; /* Use a font that matches your branding */
+                animation: shine 1.5s linear infinite; /* Apply the animation */
+            }
+            /* Keyframes for the shining (blinking) effect */
+            @keyframes shine {
+                0%,
+                100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0;
+                }
+            }
+        </style>
     </head>
     <body>
+        <div id="splash">
+            <div id="splash-text">
+                <img
+                    src="icons/michelle-yuen-jewelry-logo.png"
+                    alt="Michelle Yuen Jewelry Logo"
+                />
+            </div>
+        </div>
+
         <script>
             window.addEventListener("load", function (ev) {
                 // Download main.dart.js

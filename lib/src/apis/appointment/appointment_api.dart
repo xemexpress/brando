@@ -5,33 +5,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class AppointmentAPI implements AppointmentAPIInterface {
   AppointmentAPI({
     required FirebaseFirestore firebaseFirestore,
-  }) : _firebaseCollectionRef = firebaseFirestore.collection('appointments');
+  })  : _firestore = firebaseFirestore,
+        _userAppointmentsCollectionRef =
+            firebaseFirestore.collection('userAppointments'),
+        _appointmentSlotsCollectionRef =
+            firebaseFirestore.collection('appointmentSlots');
 
-  final CollectionReference _firebaseCollectionRef;
-
-  @override
-  Future<Appointment> book({
-    required String userId,
-    required Appointment appointment,
-  }) async {
-    try {
-      await _firebaseCollectionRef.doc(userId).set(appointment.toMap());
-
-      return appointment;
-    } catch (e) {
-      throw GenericAppointmentException(
-        message:
-            'Unexpected error when booking an appointment. ${e.toString()}',
-      );
-    }
-  }
+  final FirebaseFirestore _firestore;
+  final CollectionReference _userAppointmentsCollectionRef;
+  final CollectionReference _appointmentSlotsCollectionRef;
 
   @override
   Future<void> cancelAppointment({
     required String userId,
   }) async {
     try {
-      await _firebaseCollectionRef.doc(userId).delete();
+      await _userAppointmentsCollectionRef.doc(userId).delete();
     } catch (e) {
       throw GenericAppointmentException(
         message:
@@ -43,7 +32,10 @@ class AppointmentAPI implements AppointmentAPIInterface {
   Stream<Appointment?> currentAppointmentStream({
     required String userId,
   }) {
-    return _firebaseCollectionRef.doc(userId).snapshots().map((snapshot) {
+    return _userAppointmentsCollectionRef
+        .doc(userId)
+        .snapshots()
+        .map((snapshot) {
       if (snapshot.exists) {
         return Appointment.fromMap(snapshot.data() as Map<String, dynamic>);
       } else {
@@ -58,7 +50,7 @@ class AppointmentAPI implements AppointmentAPIInterface {
   }) async {
     try {
       DocumentSnapshot documentSnapshot =
-          await _firebaseCollectionRef.doc(userId).get();
+          await _userAppointmentsCollectionRef.doc(userId).get();
       if (documentSnapshot.exists) {
         return Appointment.fromMap(
           documentSnapshot.data() as Map<String, dynamic>,
@@ -77,13 +69,57 @@ class AppointmentAPI implements AppointmentAPIInterface {
     required Appointment appointment,
   }) async {
     try {
-      await _firebaseCollectionRef.doc(userId).update(appointment.toMap());
+      await _userAppointmentsCollectionRef
+          .doc(userId)
+          .update(appointment.toMap());
 
       return appointment;
     } catch (e) {
       throw GenericAppointmentException(
         message:
             'Unexpected error when updating an appointment. ${e.toString()}',
+      );
+    }
+  }
+
+  @override
+  Future<Appointment> book({
+    required String userId,
+    required Appointment appointment,
+  }) async {
+    try {
+      DocumentReference documentReference =
+          _appointmentSlotsCollectionRef.doc(appointment.appointmentId);
+
+      return await _firestore.runTransaction<Appointment>(
+        (transaction) async {
+          DocumentSnapshot snapshot = await transaction.get(documentReference);
+
+          if (!snapshot.exists ||
+              (snapshot.data()! as Map<String, dynamic>)['bookedBy'] == null) {
+            // Slot is available
+            await _userAppointmentsCollectionRef
+                .doc(userId)
+                .set(appointment.toMap());
+
+            transaction.set(documentReference, {
+              'bookedBy': userId,
+            });
+            // Appointment booked successfully
+          } else {
+            // Slot is not available
+            throw SlotNotAvailableException();
+          }
+
+          return appointment;
+        },
+      );
+    } on SlotNotAvailableException catch (_) {
+      rethrow;
+    } catch (e) {
+      throw GenericAppointmentException(
+        message:
+            'Unexpected error when booking an appointment. ${e.toString()}',
       );
     }
   }

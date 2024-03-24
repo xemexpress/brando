@@ -48,7 +48,7 @@ class _BrandoAppState extends ConsumerState<BrandoApp>
     // final themeState = ref.watch(themeControllerProvider);
 
     return MaterialApp(
-      title: 'Michelle Yuen Jewelry | Booking',
+      title: 'Booking | Michelle Yuen Jewelry',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.currentTheme(
           // brightness: themeState.appBrightness,

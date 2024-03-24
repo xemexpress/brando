@@ -1,17 +1,22 @@
 {
-    "name": "brando",
-    "short_name": "brando",
+    "name": "Booking | Michelle Yuen Jewelry",
+    "short_name": "MYJ Booking",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "Michelle Yuen Jewelry Booking",
+    "background_color": "#FDDABE",
+    "theme_color": "#FDDABE",
+    "description": "Welcome to Michelle Yuen Jewelry Booking System",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
         {
-            "src": "icons/Icon-192.png",
+            "src": "icons/android-chrome-192x192.png",
             "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/android-chrome-512x512.png",
+            "sizes": "512x512",
             "type": "image/png"
         }
     ]

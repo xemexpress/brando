@@ -12,4 +12,8 @@ extension TimeOfDayExtension on TimeOfDay {
   String get formattedTime {
     return '$formattedHour:$formattedMinute';
   }
+
+  String get formattedTimeCompact {
+    return '$formattedHour$formattedMinute';
+  }
 }

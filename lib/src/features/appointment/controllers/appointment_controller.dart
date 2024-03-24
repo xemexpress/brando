@@ -220,6 +220,8 @@ class AppointmentController extends StateNotifier<AppointmentState> {
   void previousStage() {
     state = state.copyWith(
       stage: state.stage.previousStage,
+      isSelectingDate: state.stage.nextStage == BookingStage.datetime,
+      isSelectingTimeslot: state.stage.nextStage == BookingStage.datetime,
     );
   }
 

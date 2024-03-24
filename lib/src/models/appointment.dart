@@ -23,7 +23,6 @@ class Appointment {
 // Get formatted date
   String get formattedDate {
     return date.formattedDate;
-    // return DateFormat('yyyy MMM dd').format(date);
   }
 
   String get formattedTimeslot {
@@ -38,6 +37,11 @@ class Appointment {
   // Get formatted end time
   String get formattedEndTime {
     return endTime.formattedTime;
+  }
+
+  // Get custom document id
+  String get appointmentId {
+    return '${date.formattedDateCompact}_${startTime.formattedTimeCompact}_${endTime.formattedTimeCompact}';
   }
 
   Appointment copyWith({

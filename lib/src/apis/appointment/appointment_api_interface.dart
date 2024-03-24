@@ -1,3 +1,4 @@
+import 'package:brando/src/models/appointment.dart';
 import 'package:brando/src/models/models.dart';
 
 abstract class AppointmentAPIInterface {

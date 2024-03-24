@@ -37,6 +37,10 @@ extension DateTimeExtension on DateTime {
     return DateFormat('yyyy MMMM dd').format(this);
   }
 
+  String get formattedDateCompact {
+    return DateFormat('yyyyMMdd').format(this);
+  }
+
   DateTime get previousMonth {
     int year = this.year;
     int month = this.month - 1;
