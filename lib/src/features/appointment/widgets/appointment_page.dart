@@ -31,7 +31,7 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
           if (appointment != null) {
             ref
                 .read(appointmentControllerProvider.notifier)
-                .updateAppointment(appointment);
+                .startUpdatingAppointment(appointment);
           }
         }
       },
@@ -41,11 +41,18 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
   void goToHomePage() {
     ref.read(appointmentControllerProvider.notifier).resetStage();
 
-    Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
+    Navigator.of(context).pushReplacementNamed(
+      AuthScreen.routeName,
+      arguments: slideFromLeftTransition(
+        const AuthScreen(),
+      ),
+    );
   }
 
-  Widget Function({required String title, Function()? leadingFunction})
-      _buildAppBar() {
+  Widget Function({
+    required String title,
+    Function()? leadingFunction,
+  }) _buildAppBar() {
     return ({required String title, Function()? leadingFunction}) => MyAppBar(
           title: context.responsive(
             title,
@@ -80,7 +87,6 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
           ),
           backgroundColor: context.responsive(
             null,
-            // md: Theme.of(context).colorScheme.surface,
             md: Colors.transparent,
           ),
         );

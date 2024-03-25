@@ -128,7 +128,7 @@ class AppointmentController extends StateNotifier<AppointmentState> {
 // ************** Firestore related (above) **************
 
   // Local edits
-  void updateAppointment(Appointment? appointment) {
+  void startUpdatingAppointment(Appointment? appointment) {
     state = state.copyWith(
       appointment: appointment ?? state.appointment,
       currentlyViewingMonth: DateTime(
@@ -220,8 +220,8 @@ class AppointmentController extends StateNotifier<AppointmentState> {
   void previousStage() {
     state = state.copyWith(
       stage: state.stage.previousStage,
-      isSelectingDate: state.stage.nextStage == BookingStage.datetime,
-      isSelectingTimeslot: state.stage.nextStage == BookingStage.datetime,
+      isSelectingDate: state.stage.previousStage == BookingStage.datetime,
+      isSelectingTimeslot: state.stage.previousStage == BookingStage.datetime,
     );
   }
 

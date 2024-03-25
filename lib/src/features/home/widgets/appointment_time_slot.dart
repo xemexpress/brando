@@ -24,10 +24,15 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
   void changeAppointment(Appointment? appointment) {
     ref
         .read(appointmentControllerProvider.notifier)
-        .updateAppointment(appointment);
+        .startUpdatingAppointment(appointment);
 
-    // Navigator.of(context).push(BookingScreen.route());
-    Navigator.of(context).pushNamed(BookingScreen.routeName);
+    // Navigator.of(context).pushNamed(BookingScreen.routeName);
+    Navigator.of(context).pushReplacementNamed(
+      BookingScreen.routeName,
+      arguments: slideFromRightTransition(
+        const BookingScreen(),
+      ),
+    );
   }
 
   void cancelAppointment() {
@@ -41,7 +46,11 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
   }
 
   void goToBookingScreen() {
-    Navigator.of(context).pushReplacement(BookingScreen.route());
+    Navigator.of(context).pushReplacement(
+      slideFromRightTransition(
+        const BookingScreen(),
+      ),
+    );
   }
 
   @override

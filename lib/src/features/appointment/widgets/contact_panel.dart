@@ -45,7 +45,7 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
 
   void onChangeName(String value) {
     final int offset = _nameController.selection.baseOffset;
-    value = value.capitalizeFirstofEach;
+    // value = value.capitalizeFirstofEach;
 
     setState(() {
       _nameController.text = value;
@@ -61,7 +61,7 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
 
   void onSubmitContact(_) async {
     try {
-      final String name = _nameController.text;
+      final String name = _nameController.text.capitalizeFirstofEach;
       final String phoneNumber = _phoneNumberController.text;
 
       if (name.isEmpty || phoneNumber.isEmpty) {
@@ -97,31 +97,43 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
   }
 
   void nextStage() async {
-    final Appointment appointment =
-        ref.read(appointmentControllerProvider).appointment;
-    final String name = appointment.name;
-    final String phoneNumber = appointment.phoneNumber;
+    try {
+      final Appointment appointment =
+          ref.read(appointmentControllerProvider).appointment;
+      final String name = appointment.name;
+      final String phoneNumber = appointment.phoneNumber;
 
-    if (name.isEmpty || phoneNumber.isEmpty) {
-      if (name.isEmpty) {
-        ref
-            .read(appointmentControllerProvider.notifier)
-            .raiseError(ContactPanelInputType.name);
+      if (name.isEmpty || phoneNumber.isEmpty) {
+        if (name.isEmpty) {
+          ref
+              .read(appointmentControllerProvider.notifier)
+              .raiseError(ContactPanelInputType.name);
+        }
+
+        if (phoneNumber.isEmpty) {
+          ref
+              .read(appointmentControllerProvider.notifier)
+              .raiseError(ContactPanelInputType.phoneNumber);
+        }
+
+        showMySnackBar(context: context, message: 'Please fill in all fields.');
+        return;
       }
 
-      if (phoneNumber.isEmpty) {
-        ref
-            .read(appointmentControllerProvider.notifier)
-            .raiseError(ContactPanelInputType.phoneNumber);
-      }
+      await ref.read(appointmentControllerProvider.notifier).bookAppointment();
 
-      showMySnackBar(context: context, message: 'Please fill in all fields.');
+      ref.read(appointmentControllerProvider.notifier).nextStage();
+    } on SlotNotAvailableException catch (_) {
+      showFeedback(
+        message:
+            'Sorry! The time slot is no longer available. Please try with another.',
+      );
+
+      ref.read(appointmentControllerProvider.notifier).previousStage();
       return;
+    } on GenericAppointmentException catch (e) {
+      showFeedback(message: e.message);
     }
-
-    await ref.read(appointmentControllerProvider.notifier).bookAppointment();
-
-    ref.read(appointmentControllerProvider.notifier).nextStage();
   }
 
   @override

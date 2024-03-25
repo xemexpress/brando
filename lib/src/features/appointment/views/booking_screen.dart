@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class BookingScreen extends ConsumerWidget {
-  static const String routeName = 'booking';
+  static const String routeName = '/booking';
   static route() => MaterialPageRoute(
         builder: (context) => const BookingScreen(),
       );
@@ -31,7 +31,7 @@ class BookingScreen extends ConsumerWidget {
             ),
             md: const DesktopScaffold(
               leftSide: PrimarySection(
-                isShadowed: true,
+                isShadowed: false,
                 child: BookingSummary(),
               ),
               rightSide: body,

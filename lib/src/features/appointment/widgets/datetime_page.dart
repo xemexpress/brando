@@ -1,3 +1,4 @@
+import 'package:brando/src/common/common.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/appointment/controllers/controllers.dart';
 import 'package:brando/src/features/appointment/widgets/widgets.dart';
@@ -24,7 +25,12 @@ class _DateTimePageState extends ConsumerState<DateTimePage> {
   void goToHomePage() {
     ref.read(appointmentControllerProvider.notifier).resetStage();
 
-    Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
+    Navigator.of(context).pushReplacementNamed(
+      AuthScreen.routeName,
+      arguments: slideFromLeftTransition(
+        const AuthScreen(),
+      ),
+    );
   }
 
   @override

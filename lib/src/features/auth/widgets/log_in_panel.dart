@@ -69,8 +69,10 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
     try {
       await ref.read(authControllerProvider.notifier).signInWithGoogle();
       goToAuthScreen();
-    } on GenericAuthException catch (e) {
-      showFeedback(message: e.message);
+    } on UserNotLoggedInException catch (_) {
+      showFeedback(message: 'User not logged in via Google');
+    } on GenericAuthException catch (_) {
+      showFeedback(message: 'Unknown Error. Please contact us.');
     }
   }
 
@@ -78,8 +80,10 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
     try {
       await ref.read(authControllerProvider.notifier).signInWithFacebook();
       goToAuthScreen();
-    } on GenericAuthException catch (e) {
-      showFeedback(message: e.message);
+    } on UserNotLoggedInException catch (_) {
+      showFeedback(message: 'User not logged in via Facebook');
+    } on GenericAuthException catch (_) {
+      showFeedback(message: 'Unknown Error. Please contact us.');
     }
   }
 
@@ -87,6 +91,8 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
     try {
       await ref.read(authControllerProvider.notifier).signInWithApple();
       goToAuthScreen();
+    } on UserNotLoggedInException catch (_) {
+      showFeedback(message: 'User not logged in via Apple');
     } on GenericAuthException catch (e) {
       showFeedback(message: e.message);
     }

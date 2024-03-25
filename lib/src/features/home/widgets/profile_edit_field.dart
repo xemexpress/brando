@@ -36,7 +36,6 @@ class ProfileEditField extends StatelessWidget {
         hintText: hintText,
         contentPadding: const EdgeInsets.symmetric(horizontal: 10),
         fillColor: Theme.of(context).colorScheme.surface,
-        hoverColor: Theme.of(context).colorScheme.surface,
         filled: true,
         border: outlineBorder,
         enabledBorder: outlineBorder,

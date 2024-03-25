@@ -2,7 +2,7 @@ import 'package:brando/src/models/appointment.dart';
 import 'package:brando/src/models/models.dart';
 
 abstract class AppointmentAPIInterface {
-  Future<Appointment> book({
+  Future<void> book({
     required String userId,
     required Appointment appointment,
   });

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AuthScreen extends ConsumerWidget {
-  static const String routeName = 'auth';
+  static const String routeName = '/';
   static route() => MaterialPageRoute(
         builder: (context) => const AuthScreen(),
       );

@@ -83,7 +83,7 @@ class AppointmentAPI implements AppointmentAPIInterface {
   }
 
   @override
-  Future<Appointment> book({
+  Future<void> book({
     required String userId,
     required Appointment appointment,
   }) async {
@@ -91,7 +91,7 @@ class AppointmentAPI implements AppointmentAPIInterface {
       DocumentReference documentReference =
           _appointmentSlotsCollectionRef.doc(appointment.appointmentId);
 
-      return await _firestore.runTransaction<Appointment>(
+      final bool registered = await _firestore.runTransaction<bool>(
         (transaction) async {
           DocumentSnapshot snapshot = await transaction.get(documentReference);
 
@@ -106,14 +106,17 @@ class AppointmentAPI implements AppointmentAPIInterface {
               'bookedBy': userId,
             });
             // Appointment booked successfully
+            return true;
           } else {
             // Slot is not available
-            throw SlotNotAvailableException();
+            return false;
           }
-
-          return appointment;
         },
       );
+
+      if (!registered) {
+        throw SlotNotAvailableException();
+      }
     } on SlotNotAvailableException catch (_) {
       rethrow;
     } catch (e) {

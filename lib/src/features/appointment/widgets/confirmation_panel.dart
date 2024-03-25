@@ -20,6 +20,7 @@ class ConfirmationPanel extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final Appointment appointment =
         ref.watch(appointmentControllerProvider).appointment;
+
     final Widget appointmentDateTime = Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
