@@ -30,7 +30,7 @@ class ContactPanelInput extends ConsumerWidget {
   Function(String) updateTitle(WidgetRef ref) {
     return (value) => ref
         .read(appointmentControllerProvider.notifier)
-        .updateAppointmentTitle(value);
+        .localUpdateAppointmentTitle(value);
   }
 
   @override
@@ -132,7 +132,7 @@ class ContactPanelInput extends ConsumerWidget {
             keyboardType: type == ContactPanelInputType.phoneNumber
                 ? TextInputType.phone
                 : type == ContactPanelInputType.name
-                    ? TextInputType.text
+                    ? TextInputType.name
                     : null,
             inputFormatters: type == ContactPanelInputType.phoneNumber
                 ? [

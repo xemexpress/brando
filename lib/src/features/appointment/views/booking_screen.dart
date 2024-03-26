@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class BookingScreen extends ConsumerWidget {
   static const String routeName = '/booking';
+
   static route() => MaterialPageRoute(
         builder: (context) => const BookingScreen(),
       );

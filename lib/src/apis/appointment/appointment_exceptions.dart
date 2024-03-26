@@ -4,6 +4,8 @@ import 'package:brando/src/core/core.dart';
 
 class SlotNotAvailableException implements Exception {}
 
+class AppointmentCancellationFailureException implements Exception {}
+
 class GenericAppointmentException extends GenerichException {
   GenericAppointmentException({
     required String message,

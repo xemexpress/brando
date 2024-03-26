@@ -3,12 +3,6 @@ enum ContactPanelInputType {
   name,
 }
 
-// enum BookingStage {
-//   datetime,
-//   contact,
-//   confirmation,
-// }
-
 enum BookingStage {
   datetime(0),
   contact(1),

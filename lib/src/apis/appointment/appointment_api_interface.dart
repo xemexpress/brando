@@ -5,15 +5,16 @@ abstract class AppointmentAPIInterface {
   Future<void> book({
     required String userId,
     required Appointment appointment,
+    required bool createNew,
+  });
+
+  Future<bool> checkAvailability({
+    required String userId,
+    required String appointmentId,
   });
 
   Future<Appointment?> currentAppointment({
     required String userId,
-  });
-
-  Future<Appointment> updateAppointment({
-    required String userId,
-    required Appointment appointment,
   });
 
   Future<void> cancelAppointment({

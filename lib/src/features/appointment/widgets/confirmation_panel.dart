@@ -54,7 +54,7 @@ class ConfirmationPanel extends ConsumerWidget {
         children: [
           context.responsive(
             const SizedBox(height: 110),
-            md: const SizedBox(height: 230),
+            md: const SizedBox(height: 200),
           ),
           Text(
             'Your booking is all set!',
@@ -73,17 +73,18 @@ class ConfirmationPanel extends ConsumerWidget {
           const SizedBox(height: 30),
           context.responsive(
             appointmentDateTime,
-            md: Stack(
-              alignment: Alignment.center,
-              clipBehavior: Clip.none,
-              children: [
-                appointmentDateTime,
-                const Positioned(
-                  bottom: -270,
-                  child: ChangeTimeButton(),
-                ),
-              ],
-            ),
+            // md: Stack(
+            //   alignment: Alignment.center,
+            //   clipBehavior: Clip.none,
+            //   children: [
+            //     appointmentDateTime,
+            //     const Positioned(
+            //       bottom: -270,
+            //       child: ChangeTimeButton(),
+            //     ),
+            //   ],
+            // ),
+            md: appointmentDateTime,
           ),
           const SizedBox(height: 30),
           _buildDivider(context),
@@ -110,7 +111,13 @@ class ConfirmationPanel extends ConsumerWidget {
           ),
           context.responsive(
             const SizedBox(),
-            md: const SizedBox(height: 230),
+            md: const Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                SizedBox(width: 150, height: 200),
+                ChangeTimeButton(),
+              ],
+            ),
           ),
           context.responsive(
             const Padding(

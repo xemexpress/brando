@@ -8,9 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AppointmentPage extends ConsumerStatefulWidget {
-  const AppointmentPage({
-    super.key,
-  });
+  const AppointmentPage({super.key});
 
   @override
   ConsumerState<AppointmentPage> createState() => _AppointmentPageState();
@@ -23,7 +21,7 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
 
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
-        if (!ModalRoute.of(context)!.canPop) {
+        if (ModalRoute.of(context)!.canPop) {
           final Appointment? appointment = await ref
               .read(appointmentControllerProvider.notifier)
               .currentAppointment();
@@ -31,7 +29,7 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
           if (appointment != null) {
             ref
                 .read(appointmentControllerProvider.notifier)
-                .startUpdatingAppointment(appointment);
+                .localUpdateAppointment(appointment);
           }
         }
       },
@@ -39,14 +37,11 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
   }
 
   void goToHomePage() {
-    ref.read(appointmentControllerProvider.notifier).resetStage();
-
     Navigator.of(context).pushReplacementNamed(
       AuthScreen.routeName,
-      arguments: slideFromLeftTransition(
-        const AuthScreen(),
-      ),
+      arguments: slideFromLeftTransition,
     );
+    ref.read(appointmentControllerProvider.notifier).resetStage();
   }
 
   Widget Function({
@@ -109,10 +104,12 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Align(
+        IndexedStack(
           alignment: Alignment.topCenter,
-          child: stages[stage.code],
+          index: stage.code,
+          children: stages,
         ),
+        // stages[stage.code],
         if (isLoading) ...[
           const LoaderBackground(),
           const Loader(),

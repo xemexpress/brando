@@ -1,3 +1,4 @@
+import 'package:brando/src/core/core.dart';
 import 'package:flutter/material.dart';
 
 PageRouteBuilder slideFromLeftTransition(Widget page) {
@@ -16,6 +17,6 @@ PageRouteBuilder slideFromLeftTransition(Widget page) {
         child: child,
       );
     },
-    transitionDuration: const Duration(milliseconds: 300),
+    transitionDuration: const Duration(milliseconds: animationDuration),
   );
 }

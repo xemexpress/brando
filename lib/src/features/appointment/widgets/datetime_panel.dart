@@ -16,11 +16,23 @@ class DateTimePanel extends ConsumerStatefulWidget {
 }
 
 class _DateTimePanelState extends ConsumerState<DateTimePanel> {
-  void nextStage() {
-    ref.read(appointmentControllerProvider.notifier).finishDateTimeSelection();
+  void nextStage() async {
+    final bool isAvailable = await ref
+        .read(appointmentControllerProvider.notifier)
+        .isAppointmentAvailable();
+
+    if (!isAvailable) {
+      showFeedback(
+        message:
+            'This time slot is no longer available. Please select another time slot.',
+      );
+      return;
+    }
+
+    ref.read(appointmentControllerProvider.notifier).finishSelectingDateTime();
 
     Future.delayed(const Duration(milliseconds: 600)).then(
-      (value) => ref.read(appointmentControllerProvider.notifier).nextStage(),
+      (_) => ref.read(appointmentControllerProvider.notifier).nextStage(),
     );
   }
 

@@ -29,7 +29,7 @@ class _PaddedTimeslotState extends ConsumerState<PaddedTimeslot> {
   void selectTimeslot() {
     ref
         .read(appointmentControllerProvider.notifier)
-        .updateAppointmentTimeslot(widget.timeslot);
+        .localUpdateAppointmentTimeslot(widget.timeslot);
   }
 
   @override

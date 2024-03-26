@@ -4,7 +4,6 @@ import 'package:brando/src/features/appointment/controllers/controllers.dart';
 import 'package:brando/src/features/appointment/widgets/widgets.dart';
 import 'package:brando/src/models/models.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -39,29 +38,30 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
 
   void onChangePhoneNumber(String value) => ref
       .read(appointmentControllerProvider.notifier)
-      .updateAppointmentPhoneNumber(value);
+      .localUpdateAppointmentPhoneNumber(value);
 
   void onSubmitPhoneNumber(value) => _nameFocusNode.requestFocus();
 
   void onChangeName(String value) {
-    final int offset = _nameController.selection.baseOffset;
+    // ! Deprecated due to the failure when working with Chinese input
+    // final int offset = _nameController.selection.baseOffset;
     // value = value.capitalizeFirstofEach;
 
-    setState(() {
-      _nameController.text = value;
-      _nameController.selection = TextSelection.fromPosition(
-        TextPosition(offset: offset),
-      );
-    });
+    // setState(() {
+    //   _nameController.text = value;
+    //   _nameController.selection = TextSelection.fromPosition(
+    //     TextPosition(offset: offset),
+    //   );
+    // });
 
     ref
         .read(appointmentControllerProvider.notifier)
-        .updateAppointmentName(value);
+        .localUpdateAppointmentName(value);
   }
 
-  void onSubmitContact(_) async {
+  void onSubmitContact() async {
     try {
-      final String name = _nameController.text.capitalizeFirstofEach;
+      final String name = _nameController.text;
       final String phoneNumber = _phoneNumberController.text;
 
       if (name.isEmpty || phoneNumber.isEmpty) {
@@ -81,6 +81,14 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
         return;
       }
 
+      setState(() {
+        _nameController.text = _nameController.text.capitalizeFirstofEach;
+      });
+
+      ref
+          .read(appointmentControllerProvider.notifier)
+          .localUpdateAppointmentName(_nameController.text);
+
       await ref.read(appointmentControllerProvider.notifier).bookAppointment();
     } on SlotNotAvailableException catch (_) {
       showFeedback(
@@ -91,49 +99,10 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
       return;
     } on GenericAppointmentException catch (e) {
       showFeedback(message: e.message);
+      return;
     }
 
     ref.read(appointmentControllerProvider.notifier).nextStage();
-  }
-
-  void nextStage() async {
-    try {
-      final Appointment appointment =
-          ref.read(appointmentControllerProvider).appointment;
-      final String name = appointment.name;
-      final String phoneNumber = appointment.phoneNumber;
-
-      if (name.isEmpty || phoneNumber.isEmpty) {
-        if (name.isEmpty) {
-          ref
-              .read(appointmentControllerProvider.notifier)
-              .raiseError(ContactPanelInputType.name);
-        }
-
-        if (phoneNumber.isEmpty) {
-          ref
-              .read(appointmentControllerProvider.notifier)
-              .raiseError(ContactPanelInputType.phoneNumber);
-        }
-
-        showMySnackBar(context: context, message: 'Please fill in all fields.');
-        return;
-      }
-
-      await ref.read(appointmentControllerProvider.notifier).bookAppointment();
-
-      ref.read(appointmentControllerProvider.notifier).nextStage();
-    } on SlotNotAvailableException catch (_) {
-      showFeedback(
-        message:
-            'Sorry! The time slot is no longer available. Please try with another.',
-      );
-
-      ref.read(appointmentControllerProvider.notifier).previousStage();
-      return;
-    } on GenericAppointmentException catch (e) {
-      showFeedback(message: e.message);
-    }
   }
 
   @override
@@ -163,7 +132,7 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
 
     Widget button = ActionButton(
       text: 'CONFIRM',
-      next: nextStage,
+      next: onSubmitContact,
     );
 
     Widget title = Text(
@@ -204,7 +173,7 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
             controller: _nameController,
             focusNode: _nameFocusNode,
             onChanged: onChangeName,
-            onSubmitted: onSubmitContact,
+            onSubmitted: (_) => onSubmitContact(),
             hasError: nameError,
             errorHintText: 'required',
           ),

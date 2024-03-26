@@ -165,12 +165,12 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               MyButton(
-                text: 'Cancel',
+                text: 'cancel',
                 onPressed: () => Navigator.of(context).pop(),
                 backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
               ),
               MyButton(
-                text: 'Submit',
+                text: 'submit',
                 onPressed: onButtonSubmit,
                 backgroundColor: Theme.of(context).colorScheme.primary,
               ),

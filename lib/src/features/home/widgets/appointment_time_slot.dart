@@ -24,9 +24,8 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
   void changeAppointment(Appointment? appointment) {
     ref
         .read(appointmentControllerProvider.notifier)
-        .startUpdatingAppointment(appointment);
+        .localUpdateAppointment(appointment);
 
-    // Navigator.of(context).pushNamed(BookingScreen.routeName);
     Navigator.of(context).pushReplacementNamed(
       BookingScreen.routeName,
       arguments: slideFromRightTransition(
@@ -35,7 +34,7 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
     );
   }
 
-  void cancelAppointment() {
+  void goToCancelAppointment() {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -46,10 +45,19 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
   }
 
   void goToBookingScreen() {
-    Navigator.of(context).pushReplacement(
-      slideFromRightTransition(
+    ref.read(appointmentControllerProvider.notifier).isCreatingNew(true);
+
+    Navigator.of(context).pushReplacementNamed(
+      BookingScreen.routeName,
+      arguments: slideFromRightTransition(
         const BookingScreen(),
       ),
+      // arguments: {
+      //   'createNew': true, // Your existing argument
+      //   'route': slideFromRightTransition(
+      //     const BookingScreen(),
+      //   ), // Add animation route
+      // },
     );
   }
 
@@ -127,7 +135,7 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
                                 ),
                                 MyButton(
                                   text: 'cancel',
-                                  onPressed: cancelAppointment,
+                                  onPressed: goToCancelAppointment,
                                   height: buttonHeight,
                                   backgroundColor: Theme.of(context)
                                       .colorScheme

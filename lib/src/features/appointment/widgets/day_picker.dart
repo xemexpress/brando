@@ -21,7 +21,7 @@ class _MyCalendarPickerState extends ConsumerState<DayPicker> {
   void updateSelectedDate(DateTime newDate) {
     ref
         .read(appointmentControllerProvider.notifier)
-        .updateAppointmentDate(newDate);
+        .localUpdateAppointmentDate(newDate);
   }
 
   @override

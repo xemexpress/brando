@@ -32,7 +32,6 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
             email: _emailController.text,
             password: _passwordController.text,
           );
-      goToAuthScreen();
     } on InvalidEmailAuthException catch (_) {
       _emailFocusNode.requestFocus();
 

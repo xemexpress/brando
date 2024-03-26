@@ -28,6 +28,7 @@ final appointmentControllerProvider =
         name: '',
         phoneNumber: '',
       ),
+      createNew: true,
     );
   },
 );

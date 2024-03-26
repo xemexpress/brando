@@ -16,11 +16,15 @@ class CancelAppointmentDialog extends ConsumerStatefulWidget {
 
 class _CancelAppointmentDialogState
     extends ConsumerState<CancelAppointmentDialog> {
-  void confrimCancellation() {
+  void confrimCancellation() async {
     try {
       Navigator.of(context).pop();
 
-      ref.read(appointmentControllerProvider.notifier).cancelAppointment();
+      await ref
+          .read(appointmentControllerProvider.notifier)
+          .cancelAppointment();
+
+      ref.read(appointmentControllerProvider.notifier).resetStage();
     } on GenericAppointmentException catch (e) {
       showFeedback(message: e.message);
     }

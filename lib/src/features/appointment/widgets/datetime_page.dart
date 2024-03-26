@@ -27,9 +27,7 @@ class _DateTimePageState extends ConsumerState<DateTimePage> {
 
     Navigator.of(context).pushReplacementNamed(
       AuthScreen.routeName,
-      arguments: slideFromLeftTransition(
-        const AuthScreen(),
-      ),
+      arguments: slideFromLeftTransition,
     );
   }
 

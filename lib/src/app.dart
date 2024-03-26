@@ -1,7 +1,10 @@
+import 'package:brando/generated/l10n.dart';
+import 'package:brando/src/common/common.dart';
 import 'package:brando/src/features/appointment/views/booking_screen.dart';
 import 'package:brando/src/features/auth/view/auth_screen.dart';
 import 'package:brando/src/themes/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class BrandoApp extends ConsumerStatefulWidget {
@@ -45,19 +48,37 @@ class _BrandoAppState extends ConsumerState<BrandoApp>
 
   @override
   Widget build(BuildContext context) {
-    // final themeState = ref.watch(themeControllerProvider);
+    final themeState = ref.watch(themeControllerProvider);
 
     return MaterialApp(
-      title: 'Booking | Michelle Yuen Jewelry',
+      // title: 'Booking | Michelle Yuen Jewelry',
+      onGenerateTitle: (context) =>
+          '${S.of(context).title} | Michelle Yuen Jewelry',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.currentTheme(
-          // brightness: themeState.appBrightness,
-          ),
-      // home: const AuthScreen(),
+        brightness: themeState.appBrightness,
+      ),
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
       initialRoute: AuthScreen.routeName,
-      routes: {
-        AuthScreen.routeName: (context) => const AuthScreen(),
-        BookingScreen.routeName: (context) => const BookingScreen(),
+      onGenerateRoute: (settings) {
+        switch (settings.name) {
+          case AuthScreen.routeName:
+            return slideFromLeftTransition(
+              const AuthScreen(),
+            );
+          case BookingScreen.routeName:
+            return slideFromRightTransition(
+              const BookingScreen(),
+            );
+          default:
+            return null;
+        }
       },
     );
   }

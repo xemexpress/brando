@@ -20,7 +20,45 @@ class AppointmentAPI implements AppointmentAPIInterface {
     required String userId,
   }) async {
     try {
-      await _userAppointmentsCollectionRef.doc(userId).delete();
+      final bool cancelled =
+          await _firestore.runTransaction<bool>((transaction) async {
+        try {
+          final DateTime now = DateTime.now();
+
+          // Delete the user's appointment document
+          final DocumentReference userAppointmentDocRef =
+              _userAppointmentsCollectionRef.doc(userId);
+
+          final DocumentSnapshot snapshot =
+              await transaction.get(userAppointmentDocRef);
+          final String appointmentId =
+              Appointment.fromMap(snapshot.data()! as Map<String, dynamic>)
+                  .appointmentId;
+
+          transaction.delete(userAppointmentDocRef);
+
+          // Update the appointment slot document
+          final DocumentReference appointmentSlotDocRef =
+              _appointmentSlotsCollectionRef.doc(appointmentId);
+
+          transaction.update(
+            appointmentSlotDocRef,
+            {
+              'cancelledAt': now.millisecondsSinceEpoch,
+            },
+          );
+
+          return true;
+        } catch (e) {
+          return false;
+        }
+      });
+
+      if (!cancelled) {
+        throw AppointmentCancellationFailureException;
+      }
+    } on AppointmentCancellationFailureException catch (_) {
+      rethrow;
     } catch (e) {
       throw GenericAppointmentException(
         message:
@@ -64,51 +102,81 @@ class AppointmentAPI implements AppointmentAPIInterface {
   }
 
   @override
-  Future<Appointment> updateAppointment({
-    required String userId,
-    required Appointment appointment,
-  }) async {
-    try {
-      await _userAppointmentsCollectionRef
-          .doc(userId)
-          .update(appointment.toMap());
-
-      return appointment;
-    } catch (e) {
-      throw GenericAppointmentException(
-        message:
-            'Unexpected error when updating an appointment. ${e.toString()}',
-      );
-    }
-  }
-
-  @override
   Future<void> book({
     required String userId,
     required Appointment appointment,
+    required bool createNew,
   }) async {
     try {
-      DocumentReference documentReference =
-          _appointmentSlotsCollectionRef.doc(appointment.appointmentId);
-
       final bool registered = await _firestore.runTransaction<bool>(
         (transaction) async {
-          DocumentSnapshot snapshot = await transaction.get(documentReference);
+          try {
+            DocumentReference slotRecordRef =
+                _appointmentSlotsCollectionRef.doc(appointment.appointmentId);
 
-          if (!snapshot.exists ||
-              (snapshot.data()! as Map<String, dynamic>)['bookedBy'] == null) {
-            // Slot is available
-            await _userAppointmentsCollectionRef
-                .doc(userId)
-                .set(appointment.toMap());
+            DocumentSnapshot potentialSlotRecord =
+                await transaction.get(slotRecordRef);
 
-            transaction.set(documentReference, {
-              'bookedBy': userId,
-            });
-            // Appointment booked successfully
-            return true;
-          } else {
-            // Slot is not available
+            final DocumentReference userAppointmentDocRef =
+                _userAppointmentsCollectionRef.doc(userId);
+
+            if (!createNew) {
+              // Copied from cancelAppointment() to here to have the full transaction
+              final DateTime now = DateTime.now();
+
+              final DocumentSnapshot userRecord =
+                  await transaction.get(userAppointmentDocRef);
+
+              final String appointmentId = Appointment.fromMap(
+                      userRecord.data()! as Map<String, dynamic>)
+                  .appointmentId;
+
+              // Update the appointment slot document
+              final DocumentReference oldSlotRecord =
+                  _appointmentSlotsCollectionRef.doc(appointmentId);
+
+              transaction.update(
+                oldSlotRecord,
+                {
+                  'cancelledAt': now.millisecondsSinceEpoch,
+                },
+              );
+            }
+            final bool isSlotAvailable =
+                !potentialSlotRecord.exists || // If the snapshot doesn't exist,
+                    ((potentialSlotRecord.data()! as Map<String, dynamic>)
+                                .containsKey('bookedBy') &&
+                            ((potentialSlotRecord.data()!
+                                    as Map<String, dynamic>)['bookedBy'] ==
+                                userId) || // and it's this user,
+                        ((potentialSlotRecord.data()! as Map<String, dynamic>)
+                                .containsKey('cancelledAt') &&
+                            (potentialSlotRecord.data()!
+                                    as Map<String, dynamic>)['cancelledAt'] !=
+                                null)); // or if it's cancelled,
+
+            if (isSlotAvailable) {
+              // Slot is available
+              transaction.set(
+                userAppointmentDocRef,
+                appointment.toMap(),
+              );
+
+              transaction.set(
+                slotRecordRef,
+                {
+                  'bookedBy': userId,
+                },
+              );
+
+              // Appointment booked successfully
+              return true;
+            } else {
+              // Slot is not available
+              return false;
+            }
+          } catch (_) {
+            // print(e.toString());
             return false;
           }
         },
@@ -125,5 +193,23 @@ class AppointmentAPI implements AppointmentAPIInterface {
             'Unexpected error when booking an appointment. ${e.toString()}',
       );
     }
+  }
+
+  @override
+  Future<bool> checkAvailability({
+    required String userId,
+    required String appointmentId,
+  }) async {
+    final DocumentSnapshot slotRecord =
+        await _appointmentSlotsCollectionRef.doc(appointmentId).get();
+
+    return !slotRecord.exists || // If the slotRecord doesn't exist,
+        ((slotRecord.data()! as Map<String, dynamic>).containsKey('bookedBy') &&
+                ((slotRecord.data()! as Map<String, dynamic>)['bookedBy'] ==
+                    userId) || // and it's this user,
+            ((slotRecord.data()! as Map<String, dynamic>)
+                    .containsKey('cancelledAt') &&
+                (slotRecord.data()! as Map<String, dynamic>)['cancelledAt'] !=
+                    null)); // or if it's cancelled,;
   }
 }

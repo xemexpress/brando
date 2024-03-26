@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Pallete {
-  static const Color primary = Color.fromRGBO(250, 216, 189, 1);
+  // static const Color primary = Color.fromRGBO(250, 216, 189, 1);
+  static const Color primary = Color.fromRGBO(253, 218, 190, 1.0);
   static const Color onPrimary = Color.fromRGBO(0, 0, 0, 1);
+  static const Color secondary = Color.fromRGBO(253, 218, 190, 1.0);
   static const Color surfaceVariant =
       Color.fromRGBO(190, 190, 190, 1); // For hint text color
 
@@ -14,7 +16,7 @@ class Pallete {
   // static const Color primary = Color.fromRGBO(250, 216, 189, 1.0);
   static const Color primaryVariant1 = Color.fromRGBO(145, 126, 111, 1.0);
   static const Color primaryContainer = Color.fromRGBO(246, 228, 214, 1.0);
-  static const Color secondary = Color.fromRGBO(250, 216, 189, 1.0);
+
   static const Color secondaryVariant = Color.fromRGBO(41, 37, 34, 1.0);
   static const Color background = Color.fromRGBO(255, 255, 255, 1.0);
   static const Color surface = Color.fromRGBO(255, 255, 255, 1.0);

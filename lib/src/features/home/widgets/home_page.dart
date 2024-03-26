@@ -1,6 +1,7 @@
 import 'package:brando/src/apis/apis.dart';
 import 'package:brando/src/common/common.dart';
 import 'package:brando/src/core/core.dart';
+import 'package:brando/src/features/appointment/controllers/controllers.dart';
 import 'package:brando/src/features/auth/controllers/controllers.dart';
 import 'package:brando/src/features/home/widgets/widgets.dart';
 import 'package:brando/src/models/models.dart';
@@ -29,7 +30,9 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLoading = ref.watch(authControllerProvider);
+    final bool isAuthLoading = ref.watch(authControllerProvider);
+    final bool isAppointmentLoading =
+        ref.watch(appointmentControllerProvider).isLoading;
 
     return Stack(
       children: [
@@ -94,7 +97,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             ],
           ),
         ),
-        if (isLoading) ...[
+        if (isAuthLoading || isAppointmentLoading) ...[
           const LoaderBackground(),
           const Loader(),
         ],
