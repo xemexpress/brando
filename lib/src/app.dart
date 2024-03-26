@@ -51,9 +51,14 @@ class _BrandoAppState extends ConsumerState<BrandoApp>
     final themeState = ref.watch(themeControllerProvider);
 
     return MaterialApp(
-      // title: 'Booking | Michelle Yuen Jewelry',
-      onGenerateTitle: (context) =>
-          '${S.of(context).title} | Michelle Yuen Jewelry',
+      // onGenerateTitle: (context) =>
+      //     '${S.current.title} | Michelle Yuen Jewelry',
+      onGenerateTitle: (context) {
+        final Locale myLocale = Localizations.localeOf(context);
+        print("Current Locale: ${myLocale.toString()}");
+        print('test: ${S.current.title}');
+        return '${S.current.title} | Michelle Yuen Jewelry';
+      },
       debugShowCheckedModeBanner: false,
       theme: AppTheme.currentTheme(
         brightness: themeState.appBrightness,

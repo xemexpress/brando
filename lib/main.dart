@@ -36,8 +36,4 @@ void main() async {
       child: BrandoApp(),
     ),
   );
-
-  if (kIsWeb) {
-    document.getElementById('splash')?.remove();
-  }
 }

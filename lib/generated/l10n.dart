@@ -59,6 +59,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Welcome to\nMichelle Yuen Jewelry\nBooking System`
+  String get greetings {
+    return Intl.message(
+      'Welcome to\nMichelle Yuen Jewelry\nBooking System',
+      name: 'greetings',
+      desc: 'The greeting message',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get loginHeading {
+    return Intl.message(
+      'Login',
+      name: 'loginHeading',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

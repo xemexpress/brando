@@ -2,5 +2,13 @@
     "title": "Booking",
     "@title": {
         "description": "The title of the page"
+    },
+    "greetings": "Welcome to\nMichelle Yuen Jewelry\nBooking System",
+    "@greetings": {
+        "description": "The greeting message"
+    },
+    "loginHeading": "Login",
+    "@heading": {
+        "description": "The heading for the login form"
     }
 }

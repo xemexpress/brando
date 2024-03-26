@@ -1,3 +1,4 @@
+import 'package:brando/generated/l10n.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,7 +11,7 @@ class WelcomeSign extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      greetings,
+      S.of(context).greetings,
       textAlign: TextAlign.center,
       style: GoogleFonts.libreBaskerville(
         textStyle: context.responsive(

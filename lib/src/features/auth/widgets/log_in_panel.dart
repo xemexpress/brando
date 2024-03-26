@@ -1,3 +1,4 @@
+import 'package:brando/generated/l10n.dart';
 import 'package:brando/src/apis/apis.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/auth/controllers/controllers.dart';
@@ -116,7 +117,7 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 30),
             child: Text(
-              'Log In',
+              S.of(context).loginHeading,
               style: GoogleFonts.openSans(
                 textStyle: context.responsive(
                   Theme.of(context).textTheme.headlineLarge,
