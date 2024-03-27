@@ -6,6 +6,7 @@ import 'package:brando/src/features/auth/controllers/controllers.dart';
 import 'package:brando/src/features/auth/view/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MobileScaffold extends ConsumerStatefulWidget {
   const MobileScaffold({
@@ -33,7 +34,8 @@ class _MobileScaffoldState extends ConsumerState<MobileScaffold> {
   void goToHomePage() {
     Navigator.of(context).pop();
     ref.read(appointmentControllerProvider.notifier).resetStage();
-
+    print(
+        'test ModalRoute.of(context)?.settings.name: ${ModalRoute.of(context)?.settings.name}');
     if (ModalRoute.of(context)?.settings.name != AuthScreen.routeName) {
       Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
     }
@@ -64,14 +66,40 @@ class _MobileScaffoldState extends ConsumerState<MobileScaffold> {
               ),
             ),
             const SizedBox(height: 20),
-            DrawerItem(
-              title: 'My appointment',
+            ListTile(
+              title: Text(
+                'My appointment',
+                style: GoogleFonts.openSans(
+                  textStyle: Theme.of(context).textTheme.titleLarge,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               onTap: goToHomePage,
             ),
             const SizedBox(height: 10),
-            DrawerItem(title: 'Language', onTap: () {}),
+            // DrawerItem(
+            //   title: Text(
+            //     'Language',
+            //     style: GoogleFonts.openSans(
+            //       textStyle: Theme.of(context).textTheme.titleLarge,
+            //       fontWeight: FontWeight.w500,
+            //     ),
+            //   ),
+            //   onTap: () {
+            //     print('Change Language');
+            //   },
+            // ),
+            // DrawerItem(title: ,),
             const Spacer(),
-            DrawerItem(title: 'Log out', onTap: logOut),
+            ListTile(
+                title: Text(
+                  'Log out',
+                  style: GoogleFonts.openSans(
+                    textStyle: Theme.of(context).textTheme.titleLarge,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                onTap: logOut),
             Divider(
               indent: 17,
               endIndent: 17,

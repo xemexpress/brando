@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'package:brando/src/app.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

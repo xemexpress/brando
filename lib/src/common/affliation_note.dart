@@ -73,8 +73,8 @@ class _AffiliationNoteState extends State<AffiliationNote> {
 
     /*
       Current locale: zh_Hant_HK
-      Current countryCode: HK
       Current languageCode: zh
+      Current countryCode: HK
       Current scriptCode: Hant
     */
 

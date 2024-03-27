@@ -5,7 +5,6 @@ export './affliation_note.dart';
 export './loader_background.dart';
 export './welcome_sign.dart';
 export './my_app_bar.dart';
-export './drawer_item.dart';
 export './menu_button.dart';
 export './dialog_box.dart';
-export 'animations/animations.dart';
+export './animations/animations.dart';

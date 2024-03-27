@@ -86,7 +86,6 @@ class AppointmentController extends StateNotifier<AppointmentState> {
   }
 
   void isCreatingNew(bool createNew) {
-    print('isCreatingNew $createNew');
     state = state.copyWith(createNew: createNew);
   }
 

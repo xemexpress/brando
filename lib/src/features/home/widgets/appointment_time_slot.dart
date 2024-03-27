@@ -26,12 +26,7 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
         .read(appointmentControllerProvider.notifier)
         .localUpdateAppointment(appointment);
 
-    Navigator.of(context).pushReplacementNamed(
-      BookingScreen.routeName,
-      arguments: slideFromRightTransition(
-        const BookingScreen(),
-      ),
-    );
+    Navigator.of(context).pushReplacementNamed(BookingScreen.routeName);
   }
 
   void goToCancelAppointment() {
@@ -47,18 +42,7 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
   void goToBookingScreen() {
     ref.read(appointmentControllerProvider.notifier).isCreatingNew(true);
 
-    Navigator.of(context).pushReplacementNamed(
-      BookingScreen.routeName,
-      arguments: slideFromRightTransition(
-        const BookingScreen(),
-      ),
-      // arguments: {
-      //   'createNew': true, // Your existing argument
-      //   'route': slideFromRightTransition(
-      //     const BookingScreen(),
-      //   ), // Add animation route
-      // },
-    );
+    Navigator.of(context).pushReplacementNamed(BookingScreen.routeName);
   }
 
   @override
