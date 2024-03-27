@@ -20,11 +20,39 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(company) => "Powered by ${company}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "greetings": MessageLookupByLibrary.simpleMessage(
+        "common_affiliationPoweredBy": m0,
+        "common_greetings": MessageLookupByLibrary.simpleMessage(
             "Welcome to\nMichelle Yuen Jewelry\nBooking System"),
-        "loginHeading": MessageLookupByLibrary.simpleMessage("Login"),
-        "title": MessageLookupByLibrary.simpleMessage("Booking")
+        "common_title": MessageLookupByLibrary.simpleMessage("Booking"),
+        "login_emailHint": MessageLookupByLibrary.simpleMessage("Email"),
+        "login_emptyFieldsMessage":
+            MessageLookupByLibrary.simpleMessage("Please fill in all fields."),
+        "login_forgotPasswordButton":
+            MessageLookupByLibrary.simpleMessage("Forgotten password? "),
+        "login_heading": MessageLookupByLibrary.simpleMessage("Login"),
+        "login_invalidEmailMessage": MessageLookupByLibrary.simpleMessage(
+            "Invalid email. Please try again."),
+        "login_invalidPasswordMessage": MessageLookupByLibrary.simpleMessage(
+            "Invalid password. Please try again."),
+        "login_loginButton": MessageLookupByLibrary.simpleMessage("LOGIN"),
+        "login_networkRequestFailedMessage": MessageLookupByLibrary.simpleMessage(
+            "Network request temporarily failed. Please try logging in again."),
+        "login_passwordHint": MessageLookupByLibrary.simpleMessage("Password"),
+        "login_rememberMeButton":
+            MessageLookupByLibrary.simpleMessage("Remember me"),
+        "login_thirdPartyLoginIntro":
+            MessageLookupByLibrary.simpleMessage("or\nlog in with"),
+        "login_unknownErrorMessage": MessageLookupByLibrary.simpleMessage(
+            "Unknown Error. Please contact us."),
+        "login_userNotLoggedInApple": MessageLookupByLibrary.simpleMessage(
+            "User not logged in via Apple"),
+        "login_userNotLoggedInFacebook": MessageLookupByLibrary.simpleMessage(
+            "User not logged in via Facebook"),
+        "login_userNotLoggedInGoogle": MessageLookupByLibrary.simpleMessage(
+            "User not logged in via Google.")
       };
 }

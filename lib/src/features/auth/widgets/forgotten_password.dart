@@ -1,3 +1,4 @@
+import 'package:brando/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -18,7 +19,7 @@ class ForgotPassword extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           children: [
             Text(
-              'Forgotten Password? ',
+              S.of(context).login_forgotPasswordButton,
               style: GoogleFonts.openSans(
                 textStyle: Theme.of(context).textTheme.labelMedium,
                 fontWeight: FontWeight.w400,

@@ -7,6 +7,7 @@ class ScreenSize {
 
 const double inputBorderRadiusMobile = 5;
 
-const String greetings = 'Welcome to\nMichelle Yuen Jewelry\nBooking System';
+const String companyName = 'Michelle Yuen Jewelry';
+const String companyWebsite = 'https://michelleyuenjewelry.com';
 
 const int animationDuration = 500;

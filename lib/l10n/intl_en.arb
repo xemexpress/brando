@@ -1,14 +1,74 @@
 {
-    "title": "Booking",
-    "@title": {
-        "description": "The title of the page"
+    "common_title": "Booking",
+    "@common_title": {
+        "description": "The title of the booking system"
     },
-    "greetings": "Welcome to\nMichelle Yuen Jewelry\nBooking System",
-    "@greetings": {
+    "common_greetings": "Welcome to\nMichelle Yuen Jewelry\nBooking System",
+    "@common_greetings": {
         "description": "The greeting message"
     },
-    "loginHeading": "Login",
-    "@heading": {
+    "common_affiliationPoweredBy": "Powered by {company}",
+    "@common_affiliationPoweredBy": {
+        "description": "The phrase 'Powered by' with a placeholder for the company name"
+    },
+    "login_heading": "Login",
+    "@login_heading": {
         "description": "The heading for the login form"
+    },
+    "login_emailHint": "Email",
+    "@login_emailHint": {
+        "description": "Hint text inside the email input field on the login screen."
+    },
+    "login_passwordHint": "Password",
+    "@login_passwordHint": {
+        "description": "Hint text inside the password input field on the login screen."
+    },
+    "login_forgotPasswordButton": "Forgotten password? ",
+    "@login_forgotPasswordButton": {
+        "description": "Text for the button or link to reset a forgotten password on the login screen."
+    },
+    "login_rememberMeButton": "Remember me",
+    "@login_rememberMeButton": {
+        "description": "Text for the button or link to remember user's password on the login screen."
+    },
+    "login_loginButton": "LOGIN",
+    "@login_loginButton": {
+        "description": "Text for the button or link to log in on the login screen."
+    },
+    "login_thirdPartyLoginIntro": "or\nlog in with",
+    "@login_thirdPartyLoginIntro": {
+        "description": "Text for introducing 3rd party log-in method on the login screen."
+    },
+    "login_emptyFieldsMessage": "Please fill in all fields.",
+    "@login_emptyFieldsMessage": {
+        "description": "Message displayed when the user attempts to log in without filling in all the required fields."
+    },
+    "login_invalidEmailMessage": "Invalid email. Please try again.",
+    "@login_invalidEmailMessage": {
+        "description": "Displayed when the user enters an invalid email format and is prompted to try again."
+    },
+    "login_invalidPasswordMessage": "Invalid password. Please try again.",
+    "@login_invalidPasswordMessage": {
+        "description": "Shown to the user when they enter an invalid password and are prompted to try again."
+    },
+    "login_networkRequestFailedMessage": "Network request temporarily failed. Please try logging in again.",
+    "@login_networkRequestFailedMessage": {
+        "description": "Shown when a network request fails temporarily and the user is advised to try logging in again."
+    },
+    "login_userNotLoggedInFacebook": "User not logged in via Facebook",
+    "@login_userNotLoggedInFacebook": {
+        "description": "Message indicating the user has not logged in using their Facebook account."
+    },
+    "login_userNotLoggedInGoogle": "User not logged in via Google.",
+    "@login_userNotLoggedInGoogle": {
+        "description": "Message indicating the user has not logged in using their Google account."
+    },
+    "login_userNotLoggedInApple": "User not logged in via Apple",
+    "@login_userNotLoggedInApple": {
+        "description": "Message indicating the user has not logged in using their Apple account."
+    },
+    "login_unknownErrorMessage": "Unknown Error. Please contact us.",
+    "@login_unknownErrorMessage": {
+        "description": "Shown when an unknown error occurs, advising the user to contact support."
     }
 }

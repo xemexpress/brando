@@ -1,3 +1,4 @@
+import 'package:brando/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -71,7 +72,7 @@ class _RememberMeState extends State<RememberMe> {
           child: GestureDetector(
             onTap: onTap,
             child: Text(
-              'Remember me',
+              S.of(context).login_rememberMeButton,
               style: GoogleFonts.openSans(
                 textStyle: Theme.of(context).textTheme.labelMedium,
                 fontWeight: FontWeight.w400,

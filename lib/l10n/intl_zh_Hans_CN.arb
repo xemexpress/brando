@@ -1,5 +1,20 @@
 {
-    "title": "预约",
-    "greetings": "欢迎来到\nMichelle Yuen Jewelry\n预约系统",
-    "loginHeading": "登入"
+    "common_title": "预约",
+    "common_greetings": "欢迎来到\nMichelle Yuen Jewelry\n预约系统",
+    "common_affiliationPoweredBy": "由 {company} 提供技術支持",
+    "login_heading": "登录",
+    "login_emailHint": "电邮",
+    "login_passwordHint": "密码",
+    "login_forgotPasswordButton": "忘记密码？",
+    "login_rememberMeButton": "记住我",
+    "login_loginButton": "登录",
+    "login_thirdPartyLoginIntro": "或者\n使用以下方式登录",
+    "login_emptyFieldsMessage": "请填写所有字段。",
+    "login_invalidEmailMessage": "电子邮箱无效，请再试一次。",
+    "login_invalidPasswordMessage": "密码无效，请再试一次。",
+    "login_networkRequestFailedMessage": "网络请求暂时失败。请尝试重新登录。",
+    "login_userNotLoggedInFacebook": "用户未通过 Facebook 登录。",
+    "login_userNotLoggedInGoogle": "用户未通过 Google 登录。",
+    "login_userNotLoggedInApple": "用户未通过 Apple 登录。",
+    "login_unknownErrorMessage": "未知错误。请联系我们。"
 }

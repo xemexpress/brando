@@ -1,3 +1,4 @@
+import 'package:brando/generated/l10n.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,7 +27,7 @@ class LogInButton extends StatelessWidget {
           ),
           alignment: Alignment.center,
           child: Text(
-            'LOGIN',
+            S.of(context).login_loginButton,
             textAlign: TextAlign.center,
             style: GoogleFonts.openSans(
               textStyle: Theme.of(context).textTheme.titleMedium,

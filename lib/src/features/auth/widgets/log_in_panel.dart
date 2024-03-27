@@ -29,6 +29,18 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
 
   void signInUserWithEmailAndPassword() async {
     try {
+      if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+        if (_emailController.text.isEmpty) {
+          _emailFocusNode.requestFocus();
+        } else {
+          _passwordFocusNode.requestFocus();
+        }
+
+        showFeedback(
+          message: S.current.login_emptyFieldsMessage,
+        );
+        return;
+      }
       await ref.read(authControllerProvider.notifier).signInEmailAndPassword(
             email: _emailController.text,
             password: _passwordController.text,
@@ -42,7 +54,7 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
       );
 
       showFeedback(
-        message: 'Invalid email. Please try again.',
+        message: S.current.login_invalidEmailMessage,
       );
     } on InvalidPasswordAuthException catch (_) {
       _passwordFocusNode.requestFocus();
@@ -53,12 +65,11 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
       );
 
       showFeedback(
-        message: 'Invalid password. Please try again.',
+        message: S.current.login_invalidPasswordMessage,
       );
     } on NetworkRequestAuthException catch (_) {
       showFeedback(
-        message:
-            'Network request temporarily failed. Please try logging in again.',
+        message: S.current.login_networkRequestFailedMessage,
       );
     } on GenericAuthException catch (e) {
       showFeedback(message: e.message);
@@ -70,9 +81,9 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
       await ref.read(authControllerProvider.notifier).signInWithGoogle();
       goToAuthScreen();
     } on UserNotLoggedInException catch (_) {
-      showFeedback(message: 'User not logged in via Google');
+      showFeedback(message: S.current.login_userNotLoggedInGoogle);
     } on GenericAuthException catch (_) {
-      showFeedback(message: 'Unknown Error. Please contact us.');
+      showFeedback(message: S.current.login_unknownErrorMessage);
     }
   }
 
@@ -81,9 +92,9 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
       await ref.read(authControllerProvider.notifier).signInWithFacebook();
       goToAuthScreen();
     } on UserNotLoggedInException catch (_) {
-      showFeedback(message: 'User not logged in via Facebook');
+      showFeedback(message: S.current.login_userNotLoggedInFacebook);
     } on GenericAuthException catch (_) {
-      showFeedback(message: 'Unknown Error. Please contact us.');
+      showFeedback(message: S.current.login_unknownErrorMessage);
     }
   }
 
@@ -92,7 +103,7 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
       await ref.read(authControllerProvider.notifier).signInWithApple();
       goToAuthScreen();
     } on UserNotLoggedInException catch (_) {
-      showFeedback(message: 'User not logged in via Apple');
+      showFeedback(message: S.current.login_userNotLoggedInApple);
     } on GenericAuthException catch (e) {
       showFeedback(message: e.message);
     }
@@ -117,7 +128,7 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 30),
             child: Text(
-              S.of(context).loginHeading,
+              S.of(context).login_heading,
               style: GoogleFonts.openSans(
                 textStyle: context.responsive(
                   Theme.of(context).textTheme.headlineLarge,
@@ -131,7 +142,7 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
             controller: _emailController,
             currentFocusNode: _emailFocusNode,
             nextFocusNode: _passwordFocusNode,
-            hintText: 'Email',
+            hintText: S.of(context).login_emailHint,
             icon: CupertinoIcons.person_fill,
             textInputType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
@@ -141,7 +152,7 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
             controller: _passwordController,
             currentFocusNode: _passwordFocusNode,
             signInUser: signInUserWithEmailAndPassword,
-            hintText: 'Password',
+            hintText: S.of(context).login_passwordHint,
             icon: CupertinoIcons.lock_fill,
             textInputAction: TextInputAction.go,
             obscureText: true,
@@ -166,7 +177,7 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
           ),
           const SizedBox(height: 20),
           Text(
-            'or\nlog in with',
+            S.of(context).login_thirdPartyLoginIntro,
             style: GoogleFonts.openSans(
               textStyle: Theme.of(context).textTheme.labelLarge,
             ),
@@ -200,9 +211,6 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
               ),
             ],
           ),
-          // const SizedBox(height: 70),
-          // const AffiliationNote(),
-          // const SizedBox(height: 50),
         ],
       ),
     );

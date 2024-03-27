@@ -1,5 +1,6 @@
 import 'package:brando/generated/l10n.dart';
 import 'package:brando/src/common/common.dart';
+import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/appointment/views/booking_screen.dart';
 import 'package:brando/src/features/auth/view/auth_screen.dart';
 import 'package:brando/src/themes/themes.dart';
@@ -51,14 +52,13 @@ class _BrandoAppState extends ConsumerState<BrandoApp>
     final themeState = ref.watch(themeControllerProvider);
 
     return MaterialApp(
-      // onGenerateTitle: (context) =>
-      //     '${S.current.title} | Michelle Yuen Jewelry',
-      onGenerateTitle: (context) {
-        final Locale myLocale = Localizations.localeOf(context);
-        print("Current Locale: ${myLocale.toString()}");
-        print('test: ${S.current.title}');
-        return '${S.current.title} | Michelle Yuen Jewelry';
-      },
+      onGenerateTitle: (context) => '${S.current.common_title} | $companyName',
+      // onGenerateTitle: (context) {
+      //   final Locale myLocale = Localizations.localeOf(context);
+      //   print("Current Locale: ${myLocale.toString()}");
+      //   print('test: ${S.current.common_title}');
+      //   return '${S.current.common_title} | Michelle Yuen Jewelry';
+      // },
       debugShowCheckedModeBanner: false,
       theme: AppTheme.currentTheme(
         brightness: themeState.appBrightness,
