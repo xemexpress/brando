@@ -22,12 +22,27 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(company) => "由 ${company} 提供技術支援";
 
+  static String m1(error) => "錯誤：${error}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "common_affiliationPoweredBy": m0,
         "common_greetings": MessageLookupByLibrary.simpleMessage(
             "歡迎來到\nMichelle Yuen Jewelry\n預約系統"),
+        "common_logoutButton": MessageLookupByLibrary.simpleMessage("登出"),
         "common_title": MessageLookupByLibrary.simpleMessage("預約"),
+        "home_appointmentTimeSlot":
+            MessageLookupByLibrary.simpleMessage("預約時間段："),
+        "home_cancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "home_change": MessageLookupByLibrary.simpleMessage("更改"),
+        "home_date": MessageLookupByLibrary.simpleMessage("日期"),
+        "home_errorMessage": m1,
+        "home_makeAnAppointment": MessageLookupByLibrary.simpleMessage("進行預約"),
+        "home_personalPanel": MessageLookupByLibrary.simpleMessage("個人面板"),
+        "home_states": MessageLookupByLibrary.simpleMessage("狀態"),
+        "home_timeSlot": MessageLookupByLibrary.simpleMessage("時間段"),
+        "home_youDontHaveAnAppointmentYet":
+            MessageLookupByLibrary.simpleMessage("您還沒有預約。"),
         "login_emailHint": MessageLookupByLibrary.simpleMessage("電郵"),
         "login_emptyFieldsMessage":
             MessageLookupByLibrary.simpleMessage("請填寫所有欄位。"),
@@ -35,9 +50,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("忘記密碼？"),
         "login_heading": MessageLookupByLibrary.simpleMessage("登入"),
         "login_invalidEmailMessage":
-            MessageLookupByLibrary.simpleMessage("無效的電子郵件地址，請再試一次。"),
+            MessageLookupByLibrary.simpleMessage("電子郵件地址無效，請重新再試。"),
         "login_invalidPasswordMessage":
-            MessageLookupByLibrary.simpleMessage("無效的密碼，請再試一次。"),
+            MessageLookupByLibrary.simpleMessage("密碼無效，請重新再試。"),
         "login_loginButton": MessageLookupByLibrary.simpleMessage("登入"),
         "login_networkRequestFailedMessage":
             MessageLookupByLibrary.simpleMessage("網絡請求暫時失敗。請嘗試重新登入。"),

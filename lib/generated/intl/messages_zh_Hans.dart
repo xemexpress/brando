@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "common_affiliationPoweredBy": m0,
         "common_greetings": MessageLookupByLibrary.simpleMessage(
             "欢迎来到\nMichelle Yuen Jewelry\n预约系统"),
+        "common_logoutButton": MessageLookupByLibrary.simpleMessage("登出"),
         "common_title": MessageLookupByLibrary.simpleMessage("预约"),
         "login_emailHint": MessageLookupByLibrary.simpleMessage("电邮"),
         "login_emptyFieldsMessage":

@@ -1,3 +1,4 @@
+import 'package:brando/generated/l10n.dart';
 import 'package:brando/src/apis/apis.dart';
 import 'package:brando/src/common/common.dart';
 import 'package:brando/src/core/core.dart';
@@ -41,7 +42,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             children: [
               MyAppBar(
                 title: context.responsive(
-                  'Personal Pannel',
+                  S.of(context).home_personalPanel,
                   md: '',
                 ),
                 leading: context.responsive(
@@ -50,7 +51,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     style: TextButton.styleFrom(padding: EdgeInsets.zero),
                     onPressed: logOut,
                     child: Text(
-                      'Log Out',
+                      S.of(context).common_logoutButton,
                       style: Theme.of(context).textTheme.labelLarge!.copyWith(
                             color: Theme.of(context).colorScheme.onPrimary,
                             fontWeight: FontWeight.bold,
@@ -85,7 +86,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
                     // Appointment Table
                     Text(
-                      'Appointment time slot:',
+                      S.of(context).home_appointmentTimeSlot,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 4),

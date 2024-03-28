@@ -80,6 +80,16 @@ class S {
     );
   }
 
+  /// `Log out`
+  String get common_logoutButton {
+    return Intl.message(
+      'Log out',
+      name: 'common_logoutButton',
+      desc: 'Text for the button or link to log out of the booking system.',
+      args: [],
+    );
+  }
+
   /// `Login`
   String get login_heading {
     return Intl.message(
@@ -237,6 +247,120 @@ class S {
       desc:
           'Shown when an unknown error occurs, advising the user to contact support.',
       args: [],
+    );
+  }
+
+  /// `Personal Panel`
+  String get home_personalPanel {
+    return Intl.message(
+      'Personal Panel',
+      name: 'home_personalPanel',
+      desc:
+          'Title in mobile version for the user\'s home screen that represents the personal panel or dashboard.',
+      args: [],
+    );
+  }
+
+  /// `Phone number not available`
+  String get home_profile_phoneNumberNotAvailable {
+    return Intl.message(
+      'Phone number not available',
+      name: 'home_profile_phoneNumberNotAvailable',
+      desc:
+          'Message displayed when the user\'s phone number is not available on the home profile screen.',
+      args: [],
+    );
+  }
+
+  /// `Appointment time slot:`
+  String get home_appointmentTimeSlot {
+    return Intl.message(
+      'Appointment time slot:',
+      name: 'home_appointmentTimeSlot',
+      desc: 'Label for displaying the appointment time slot.',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get home_date {
+    return Intl.message(
+      'Date',
+      name: 'home_date',
+      desc: 'Label for displaying the date of the appointment.',
+      args: [],
+    );
+  }
+
+  /// `Time Slot`
+  String get home_timeSlot {
+    return Intl.message(
+      'Time Slot',
+      name: 'home_timeSlot',
+      desc: 'Label for displaying available time slots for appointments.',
+      args: [],
+    );
+  }
+
+  /// `States`
+  String get home_states {
+    return Intl.message(
+      'States',
+      name: 'home_states',
+      desc:
+          'Label for displaying the states or statuses of appointments or processes.',
+      args: [],
+    );
+  }
+
+  /// `change`
+  String get home_change {
+    return Intl.message(
+      'change',
+      name: 'home_change',
+      desc: 'Button text for changing the details of an existing appointment.',
+      args: [],
+    );
+  }
+
+  /// `cancel`
+  String get home_cancel {
+    return Intl.message(
+      'cancel',
+      name: 'home_cancel',
+      desc: 'Button text for cancelling an action or appointment.',
+      args: [],
+    );
+  }
+
+  /// `you don't have an appointment yet.`
+  String get home_youDontHaveAnAppointmentYet {
+    return Intl.message(
+      'you don\'t have an appointment yet.',
+      name: 'home_youDontHaveAnAppointmentYet',
+      desc: 'Message displayed when the user has no appointments.',
+      args: [],
+    );
+  }
+
+  /// `make an appointment`
+  String get home_makeAnAppointment {
+    return Intl.message(
+      'make an appointment',
+      name: 'home_makeAnAppointment',
+      desc:
+          'Button or link text for initiating the appointment booking process.',
+      args: [],
+    );
+  }
+
+  /// `Error: {error}`
+  String home_errorMessage(Object error) {
+    return Intl.message(
+      'Error: $error',
+      name: 'home_errorMessage',
+      desc: 'Displays an error message with a dynamic error content.',
+      args: [error],
     );
   }
 }

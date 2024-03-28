@@ -22,12 +22,32 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(company) => "Powered by ${company}";
 
+  static String m1(error) => "Error: ${error}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "common_affiliationPoweredBy": m0,
         "common_greetings": MessageLookupByLibrary.simpleMessage(
             "Welcome to\nMichelle Yuen Jewelry\nBooking System"),
+        "common_logoutButton": MessageLookupByLibrary.simpleMessage("Log out"),
         "common_title": MessageLookupByLibrary.simpleMessage("Booking"),
+        "home_appointmentTimeSlot":
+            MessageLookupByLibrary.simpleMessage("Appointment time slot:"),
+        "home_cancel": MessageLookupByLibrary.simpleMessage("cancel"),
+        "home_change": MessageLookupByLibrary.simpleMessage("change"),
+        "home_date": MessageLookupByLibrary.simpleMessage("Date"),
+        "home_errorMessage": m1,
+        "home_makeAnAppointment":
+            MessageLookupByLibrary.simpleMessage("make an appointment"),
+        "home_personalPanel":
+            MessageLookupByLibrary.simpleMessage("Personal Panel"),
+        "home_profile_phoneNumberNotAvailable":
+            MessageLookupByLibrary.simpleMessage("Phone number not available"),
+        "home_states": MessageLookupByLibrary.simpleMessage("States"),
+        "home_timeSlot": MessageLookupByLibrary.simpleMessage("Time Slot"),
+        "home_youDontHaveAnAppointmentYet":
+            MessageLookupByLibrary.simpleMessage(
+                "you don\'t have an appointment yet."),
         "login_emailHint": MessageLookupByLibrary.simpleMessage("Email"),
         "login_emptyFieldsMessage":
             MessageLookupByLibrary.simpleMessage("Please fill in all fields."),

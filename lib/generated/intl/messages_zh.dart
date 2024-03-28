@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "common_affiliationPoweredBy": m0,
         "common_greetings": MessageLookupByLibrary.simpleMessage(
             "歡迎來到\nMichelle Yuen Jewelry\n預約系統"),
+        "common_logoutButton": MessageLookupByLibrary.simpleMessage("登出"),
         "common_title": MessageLookupByLibrary.simpleMessage("預約"),
         "login_emailHint": MessageLookupByLibrary.simpleMessage("電郵"),
         "login_emptyFieldsMessage":
@@ -35,9 +36,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("忘記密碼？"),
         "login_heading": MessageLookupByLibrary.simpleMessage("登入"),
         "login_invalidEmailMessage":
-            MessageLookupByLibrary.simpleMessage("無效的電子郵件地址，請再試一次。"),
+            MessageLookupByLibrary.simpleMessage("電子郵件地址無效，請重新再試。"),
         "login_invalidPasswordMessage":
-            MessageLookupByLibrary.simpleMessage("無效的密碼，請再試一次。"),
+            MessageLookupByLibrary.simpleMessage("密碼無效，請重新再試。"),
         "login_loginButton": MessageLookupByLibrary.simpleMessage("登入"),
         "login_networkRequestFailedMessage":
             MessageLookupByLibrary.simpleMessage("網絡請求暫時失敗。請嘗試重新登入。"),

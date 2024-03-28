@@ -11,6 +11,10 @@
     "@common_affiliationPoweredBy": {
         "description": "The phrase 'Powered by' with a placeholder for the company name"
     },
+    "common_logoutButton": "Log out",
+    "@common_logoutButton": {
+        "description": "Text for the button or link to log out of the booking system."
+    },
     "login_heading": "Login",
     "@login_heading": {
         "description": "The heading for the login form"
@@ -70,5 +74,49 @@
     "login_unknownErrorMessage": "Unknown Error. Please contact us.",
     "@login_unknownErrorMessage": {
         "description": "Shown when an unknown error occurs, advising the user to contact support."
+    },
+    "home_personalPanel": "Personal Panel",
+    "@home_personalPanel": {
+        "description": "Title in mobile version for the user's home screen that represents the personal panel or dashboard."
+    },
+    "home_profile_phoneNumberNotAvailable": "Phone number not available",
+    "@home_profile_phoneNumberNotAvailable": {
+        "description": "Message displayed when the user's phone number is not available on the home profile screen."
+    },
+    "home_appointmentTimeSlot": "Appointment time slot:",
+    "@home_appointmentTimeSlot": {
+        "description": "Label for displaying the appointment time slot."
+    },
+    "home_date": "Date",
+    "@home_date": {
+        "description": "Label for displaying the date of the appointment."
+    },
+    "home_timeSlot": "Time Slot",
+    "@home_timeSlot": {
+        "description": "Label for displaying available time slots for appointments."
+    },
+    "home_states": "States",
+    "@home_states": {
+        "description": "Label for displaying the states or statuses of appointments or processes."
+    },
+    "home_change": "change",
+    "@home_change": {
+        "description": "Button text for changing the details of an existing appointment."
+    },
+    "home_cancel": "cancel",
+    "@home_cancel": {
+        "description": "Button text for cancelling an action or appointment."
+    },
+    "home_youDontHaveAnAppointmentYet": "you don't have an appointment yet.",
+    "@home_youDontHaveAnAppointmentYet": {
+        "description": "Message displayed when the user has no appointments."
+    },
+    "home_makeAnAppointment": "make an appointment",
+    "@home_makeAnAppointment": {
+        "description": "Button or link text for initiating the appointment booking process."
+    },
+    "home_errorMessage": "Error: {error}",
+    "@home_errorMessage": {
+        "description": "Displays an error message with a dynamic error content."
     }
 }

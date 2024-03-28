@@ -1,3 +1,4 @@
+import 'package:brando/generated/l10n.dart';
 import 'package:brando/src/apis/apis.dart';
 import 'package:brando/src/common/common.dart';
 import 'package:brando/src/core/core.dart';
@@ -93,7 +94,7 @@ class _MobileScaffoldState extends ConsumerState<MobileScaffold> {
             const Spacer(),
             ListTile(
                 title: Text(
-                  'Log out',
+                  S.of(context).common_logoutButton,
                   style: GoogleFonts.openSans(
                     textStyle: Theme.of(context).textTheme.titleLarge,
                     fontWeight: FontWeight.w500,

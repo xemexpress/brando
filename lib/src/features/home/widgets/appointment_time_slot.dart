@@ -1,3 +1,4 @@
+import 'package:brando/generated/l10n.dart';
 import 'package:brando/src/common/common.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/appointment/controllers/controllers.dart';
@@ -63,19 +64,19 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
         TableRow(
           children: [
             Table(
-              children: const [
+              children: [
                 TableRow(
                   children: [
                     TableHeaderCell(
                       rightBordered: true,
-                      child: 'Date',
+                      child: S.of(context).home_date,
                     ),
-                    TableHeaderCell(child: 'Time Slot'),
+                    TableHeaderCell(child: S.of(context).home_timeSlot),
                   ],
                 ),
               ],
             ),
-            const TableHeaderCell(child: 'States'),
+            TableHeaderCell(child: S.of(context).home_states),
           ],
         ),
         TableRow(
@@ -108,7 +109,7 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
                               spacing: 3,
                               children: [
                                 MyButton(
-                                  text: 'change',
+                                  text: S.of(context).home_change,
                                   onPressed: () =>
                                       changeAppointment(appointment),
                                   height: buttonHeight,
@@ -118,7 +119,7 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
                                       Theme.of(context).textTheme.labelMedium,
                                 ),
                                 MyButton(
-                                  text: 'cancel',
+                                  text: S.of(context).home_cancel,
                                   onPressed: goToCancelAppointment,
                                   height: buttonHeight,
                                   backgroundColor: Theme.of(context)
@@ -132,12 +133,13 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
                           )
                         ]
                       : [
-                          const TableRowCell(
-                            child: 'you don\'t have an appointment yet.',
+                          TableRowCell(
+                            child:
+                                S.of(context).home_youDontHaveAnAppointmentYet,
                           ),
                           TableRowCell(
                             child: MyButton(
-                              text: 'make an appointment',
+                              text: S.of(context).home_makeAnAppointment,
                               textStyle:
                                   Theme.of(context).textTheme.labelMedium,
                               onPressed: goToBookingScreen,
@@ -155,7 +157,7 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
                   return [
                     Expanded(
                       child: Text(
-                        'Error: ${error.toString()}',
+                        S.of(context).home_errorMessage(error.toString()),
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                     ),

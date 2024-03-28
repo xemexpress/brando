@@ -70,6 +70,27 @@ class _BrandoAppState extends ConsumerState<BrandoApp>
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
+      // localeListResolutionCallback: (locales, supportedLocales) {
+      //   // Iterate through the preferred locales from the device
+      //   for (Locale locale in locales!) {
+      //     // Check if we support the locale
+      //     for (Locale supportedLocale in supportedLocales) {
+      //       if (supportedLocale.languageCode == locale.languageCode &&
+      //           supportedLocale.countryCode == locale.countryCode) {
+      //         return supportedLocale;
+      //       }
+      //     }
+      //     // If a match wasn't found with country code, try matching just the language code
+      //     for (Locale supportedLocale in supportedLocales) {
+      //       if (supportedLocale.languageCode == locale.languageCode) {
+      //         return supportedLocale;
+      //       }
+      //     }
+      //   }
+      //   // If no match is found, fall back to the first supportedLocale
+      //   // You can change this to any default Locale you prefer
+      //   return supportedLocales.first;
+      // },
       initialRoute: AuthScreen.routeName,
       onGenerateRoute: (settings) {
         switch (settings.name) {

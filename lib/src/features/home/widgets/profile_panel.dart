@@ -1,3 +1,4 @@
+import 'package:brando/generated/l10n.dart';
 import 'package:brando/src/apis/apis.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/auth/controllers/controllers.dart';
@@ -155,7 +156,7 @@ class _ProfilePanelState extends ConsumerState<ProfilePanel> {
                 ShowAndEdit(
                   displayText: currentUser?.phoneNumber != null
                       ? "+852 ${currentUser?.phoneNumber}"
-                      : "Phone number not available",
+                      : S.of(context).home_profile_phoneNumberNotAvailable,
                   // onEdit: editPhoneNumber,
                 ),
                 ShowAndEdit(
