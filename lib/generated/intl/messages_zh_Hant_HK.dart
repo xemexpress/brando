@@ -20,9 +20,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'zh_Hant_HK';
 
-  static String m0(company) => "由 ${company} 提供技術支援";
+  static String m0(company) => "技術支持由 ${company} 提供";
 
-  static String m1(error) => "錯誤：${error}";
+  static String m1(error) => "出現錯誤：${error}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -39,36 +39,71 @@ class MessageLookup extends MessageLookupByLibrary {
         "home_errorMessage": m1,
         "home_makeAnAppointment": MessageLookupByLibrary.simpleMessage("立即預約"),
         "home_personalPanel": MessageLookupByLibrary.simpleMessage("主頁"),
+        "home_profile_cancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "home_profile_displayNameIsUpdated":
+            MessageLookupByLibrary.simpleMessage("顯示名稱已更新！"),
+        "home_profile_editDisplayName":
+            MessageLookupByLibrary.simpleMessage("編輯顯示名稱"),
+        "home_profile_editEmail":
+            MessageLookupByLibrary.simpleMessage("更改電郵地址"),
+        "home_profile_editPassword":
+            MessageLookupByLibrary.simpleMessage("更改密碼"),
+        "home_profile_editPhoneNumber":
+            MessageLookupByLibrary.simpleMessage("更改電話號碼"),
+        "home_profile_email": MessageLookupByLibrary.simpleMessage("電郵"),
+        "home_profile_enterYourNewDisplayNameHint":
+            MessageLookupByLibrary.simpleMessage("請輸入您的新顯示名稱"),
+        "home_profile_enterYourNewEmailHint":
+            MessageLookupByLibrary.simpleMessage("請輸入您的新電郵地址"),
+        "home_profile_enterYourNewPasswordHint":
+            MessageLookupByLibrary.simpleMessage("請輸入您的新密碼"),
+        "home_profile_enterYourNewPhoneNumberHint":
+            MessageLookupByLibrary.simpleMessage("請輸入您的新電話號碼"),
+        "home_profile_enterYourOldPasswordHint":
+            MessageLookupByLibrary.simpleMessage("請輸入您的舊密碼"),
+        "home_profile_howMayIAddressYou":
+            MessageLookupByLibrary.simpleMessage("我們應如何稱呼您？"),
+        "home_profile_newPasswordIsTheSame":
+            MessageLookupByLibrary.simpleMessage("新密碼與舊密碼相同。"),
+        "home_profile_oldPasswordIsInvalid":
+            MessageLookupByLibrary.simpleMessage("舊密碼不正確。請重新嘗試。"),
+        "home_profile_passwordIsTooWeak":
+            MessageLookupByLibrary.simpleMessage("密碼強度不足。請重新嘗試。"),
+        "home_profile_passwordIsUpdated":
+            MessageLookupByLibrary.simpleMessage("密碼已更新！"),
         "home_profile_phoneNumberNotAvailable":
-            MessageLookupByLibrary.simpleMessage("電話號碼暫未登記"),
+            MessageLookupByLibrary.simpleMessage("電話號碼尚未登記"),
+        "home_profile_pwHidden":
+            MessageLookupByLibrary.simpleMessage("密碼: ******"),
+        "home_profile_submit": MessageLookupByLibrary.simpleMessage("提交"),
         "home_states": MessageLookupByLibrary.simpleMessage("狀態"),
         "home_timeSlot": MessageLookupByLibrary.simpleMessage("時段"),
         "home_youDontHaveAnAppointmentYet":
-            MessageLookupByLibrary.simpleMessage("您還沒有預約。"),
-        "login_emailHint": MessageLookupByLibrary.simpleMessage("電郵"),
+            MessageLookupByLibrary.simpleMessage("您尚未有任何預約。"),
+        "login_emailHint": MessageLookupByLibrary.simpleMessage("電郵地址"),
         "login_emptyFieldsMessage":
-            MessageLookupByLibrary.simpleMessage("請填寫所有欄位。"),
+            MessageLookupByLibrary.simpleMessage("請填妥所有欄位。"),
         "login_forgotPasswordButton":
             MessageLookupByLibrary.simpleMessage("忘記密碼？"),
         "login_heading": MessageLookupByLibrary.simpleMessage("登入"),
         "login_invalidEmailMessage":
-            MessageLookupByLibrary.simpleMessage("電子郵件地址無效，請重新再試。"),
+            MessageLookupByLibrary.simpleMessage("無效的電郵地址，請重試。"),
         "login_invalidPasswordMessage":
-            MessageLookupByLibrary.simpleMessage("密碼無效，請重新再試。"),
+            MessageLookupByLibrary.simpleMessage("密碼不正確，請重試。"),
         "login_loginButton": MessageLookupByLibrary.simpleMessage("登入"),
         "login_networkRequestFailedMessage":
-            MessageLookupByLibrary.simpleMessage("網絡請求暫時失敗。請嘗試重新登入。"),
+            MessageLookupByLibrary.simpleMessage("網絡請求失敗，請重新登入。"),
         "login_passwordHint": MessageLookupByLibrary.simpleMessage("密碼"),
-        "login_rememberMeButton": MessageLookupByLibrary.simpleMessage("記住我"),
+        "login_rememberMeButton": MessageLookupByLibrary.simpleMessage("記住賬號"),
         "login_thirdPartyLoginIntro":
-            MessageLookupByLibrary.simpleMessage("或者\n使用以下方式登入"),
+            MessageLookupByLibrary.simpleMessage("或\n以以下方法登入"),
         "login_unknownErrorMessage":
-            MessageLookupByLibrary.simpleMessage("未知錯誤。請聯繫我們。"),
+            MessageLookupByLibrary.simpleMessage("出現未知錯誤，請聯絡我們。"),
         "login_userNotLoggedInApple":
-            MessageLookupByLibrary.simpleMessage("用戶未通過 Apple 登入。"),
+            MessageLookupByLibrary.simpleMessage("未能透過 Apple 登入。"),
         "login_userNotLoggedInFacebook":
-            MessageLookupByLibrary.simpleMessage("用戶未通過 Facebook 登入。"),
+            MessageLookupByLibrary.simpleMessage("未能透過 Facebook 登入。"),
         "login_userNotLoggedInGoogle":
-            MessageLookupByLibrary.simpleMessage("用戶未通過 Google 登入。")
+            MessageLookupByLibrary.simpleMessage("未能透過 Google 登入。")
       };
 }

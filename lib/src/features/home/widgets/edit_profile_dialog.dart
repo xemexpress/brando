@@ -1,3 +1,4 @@
+import 'package:brando/generated/l10n.dart';
 import 'package:brando/src/common/common.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/home/widgets/widgets.dart';
@@ -165,12 +166,12 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               MyButton(
-                text: 'cancel',
+                text: S.of(context).home_profile_cancel,
                 onPressed: () => Navigator.of(context).pop(),
                 backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
               ),
               MyButton(
-                text: 'submit',
+                text: S.of(context).home_profile_submit,
                 onPressed: onButtonSubmit,
                 backgroundColor: Theme.of(context).colorScheme.primary,
               ),

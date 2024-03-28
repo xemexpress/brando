@@ -41,8 +41,45 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("make an appointment"),
         "home_personalPanel":
             MessageLookupByLibrary.simpleMessage("Personal Panel"),
+        "home_profile_cancel": MessageLookupByLibrary.simpleMessage("cancel"),
+        "home_profile_displayNameIsUpdated":
+            MessageLookupByLibrary.simpleMessage("Display name is updated!"),
+        "home_profile_editDisplayName":
+            MessageLookupByLibrary.simpleMessage("Edit Display Name"),
+        "home_profile_editEmail":
+            MessageLookupByLibrary.simpleMessage("Edit Email"),
+        "home_profile_editPassword":
+            MessageLookupByLibrary.simpleMessage("Edit Password"),
+        "home_profile_editPhoneNumber":
+            MessageLookupByLibrary.simpleMessage("Edit Phone Number"),
+        "home_profile_email": MessageLookupByLibrary.simpleMessage("Email"),
+        "home_profile_enterYourNewDisplayNameHint":
+            MessageLookupByLibrary.simpleMessage("Enter your new display name"),
+        "home_profile_enterYourNewEmailHint":
+            MessageLookupByLibrary.simpleMessage("Enter your new email"),
+        "home_profile_enterYourNewPasswordHint":
+            MessageLookupByLibrary.simpleMessage("Enter your new password"),
+        "home_profile_enterYourNewPhoneNumberHint":
+            MessageLookupByLibrary.simpleMessage("Enter your new phone number"),
+        "home_profile_enterYourOldPasswordHint":
+            MessageLookupByLibrary.simpleMessage("Enter your old password"),
+        "home_profile_howMayIAddressYou":
+            MessageLookupByLibrary.simpleMessage("How may I address you?"),
+        "home_profile_newPasswordIsTheSame":
+            MessageLookupByLibrary.simpleMessage(
+                "New password is the same as the old password."),
+        "home_profile_oldPasswordIsInvalid":
+            MessageLookupByLibrary.simpleMessage(
+                "Old password is invalid. Please try again."),
+        "home_profile_passwordIsTooWeak": MessageLookupByLibrary.simpleMessage(
+            "Password is too weak. Please try again."),
+        "home_profile_passwordIsUpdated":
+            MessageLookupByLibrary.simpleMessage("Password is updated!"),
         "home_profile_phoneNumberNotAvailable":
             MessageLookupByLibrary.simpleMessage("Phone number not available"),
+        "home_profile_pwHidden":
+            MessageLookupByLibrary.simpleMessage("pw: ******"),
+        "home_profile_submit": MessageLookupByLibrary.simpleMessage("submit"),
         "home_states": MessageLookupByLibrary.simpleMessage("States"),
         "home_timeSlot": MessageLookupByLibrary.simpleMessage("Time Slot"),
         "home_youDontHaveAnAppointmentYet":

@@ -256,7 +256,28 @@ class S {
       'Personal Panel',
       name: 'home_personalPanel',
       desc:
-          'Title in mobile version for the user\'s home screen that represents the personal panel or dashboard.',
+          'Title in the mobile version for the user\'s home screen that represents the personal panel or dashboard.',
+      args: [],
+    );
+  }
+
+  /// `How may I address you?`
+  String get home_profile_howMayIAddressYou {
+    return Intl.message(
+      'How may I address you?',
+      name: 'home_profile_howMayIAddressYou',
+      desc:
+          'Prompt asking for the preferred name or title for the user who not yet has their display name on the home profile screen.',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get home_profile_email {
+    return Intl.message(
+      'Email',
+      name: 'home_profile_email',
+      desc: 'Label for the email field on the home profile screen.',
       args: [],
     );
   }
@@ -268,6 +289,184 @@ class S {
       name: 'home_profile_phoneNumberNotAvailable',
       desc:
           'Message displayed when the user\'s phone number is not available on the home profile screen.',
+      args: [],
+    );
+  }
+
+  /// `pw: ******`
+  String get home_profile_pwHidden {
+    return Intl.message(
+      'pw: ******',
+      name: 'home_profile_pwHidden',
+      desc: 'Shows the password in a hidden format on the home profile screen.',
+      args: [],
+    );
+  }
+
+  /// `cancel`
+  String get home_profile_cancel {
+    return Intl.message(
+      'cancel',
+      name: 'home_profile_cancel',
+      desc: 'Button text for canceling an action on the profile screen.',
+      args: [],
+    );
+  }
+
+  /// `submit`
+  String get home_profile_submit {
+    return Intl.message(
+      'submit',
+      name: 'home_profile_submit',
+      desc: 'Button text for submitting changes on the profile screen.',
+      args: [],
+    );
+  }
+
+  /// `Edit Display Name`
+  String get home_profile_editDisplayName {
+    return Intl.message(
+      'Edit Display Name',
+      name: 'home_profile_editDisplayName',
+      desc:
+          'Dialog title for editing the display name on the home profile screen.',
+      args: [],
+    );
+  }
+
+  /// `Enter your new display name`
+  String get home_profile_enterYourNewDisplayNameHint {
+    return Intl.message(
+      'Enter your new display name',
+      name: 'home_profile_enterYourNewDisplayNameHint',
+      desc:
+          'Hint text for entering a new display name on the home profile screen.',
+      args: [],
+    );
+  }
+
+  /// `Edit Email`
+  String get home_profile_editEmail {
+    return Intl.message(
+      'Edit Email',
+      name: 'home_profile_editEmail',
+      desc: 'Dialog title for editing email on the home profile screen.',
+      args: [],
+    );
+  }
+
+  /// `Enter your new email`
+  String get home_profile_enterYourNewEmailHint {
+    return Intl.message(
+      'Enter your new email',
+      name: 'home_profile_enterYourNewEmailHint',
+      desc: 'Hint text for entering a new email on the home profile screen.',
+      args: [],
+    );
+  }
+
+  /// `Edit Phone Number`
+  String get home_profile_editPhoneNumber {
+    return Intl.message(
+      'Edit Phone Number',
+      name: 'home_profile_editPhoneNumber',
+      desc:
+          'Dialog title for editing the phone number on the home profile screen.',
+      args: [],
+    );
+  }
+
+  /// `Enter your new phone number`
+  String get home_profile_enterYourNewPhoneNumberHint {
+    return Intl.message(
+      'Enter your new phone number',
+      name: 'home_profile_enterYourNewPhoneNumberHint',
+      desc:
+          'Hint text for entering a new phone number on the home profile screen.',
+      args: [],
+    );
+  }
+
+  /// `Edit Password`
+  String get home_profile_editPassword {
+    return Intl.message(
+      'Edit Password',
+      name: 'home_profile_editPassword',
+      desc: 'Dialog title for editing the password on the home profile screen.',
+      args: [],
+    );
+  }
+
+  /// `Enter your old password`
+  String get home_profile_enterYourOldPasswordHint {
+    return Intl.message(
+      'Enter your old password',
+      name: 'home_profile_enterYourOldPasswordHint',
+      desc:
+          'Hint text for entering the old password on the home profile screen.',
+      args: [],
+    );
+  }
+
+  /// `Enter your new password`
+  String get home_profile_enterYourNewPasswordHint {
+    return Intl.message(
+      'Enter your new password',
+      name: 'home_profile_enterYourNewPasswordHint',
+      desc: 'Hint text for entering a new password on the home profile screen.',
+      args: [],
+    );
+  }
+
+  /// `Display name is updated!`
+  String get home_profile_displayNameIsUpdated {
+    return Intl.message(
+      'Display name is updated!',
+      name: 'home_profile_displayNameIsUpdated',
+      desc:
+          'Success message for updated display name on the home profile screen.',
+      args: [],
+    );
+  }
+
+  /// `New password is the same as the old password.`
+  String get home_profile_newPasswordIsTheSame {
+    return Intl.message(
+      'New password is the same as the old password.',
+      name: 'home_profile_newPasswordIsTheSame',
+      desc:
+          'Error message when the new password entered is the same as the old one on the home profile screen.',
+      args: [],
+    );
+  }
+
+  /// `Password is updated!`
+  String get home_profile_passwordIsUpdated {
+    return Intl.message(
+      'Password is updated!',
+      name: 'home_profile_passwordIsUpdated',
+      desc: 'Success message for updated password on the home profile screen.',
+      args: [],
+    );
+  }
+
+  /// `Old password is invalid. Please try again.`
+  String get home_profile_oldPasswordIsInvalid {
+    return Intl.message(
+      'Old password is invalid. Please try again.',
+      name: 'home_profile_oldPasswordIsInvalid',
+      desc:
+          'Error message when the old password entered is invalid on the home profile screen.',
+      args: [],
+    );
+  }
+
+  /// `Password is too weak. Please try again.`
+  String get home_profile_passwordIsTooWeak {
+    return Intl.message(
+      'Password is too weak. Please try again.',
+      name: 'home_profile_passwordIsTooWeak',
+      desc: 'Error message for a weak password on the home profile screen.',
       args: [],
     );
   }

@@ -29,7 +29,7 @@ class _ProfilePanelState extends ConsumerState<ProfilePanel> {
           .read(authControllerProvider.notifier)
           .updateDisplayName(displayName: newDisplayName);
 
-      showFeedback(message: 'Display name is updated!');
+      showFeedback(message: S.current.home_profile_displayNameIsUpdated);
     } on GenericAuthException catch (e) {
       showFeedback(message: e.message);
     }
@@ -44,9 +44,9 @@ class _ProfilePanelState extends ConsumerState<ProfilePanel> {
           );
 
       if (oldPassword == newPassword) {
-        showFeedback(message: 'New password is the same as the old password.');
+        showFeedback(message: S.current.home_profile_newPasswordIsTheSame);
       } else {
-        showFeedback(message: 'Password is updated!');
+        showFeedback(message: S.current.home_profile_passwordIsUpdated);
       }
     } on InvalidPasswordAuthException catch (_) {
       showFeedback(message: 'Old password is invalid. Please try again.');
@@ -61,36 +61,10 @@ class _ProfilePanelState extends ConsumerState<ProfilePanel> {
     showDialog(
       context: context,
       builder: (context) => EditProfileDialog(
-        title: 'Edit Display Name',
-        hintText: 'Enter your new display name',
+        title: S.of(context).home_profile_editDisplayName,
+        hintText: S.of(context).home_profile_enterYourNewDisplayNameHint,
         onSubmit: onSubmitDisplayName,
         capitaliseFirstLetter: true,
-      ),
-    );
-  }
-
-  editPassword() {
-    showDialog(
-      context: context,
-      builder: (context) => EditProfileDialog(
-        title: 'Edit Password',
-        hintText: 'Enter your old password',
-        secondaryHintText: 'Enter your new password',
-        onSubmitTwoFields: onSubmitPassword,
-        obscureText: true,
-      ),
-    );
-  }
-
-  editPhoneNumber() {
-    showDialog(
-      context: context,
-      builder: (context) => EditProfileDialog(
-        title: 'Edit Phone Number',
-        hintText: 'Enter your new phone number',
-        onSubmit: (phoneNumber) {
-          print('Edit phone number.');
-        },
       ),
     );
   }
@@ -99,11 +73,37 @@ class _ProfilePanelState extends ConsumerState<ProfilePanel> {
     showDialog(
       context: context,
       builder: (context) => EditProfileDialog(
-        title: 'Edit Email',
-        hintText: 'Enter your new email',
+        title: S.of(context).home_profile_editEmail,
+        hintText: S.of(context).home_profile_enterYourNewEmailHint,
         onSubmit: (email) {
           print('Edit email');
         },
+      ),
+    );
+  }
+
+  editPhoneNumber() {
+    showDialog(
+      context: context,
+      builder: (context) => EditProfileDialog(
+        title: S.of(context).home_profile_editPhoneNumber,
+        hintText: S.of(context).home_profile_enterYourNewPhoneNumberHint,
+        onSubmit: (phoneNumber) {
+          print('Edit phone number.');
+        },
+      ),
+    );
+  }
+
+  editPassword() {
+    showDialog(
+      context: context,
+      builder: (context) => EditProfileDialog(
+        title: S.of(context).home_profile_editPassword,
+        hintText: S.of(context).home_profile_enterYourOldPasswordHint,
+        secondaryHintText: S.of(context).home_profile_enterYourNewPasswordHint,
+        onSubmitTwoFields: onSubmitPassword,
+        obscureText: true,
       ),
     );
   }
@@ -144,12 +144,13 @@ class _ProfilePanelState extends ConsumerState<ProfilePanel> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ShowAndEdit(
-                  displayText:
-                      currentUser?.displayName ?? 'How may I address you?',
+                  displayText: currentUser?.displayName ??
+                      S.of(context).home_profile_howMayIAddressYou,
                   onEdit: editDisplayName,
                 ),
                 ShowAndEdit(
-                  displayText: currentUser?.email ?? 'Email',
+                  displayText:
+                      currentUser?.email ?? S.of(context).home_profile_email,
                   // onEdit: editEmail,
                   isVerified: true,
                 ),
@@ -160,7 +161,7 @@ class _ProfilePanelState extends ConsumerState<ProfilePanel> {
                   // onEdit: editPhoneNumber,
                 ),
                 ShowAndEdit(
-                  displayText: 'pw: ******',
+                  displayText: S.of(context).home_profile_pwHidden,
                   onEdit: editPassword,
                 ),
               ],

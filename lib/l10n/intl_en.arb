@@ -77,11 +77,87 @@
     },
     "home_personalPanel": "Personal Panel",
     "@home_personalPanel": {
-        "description": "Title in mobile version for the user's home screen that represents the personal panel or dashboard."
+        "description": "Title in the mobile version for the user's home screen that represents the personal panel or dashboard."
+    },
+    "home_profile_howMayIAddressYou": "How may I address you?",
+    "@home_profile_howMayIAddressYou": {
+        "description": "Prompt asking for the preferred name or title for the user who not yet has their display name on the home profile screen."
+    },
+    "home_profile_email": "Email",
+    "@home_profile_email": {
+        "description": "Label for the email field on the home profile screen."
     },
     "home_profile_phoneNumberNotAvailable": "Phone number not available",
     "@home_profile_phoneNumberNotAvailable": {
         "description": "Message displayed when the user's phone number is not available on the home profile screen."
+    },
+    "home_profile_pwHidden": "pw: ******",
+    "@home_profile_pwHidden": {
+        "description": "Shows the password in a hidden format on the home profile screen."
+    },
+    "home_profile_cancel": "cancel",
+    "@home_profile_cancel": {
+        "description": "Button text for canceling an action on the profile screen."
+    },
+    "home_profile_submit": "submit",
+    "@home_profile_submit": {
+        "description": "Button text for submitting changes on the profile screen."
+    },
+    "home_profile_editDisplayName": "Edit Display Name",
+    "@home_profile_editDisplayName": {
+        "description": "Dialog title for editing the display name on the home profile screen."
+    },
+    "home_profile_enterYourNewDisplayNameHint": "Enter your new display name",
+    "@home_profile_enterYourNewDisplayNameHint": {
+        "description": "Hint text for entering a new display name on the home profile screen."
+    },
+    "home_profile_editEmail": "Edit Email",
+    "@home_profile_editEmail": {
+        "description": "Dialog title for editing email on the home profile screen."
+    },
+    "home_profile_enterYourNewEmailHint": "Enter your new email",
+    "@home_profile_enterYourNewEmailHint": {
+        "description": "Hint text for entering a new email on the home profile screen."
+    },
+    "home_profile_editPhoneNumber": "Edit Phone Number",
+    "@home_profile_editPhoneNumber": {
+        "description": "Dialog title for editing the phone number on the home profile screen."
+    },
+    "home_profile_enterYourNewPhoneNumberHint": "Enter your new phone number",
+    "@home_profile_enterYourNewPhoneNumberHint": {
+        "description": "Hint text for entering a new phone number on the home profile screen."
+    },
+    "home_profile_editPassword": "Edit Password",
+    "@home_profile_editPassword": {
+        "description": "Dialog title for editing the password on the home profile screen."
+    },
+    "home_profile_enterYourOldPasswordHint": "Enter your old password",
+    "@home_profile_enterYourOldPasswordHint": {
+        "description": "Hint text for entering the old password on the home profile screen."
+    },
+    "home_profile_enterYourNewPasswordHint": "Enter your new password",
+    "@home_profile_enterYourNewPasswordHint": {
+        "description": "Hint text for entering a new password on the home profile screen."
+    },
+    "home_profile_displayNameIsUpdated": "Display name is updated!",
+    "@home_profile_displayNameIsUpdated": {
+        "description": "Success message for updated display name on the home profile screen."
+    },
+    "home_profile_newPasswordIsTheSame": "New password is the same as the old password.",
+    "@home_profile_newPasswordIsTheSame": {
+        "description": "Error message when the new password entered is the same as the old one on the home profile screen."
+    },
+    "home_profile_passwordIsUpdated": "Password is updated!",
+    "@home_profile_passwordIsUpdated": {
+        "description": "Success message for updated password on the home profile screen."
+    },
+    "home_profile_oldPasswordIsInvalid": "Old password is invalid. Please try again.",
+    "@home_profile_oldPasswordIsInvalid": {
+        "description": "Error message when the old password entered is invalid on the home profile screen."
+    },
+    "home_profile_passwordIsTooWeak": "Password is too weak. Please try again.",
+    "@home_profile_passwordIsTooWeak": {
+        "description": "Error message for a weak password on the home profile screen."
     },
     "home_appointmentTimeSlot": "Appointment time slot:",
     "@home_appointmentTimeSlot": {
