@@ -25,7 +25,7 @@ class ConfirmationPanel extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          appointment.formattedDate,
+          appointment.formattedDate(Localizations.localeOf(context).toString()),
           style: GoogleFonts.libreBaskerville(
             textStyle: context.responsive(
               Theme.of(context).textTheme.titleMedium,

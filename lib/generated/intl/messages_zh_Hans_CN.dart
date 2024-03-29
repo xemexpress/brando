@@ -22,13 +22,65 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(company) => "由 ${company} 提供技術支持";
 
+  static String m1(error) => "出错了：${error}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "common_affiliationPoweredBy": m0,
         "common_greetings": MessageLookupByLibrary.simpleMessage(
             "欢迎来到\nMichelle Yuen Jewelry\n预约系统"),
         "common_logoutButton": MessageLookupByLibrary.simpleMessage("登出"),
+        "common_myAppointment": MessageLookupByLibrary.simpleMessage("我的预约"),
         "common_title": MessageLookupByLibrary.simpleMessage("预约"),
+        "home_appointmentTimeSlot":
+            MessageLookupByLibrary.simpleMessage("预约时间段："),
+        "home_cancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "home_change": MessageLookupByLibrary.simpleMessage("修改"),
+        "home_date": MessageLookupByLibrary.simpleMessage("日期"),
+        "home_errorMessage": m1,
+        "home_makeAnAppointment": MessageLookupByLibrary.simpleMessage("立即预约"),
+        "home_personalPanel": MessageLookupByLibrary.simpleMessage("主页"),
+        "home_profile_cancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "home_profile_displayNameIsUpdated":
+            MessageLookupByLibrary.simpleMessage("昵称已更新！"),
+        "home_profile_editDisplayName":
+            MessageLookupByLibrary.simpleMessage("编辑昵称"),
+        "home_profile_editEmail":
+            MessageLookupByLibrary.simpleMessage("修改电子邮件"),
+        "home_profile_editPassword":
+            MessageLookupByLibrary.simpleMessage("修改密码"),
+        "home_profile_editPhoneNumber":
+            MessageLookupByLibrary.simpleMessage("修改电话号码"),
+        "home_profile_email": MessageLookupByLibrary.simpleMessage("电子邮件"),
+        "home_profile_enterYourNewDisplayNameHint":
+            MessageLookupByLibrary.simpleMessage("请输入您的新昵称"),
+        "home_profile_enterYourNewEmailHint":
+            MessageLookupByLibrary.simpleMessage("请输入您的新电子邮件地址"),
+        "home_profile_enterYourNewPasswordHint":
+            MessageLookupByLibrary.simpleMessage("请输入您的新密码"),
+        "home_profile_enterYourNewPhoneNumberHint":
+            MessageLookupByLibrary.simpleMessage("请输入您的新电话号码"),
+        "home_profile_enterYourOldPasswordHint":
+            MessageLookupByLibrary.simpleMessage("请输入您的旧密码"),
+        "home_profile_howMayIAddressYou":
+            MessageLookupByLibrary.simpleMessage("我们应如何称呼您？"),
+        "home_profile_newPasswordIsTheSame":
+            MessageLookupByLibrary.simpleMessage("新密码不能与旧密码相同。"),
+        "home_profile_oldPasswordIsInvalid":
+            MessageLookupByLibrary.simpleMessage("旧密码错误，请重试。"),
+        "home_profile_passwordIsTooWeak":
+            MessageLookupByLibrary.simpleMessage("密码强度过低，请重新设置。"),
+        "home_profile_passwordIsUpdated":
+            MessageLookupByLibrary.simpleMessage("密码已成功更新！"),
+        "home_profile_phoneNumberNotAvailable":
+            MessageLookupByLibrary.simpleMessage("电话号码暂未注册"),
+        "home_profile_pwHidden":
+            MessageLookupByLibrary.simpleMessage("密码: ******"),
+        "home_profile_submit": MessageLookupByLibrary.simpleMessage("提交"),
+        "home_states": MessageLookupByLibrary.simpleMessage("状态"),
+        "home_timeSlot": MessageLookupByLibrary.simpleMessage("时间段"),
+        "home_youDontHaveAnAppointmentYet":
+            MessageLookupByLibrary.simpleMessage("您当前没有任何预约。"),
         "login_emailHint": MessageLookupByLibrary.simpleMessage("电邮"),
         "login_emptyFieldsMessage":
             MessageLookupByLibrary.simpleMessage("请填写所有字段。"),

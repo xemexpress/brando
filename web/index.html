@@ -95,18 +95,22 @@
             }
 
             .twinkle {
-                animation: twinkleAnimation 1.7s ease-in-out infinite;
+                animation: heartbeatTwinkle 1.1s ease-in-out infinite;
             }
 
-            @keyframes twinkleAnimation {
-                0% {
-                    opacity: 1;
-                }
-                50% {
-                    opacity: 0.5;
-                }
+            @keyframes heartbeatTwinkle {
+                0%,
                 100% {
                     opacity: 1;
+                }
+                25% {
+                    opacity: 0.8;
+                }
+                50% {
+                    opacity: 0.6;
+                }
+                75% {
+                    opacity: 0.8;
                 }
             }
         </style>
@@ -129,7 +133,6 @@
         </div>
 
         <script>
-            // Add twrinkle effect to loader when completed.
             const lottiePlayer = document.querySelector("lottie-player");
 
             lottiePlayer.addEventListener("complete", function () {
@@ -149,6 +152,14 @@
                                 appRunner.runApp();
 
                                 document.getElementById("splash")?.remove();
+
+                                setTimeout(
+                                    () =>
+                                        document
+                                            .getElementById("splash")
+                                            ?.remove(),
+                                    1500
+                                ); // Adjust delay as needed
                             });
                     },
                 });

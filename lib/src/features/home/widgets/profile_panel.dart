@@ -49,9 +49,9 @@ class _ProfilePanelState extends ConsumerState<ProfilePanel> {
         showFeedback(message: S.current.home_profile_passwordIsUpdated);
       }
     } on InvalidPasswordAuthException catch (_) {
-      showFeedback(message: 'Old password is invalid. Please try again.');
+      showFeedback(message: S.current.home_profile_oldPasswordIsInvalid);
     } on WeakPasswordAuthException catch (_) {
-      showFeedback(message: 'Password is too weak. Please try again.');
+      showFeedback(message: S.current.home_profile_passwordIsTooWeak);
     } on GenericAuthException catch (e) {
       showFeedback(message: e.message);
     }

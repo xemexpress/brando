@@ -29,20 +29,22 @@ class PrimarySection extends StatelessWidget {
               ]
             : null,
       ),
-      child: Stack(
-        children: [
-          Align(
-            alignment: Alignment.center,
-            child: child,
-          ),
-          const Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 20.0),
-              child: AffiliationNote(),
+      child: SafeArea(
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: child,
             ),
-          ),
-        ],
+            const Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 20.0),
+                child: AffiliationNote(),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

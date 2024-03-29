@@ -21,8 +21,9 @@ class Appointment {
   }) : date = DateTime(date.year, date.month, date.day);
 
 // Get formatted date
-  String get formattedDate {
-    return date.formattedDate;
+  String formattedDate(String locale) {
+    print('test $locale');
+    return date.formattedDate(locale);
   }
 
   String get formattedTimeslot {

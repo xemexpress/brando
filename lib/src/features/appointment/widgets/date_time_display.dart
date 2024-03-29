@@ -18,7 +18,7 @@ class DateTimeDisplay extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         DisplayTextBox(
-          date?.formattedDate ?? '',
+          date?.formattedDate(Localizations.localeOf(context).toString()) ?? '',
           width: context.responsive(200, lg: 230),
         ),
         const SizedBox(width: 10),

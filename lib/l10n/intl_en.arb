@@ -7,13 +7,17 @@
     "@common_greetings": {
         "description": "The greeting message"
     },
-    "common_affiliationPoweredBy": "Powered by {company}",
-    "@common_affiliationPoweredBy": {
-        "description": "The phrase 'Powered by' with a placeholder for the company name"
-    },
     "common_logoutButton": "Log out",
     "@common_logoutButton": {
         "description": "Text for the button or link to log out of the booking system."
+    },
+    "common_myAppointment": "My appointment",
+    "@common_myAppointment": {
+        "description": "Title for accessing the user's appointment details."
+    },
+    "common_affiliationPoweredBy": "Powered by {company}",
+    "@common_affiliationPoweredBy": {
+        "description": "The phrase 'Powered by' with a placeholder for the company name"
     },
     "login_heading": "Login",
     "@login_heading": {

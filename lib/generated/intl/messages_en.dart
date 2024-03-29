@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "common_greetings": MessageLookupByLibrary.simpleMessage(
             "Welcome to\nMichelle Yuen Jewelry\nBooking System"),
         "common_logoutButton": MessageLookupByLibrary.simpleMessage("Log out"),
+        "common_myAppointment":
+            MessageLookupByLibrary.simpleMessage("My appointment"),
         "common_title": MessageLookupByLibrary.simpleMessage("Booking"),
         "home_appointmentTimeSlot":
             MessageLookupByLibrary.simpleMessage("Appointment time slot:"),

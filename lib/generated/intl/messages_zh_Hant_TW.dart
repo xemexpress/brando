@@ -20,7 +20,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'zh_Hant_TW';
 
-  static String m0(company) => "技術由 ${company} 提供支持";
+  static String m0(company) => "由 ${company} 提供技術支持";
 
   static String m1(error) => "錯誤：${error}";
 
@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "common_greetings": MessageLookupByLibrary.simpleMessage(
             "歡迎使用\nMichelle Yuen Jewelry\n預約系統"),
         "common_logoutButton": MessageLookupByLibrary.simpleMessage("登出"),
+        "common_myAppointment": MessageLookupByLibrary.simpleMessage("我的預約"),
         "common_title": MessageLookupByLibrary.simpleMessage("預約"),
         "home_appointmentTimeSlot":
             MessageLookupByLibrary.simpleMessage("預約時間段："),

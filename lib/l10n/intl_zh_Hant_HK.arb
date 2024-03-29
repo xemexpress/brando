@@ -1,8 +1,9 @@
 {
     "common_title": "預約",
     "common_greetings": "歡迎來到\nMichelle Yuen Jewelry\n預約系統",
-    "common_affiliationPoweredBy": "技術支持由 {company} 提供",
+    "common_affiliationPoweredBy": "由 {company} 提供技術支援",
     "common_logoutButton": "登出",
+    "common_myAppointment": "我的預約",
     "login_heading": "登入",
     "login_emailHint": "電郵地址",
     "login_passwordHint": "密碼",

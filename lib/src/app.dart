@@ -97,10 +97,12 @@ class _BrandoAppState extends ConsumerState<BrandoApp>
           case AuthScreen.routeName:
             return slideFromLeftTransition(
               const AuthScreen(),
+              AuthScreen.routeName,
             );
           case BookingScreen.routeName:
             return slideFromRightTransition(
               const BookingScreen(),
+              BookingScreen.routeName,
             );
           default:
             return null;

@@ -33,8 +33,39 @@ extension DateTimeExtension on DateTime {
     return DateFormat('MMMM').format(this);
   }
 
-  String get formattedDate {
-    return DateFormat('yyyy MMMM dd').format(this);
+  // String get formattedDate {
+  //   // return DateFormat('yyyy MMMM dd').format(this);
+  //   return DateFormat('yyyy MMMd').format(this);
+  // }
+
+  String formattedDate(String locale) {
+    DateFormat yearFormat, monthFormat, dayFormat;
+    final bool inChinese = locale.startsWith('zh_Han');
+
+    if (inChinese) {
+      // Chinese formatting
+      yearFormat = DateFormat('yyyy年', locale);
+      monthFormat = DateFormat('MMMM', locale);
+      dayFormat = DateFormat('dd日', locale);
+    } else {
+      // Default to English or any other format
+      yearFormat = DateFormat('yyyy', locale);
+      monthFormat = DateFormat('MMMM', locale);
+      dayFormat = DateFormat('dd', locale);
+    }
+
+    // Combine the formatted parts
+    String formattedYear = yearFormat.format(this);
+    String formattedMonth = monthFormat.format(this);
+    String formattedDay = dayFormat.format(this);
+
+    // Adjust the format based on the locale
+    if (inChinese) {
+      return '$formattedYear $formattedMonth $formattedDay';
+    } else {
+      // English version or any other non-Chinese language
+      return '$formattedMonth $formattedDay, $formattedYear';
+    }
   }
 
   String get formattedDateCompact {

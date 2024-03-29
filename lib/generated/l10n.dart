@@ -70,16 +70,6 @@ class S {
     );
   }
 
-  /// `Powered by {company}`
-  String common_affiliationPoweredBy(Object company) {
-    return Intl.message(
-      'Powered by $company',
-      name: 'common_affiliationPoweredBy',
-      desc: 'The phrase \'Powered by\' with a placeholder for the company name',
-      args: [company],
-    );
-  }
-
   /// `Log out`
   String get common_logoutButton {
     return Intl.message(
@@ -87,6 +77,26 @@ class S {
       name: 'common_logoutButton',
       desc: 'Text for the button or link to log out of the booking system.',
       args: [],
+    );
+  }
+
+  /// `My appointment`
+  String get common_myAppointment {
+    return Intl.message(
+      'My appointment',
+      name: 'common_myAppointment',
+      desc: 'Title for accessing the user\'s appointment details.',
+      args: [],
+    );
+  }
+
+  /// `Powered by {company}`
+  String common_affiliationPoweredBy(Object company) {
+    return Intl.message(
+      'Powered by $company',
+      name: 'common_affiliationPoweredBy',
+      desc: 'The phrase \'Powered by\' with a placeholder for the company name',
+      args: [company],
     );
   }
 

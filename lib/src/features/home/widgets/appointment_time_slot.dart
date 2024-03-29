@@ -90,7 +90,9 @@ class _AppointmentTimeSlotState extends ConsumerState<AppointmentTimeSlot> {
                                 children: [
                                   TableRowCell(
                                     rightBordered: true,
-                                    child: appointment.formattedDate,
+                                    child: appointment.formattedDate(
+                                        Localizations.localeOf(context)
+                                            .toString()),
                                   ),
                                   TableRowCell(
                                     child:

@@ -8,6 +8,7 @@ import 'package:brando/src/features/home/widgets/widgets.dart';
 import 'package:brando/src/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -40,33 +41,83 @@ class _HomePageState extends ConsumerState<HomePage> {
         SingleChildScrollView(
           child: Column(
             children: [
-              MyAppBar(
-                title: context.responsive(
-                  S.of(context).home_personalPanel,
-                  md: '',
+              // MyAppBar(
+              //   title: context.responsive(
+              //     S.of(context).home_personalPanel,
+              //     md: '',
+              //   ),
+              //   leading: context.responsive(
+              //     const MenuButton(),
+              //     md: TextButton(
+              //       style: TextButton.styleFrom(padding: EdgeInsets.zero),
+              //       onPressed: logOut,
+              //       child: Text(
+              //         S.of(context).common_logoutButton,
+              //         style: Theme.of(context).textTheme.labelLarge!.copyWith(
+              //               color: Theme.of(context).colorScheme.onPrimary,
+              //               fontWeight: FontWeight.bold,
+              //             ),
+              //       ),
+              //     ),
+              //   ),
+              //   trailing: context.responsive(
+              //     null,
+              //     md: Icon(
+              //       Icons.person_rounded,
+              //       color: Theme.of(context).colorScheme.surface,
+              //       size: 40,
+              //     ),
+              //   ),
+              // ),
+
+              AppBar(
+                backgroundColor:
+                    getCompensatedColor(Theme.of(context).colorScheme.primary)
+                        .withOpacity(0.5),
+                title: Text(
+                  context.responsive(
+                    S.of(context).home_personalPanel,
+                    md: '',
+                  ),
+                  style: GoogleFonts.libreBaskerville(
+                    textStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
+                        ),
+                  ),
                 ),
+                leadingWidth: 100,
                 leading: context.responsive(
                   const MenuButton(),
-                  md: TextButton(
-                    style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                    onPressed: logOut,
-                    child: Text(
-                      S.of(context).common_logoutButton,
-                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                            fontWeight: FontWeight.bold,
-                          ),
+                  md: Padding(
+                    padding: const EdgeInsets.only(left: 15.0),
+                    child: TextButton(
+                      style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                      onPressed: logOut,
+                      child: Text(
+                        S.of(context).common_logoutButton,
+                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
                     ),
                   ),
                 ),
-                trailing: context.responsive(
-                  null,
-                  md: Icon(
-                    Icons.person_rounded,
-                    color: Theme.of(context).colorScheme.surface,
-                    size: 40,
-                  ),
-                ),
+                actions: [
+                  context.responsive(
+                    const SizedBox(),
+                    md: Padding(
+                      padding: const EdgeInsets.only(right: 15),
+                      child: Icon(
+                        Icons.person_rounded,
+                        color: Theme.of(context).colorScheme.surface,
+                        size: 40,
+                      ),
+                    ),
+                  )
+                ],
               ),
               Padding(
                 padding: EdgeInsets.symmetric(

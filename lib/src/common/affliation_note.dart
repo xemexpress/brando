@@ -52,16 +52,6 @@ class _AffiliationNoteState extends State<AffiliationNote> {
               ),
             )
             .toList(),
-
-        // children: [
-        //   TextSpan(
-        //     text: S.of(context).common_affiliationPoweredBy(companyName),
-        //   ),
-        //   TextSpan(
-        //     text: companyName,
-        //     recognizer: TapGestureRecognizer()..onTap = onTap,
-        //   ),
-        // ],
       ),
     );
 
