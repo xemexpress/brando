@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "common_affiliationPoweredBy": m0,
         "common_greetings": MessageLookupByLibrary.simpleMessage(
             "Welcome to\nMichelle Yuen Jewelry\nBooking System"),
+        "common_locale": MessageLookupByLibrary.simpleMessage("en"),
         "common_logoutButton": MessageLookupByLibrary.simpleMessage("Log out"),
         "common_myAppointment":
             MessageLookupByLibrary.simpleMessage("My appointment"),

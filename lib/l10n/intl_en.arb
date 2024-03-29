@@ -1,4 +1,8 @@
 {
+    "common_locale": "en",
+    "@common_locale": {
+        "description": "Locale code for the application."
+    },
     "common_title": "Booking",
     "@common_title": {
         "description": "The title of the booking system"

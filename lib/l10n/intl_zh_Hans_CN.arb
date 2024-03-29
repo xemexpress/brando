@@ -1,4 +1,5 @@
 {
+    "common_locale": "zh_Hans_CN",
     "common_title": "预约",
     "common_greetings": "欢迎来到\nMichelle Yuen Jewelry\n预约系统",
     "common_affiliationPoweredBy": "由 {company} 提供技術支持",

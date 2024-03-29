@@ -1,3 +1,4 @@
+import 'package:brando/generated/l10n.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/appointment/controllers/controllers.dart';
 import 'package:brando/src/features/appointment/widgets/widgets.dart';
@@ -25,7 +26,7 @@ class ConfirmationPanel extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          appointment.formattedDate(Localizations.localeOf(context).toString()),
+          appointment.formattedDate(S.of(context).common_locale),
           style: GoogleFonts.libreBaskerville(
             textStyle: context.responsive(
               Theme.of(context).textTheme.titleMedium,

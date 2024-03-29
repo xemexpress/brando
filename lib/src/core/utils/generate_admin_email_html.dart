@@ -1,7 +1,7 @@
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/models/models.dart';
 
-String generateAdminEmailHtml(Appointment appointment) {
+String generateAdminEmailHtml(Appointment appointment, String locale) {
   // Assuming your Appointment class and its methods are properly defined as mentioned earlier
   // And assuming the formattedDate and formattedTimeslot methods properly format the date and time slots
   String htmlContent = """
@@ -36,7 +36,7 @@ String generateAdminEmailHtml(Appointment appointment) {
       </tr>
       <tr>
         <th>Date</th>
-        <td>${appointment.formattedDate('en_US')}</td>
+        <td>${appointment.formattedDate(locale)}</td>
       </tr>
       <tr>
         <th>Time Slot</th>

@@ -50,6 +50,16 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `en`
+  String get common_locale {
+    return Intl.message(
+      'en',
+      name: 'common_locale',
+      desc: 'Locale code for the application.',
+      args: [],
+    );
+  }
+
   /// `Booking`
   String get common_title {
     return Intl.message(

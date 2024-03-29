@@ -1,3 +1,4 @@
+import 'package:brando/generated/l10n.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/appointment/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class DateTimeDisplay extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         DisplayTextBox(
-          date?.formattedDate(Localizations.localeOf(context).toString()) ?? '',
+          date?.formattedDate(S.of(context).common_locale) ?? '',
           width: context.responsive(200, lg: 230),
         ),
         const SizedBox(width: 10),

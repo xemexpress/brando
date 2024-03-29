@@ -33,14 +33,9 @@ extension DateTimeExtension on DateTime {
     return DateFormat('MMMM').format(this);
   }
 
-  // String get formattedDate {
-  //   // return DateFormat('yyyy MMMM dd').format(this);
-  //   return DateFormat('yyyy MMMd').format(this);
-  // }
-
   String formattedDate(String locale) {
     DateFormat yearFormat, monthFormat, dayFormat;
-    final bool inChinese = locale.startsWith('zh_Han');
+    final bool inChinese = locale.startsWith('zh');
 
     if (inChinese) {
       // Chinese formatting
