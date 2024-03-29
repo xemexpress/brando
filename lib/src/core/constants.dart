@@ -9,5 +9,6 @@ const double inputBorderRadiusMobile = 5;
 
 const String companyName = 'Michelle Yuen Jewelry';
 const String companyWebsite = 'https://michelleyuenjewelry.com';
+const String companyEmail = 'michelleyuenjewelry@gmail.com';
 
 const int animationDuration = 500;

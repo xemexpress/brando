@@ -6,3 +6,4 @@ export './generate_nonce.dart';
 export './sha256_of_string.dart';
 export './open_drawer.dart';
 export './split_with_target_string.dart';
+export './generate_admin_email_html.dart';

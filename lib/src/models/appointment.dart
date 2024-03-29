@@ -22,7 +22,6 @@ class Appointment {
 
 // Get formatted date
   String formattedDate(String locale) {
-    print('test $locale');
     return date.formattedDate(locale);
   }
 

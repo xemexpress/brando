@@ -1,4 +1,5 @@
 import 'package:brando/src/apis/appointment/appointment.dart';
+import 'package:brando/src/core/core.dart';
 import 'package:brando/src/models/models.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -9,11 +10,13 @@ class AppointmentAPI implements AppointmentAPIInterface {
         _userAppointmentsCollectionRef =
             firebaseFirestore.collection('userAppointments'),
         _appointmentSlotsCollectionRef =
-            firebaseFirestore.collection('appointmentSlots');
+            firebaseFirestore.collection('appointmentSlots'),
+        _mailCollectionRef = firebaseFirestore.collection('mail');
 
   final FirebaseFirestore _firestore;
   final CollectionReference _userAppointmentsCollectionRef;
   final CollectionReference _appointmentSlotsCollectionRef;
+  final CollectionReference _mailCollectionRef;
 
   @override
   Future<void> cancelAppointment({
@@ -142,6 +145,7 @@ class AppointmentAPI implements AppointmentAPIInterface {
                 },
               );
             }
+
             final bool isSlotAvailable =
                 !potentialSlotRecord.exists || // If the snapshot doesn't exist,
                     ((potentialSlotRecord.data()! as Map<String, dynamic>)
@@ -168,6 +172,23 @@ class AppointmentAPI implements AppointmentAPIInterface {
                   'bookedBy': userId,
                 },
               );
+
+              // Send a notification to the admin
+              DocumentReference mailRef = _firestore.collection('mail').doc();
+              transaction.set(mailRef, {
+                'to': companyEmail,
+                'message': {
+                  'subject': 'An Appointment Has Been Booked',
+                  'html': generateAdminEmailHtml(appointment),
+                },
+              });
+              // _mailCollectionRef.add({
+              //   'to': companyEmail,
+              //   'message': {
+              //     'subject': 'An Appoinment Has Been Booked',
+              //     'html': generateAdminEmailHtml(appointment),
+              //   },
+              // });
 
               // Appointment booked successfully
               return true;
