@@ -149,17 +149,14 @@
                         engineInitializer
                             .initializeEngine()
                             .then(function (appRunner) {
-                                appRunner.runApp();
-
-                                document.getElementById("splash")?.remove();
-
-                                setTimeout(
-                                    () =>
+                                appRunner.runApp().then(function () {
+                                    // Remove splash screen
+                                    setTimeout(() => {
                                         document
                                             .getElementById("splash")
-                                            ?.remove(),
-                                    1500
-                                ); // Adjust delay as needed
+                                            ?.remove();
+                                    }, 1000);
+                                });
                             });
                     },
                 });

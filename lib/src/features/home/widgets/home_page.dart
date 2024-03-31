@@ -87,29 +87,48 @@ class _HomePageState extends ConsumerState<HomePage> {
                         ),
                   ),
                 ),
-                leadingWidth: 100,
+                leadingWidth: 70,
                 leading: context.responsive(
                   const MenuButton(),
-                  md: Padding(
-                    padding: const EdgeInsets.only(left: 15.0),
-                    child: TextButton(
-                      style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                      onPressed: logOut,
-                      child: Text(
-                        S.of(context).common_logoutButton,
-                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                              color: Theme.of(context).colorScheme.onPrimary,
-                              fontWeight: FontWeight.bold,
-                            ),
+                  md: Container(
+                    alignment: Alignment.centerLeft,
+                    // padding: const EdgeInsets.only(left: 15.0),
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: logOut,
+                        child: Text(
+                          S.of(context).common_logoutButton,
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelLarge!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                          textAlign: TextAlign.left,
+                        ),
                       ),
                     ),
                   ),
+                  // child: TextButton(
+                  //   style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                  //   onPressed: logOut,
+                  //   child: Text(
+                  //     S.of(context).common_logoutButton,
+                  //     style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                  //           color: Theme.of(context).colorScheme.onPrimary,
+                  //           fontWeight: FontWeight.bold,
+                  //         ),
+                  //     textAlign: TextAlign.left,
+                  //   ),
+                  // ),
                 ),
                 actions: [
                   context.responsive(
                     const SizedBox(),
-                    md: Padding(
-                      padding: const EdgeInsets.only(right: 15),
+                    md: Container(
+                      // padding: const EdgeInsets.only(right: 15),
                       child: Icon(
                         Icons.person_rounded,
                         color: Theme.of(context).colorScheme.surface,

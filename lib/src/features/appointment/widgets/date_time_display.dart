@@ -15,6 +15,8 @@ class DateTimeDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double timeWidth = 37.0;
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -23,14 +25,14 @@ class DateTimeDisplay extends StatelessWidget {
           width: context.responsive(200, lg: 230),
         ),
         const SizedBox(width: 10),
-        DisplayTextBox(time?.formattedHour ?? '', width: 50),
+        DisplayTextBox(time?.formattedHour ?? '', width: timeWidth),
         const SizedBox(width: 5),
         const Text(
           ':',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         const SizedBox(width: 5),
-        DisplayTextBox(time?.formattedMinute ?? '', width: 50),
+        DisplayTextBox(time?.formattedMinute ?? '', width: timeWidth),
       ],
     );
   }

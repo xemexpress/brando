@@ -21,7 +21,7 @@ class BookingSummary extends ConsumerWidget {
     final TimeOfDay endTime = myAppointmentState.appointment.endTime;
 
     return SizedBox(
-      height: 200,
+      height: 250,
       child: Center(
         child: stage == BookingStage.confirmation
             ? Text(

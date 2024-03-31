@@ -3,7 +3,6 @@ import 'package:brando/src/apis/appointment/appointment.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/models/models.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 
 class AppointmentAPI implements AppointmentAPIInterface {
   AppointmentAPI({
@@ -175,21 +174,14 @@ class AppointmentAPI implements AppointmentAPIInterface {
                 },
               );
 
-              // Send a notification to the admin
-              DocumentReference mailRef = _firestore.collection('mail').doc();
-              transaction.set(mailRef, {
-                'to': companyEmail,
-                'message': {
-                  'subject': 'An Appointment Has Been Booked',
-                  'html': generateAdminEmailHtml(
-                      appointment, S.current.common_locale),
-                },
-              });
-              // _mailCollectionRef.add({
+              // ? Send a notification to the admin
+              // DocumentReference mailRef = _mailCollectionRef.doc();
+              // transaction.set(mailRef, {
               //   'to': companyEmail,
               //   'message': {
-              //     'subject': 'An Appoinment Has Been Booked',
-              //     'html': generateAdminEmailHtml(appointment),
+              //     'subject': 'An Appointment Has Been Booked',
+              //     'html': generateAdminEmailHtml(
+              //         appointment, S.current.common_locale),
               //   },
               // });
 

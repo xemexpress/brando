@@ -29,6 +29,7 @@ class DisplayTextBox extends StatelessWidget {
           fontStyle: FontStyle.italic,
           fontWeight: FontWeight.bold,
         ),
+        textAlign: TextAlign.center,
       ),
     );
   }

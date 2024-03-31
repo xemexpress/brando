@@ -151,7 +151,7 @@ class _ContactPageState extends ConsumerState<ContactPanel> {
 
     return SingleChildScrollView(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 110),
           title,

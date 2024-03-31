@@ -5,7 +5,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
-// import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -26,9 +25,6 @@ void main() async {
 
     if (kIsWeb) {
       await dotenv.load(fileName: '.env');
-
-      // Disable the below to access iphone
-      // setUrlStrategy(PathUrlStrategy());
     }
   }
 

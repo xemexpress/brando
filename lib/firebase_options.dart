@@ -50,6 +50,7 @@ class DefaultFirebaseOptions {
     projectId: 'michelleyuenjewelry-booking',
     authDomain: 'michelleyuenjewelry-booking.firebaseapp.com',
     storageBucket: 'michelleyuenjewelry-booking.appspot.com',
+    measurementId: 'G-3RYG5KVTSC',
   );
 
   static const FirebaseOptions android = FirebaseOptions(

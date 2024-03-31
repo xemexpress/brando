@@ -53,11 +53,11 @@ class _DateTimePanelState extends ConsumerState<DateTimePanel> {
         ),
       ],
       md: [
-        const Spacer(),
+        // const Spacer(),
         const DatePicker(),
-        const Spacer(),
+        // const Spacer(),
         const TimeslotPicker(),
-        const Spacer(),
+        // const Spacer(),
       ],
     );
 

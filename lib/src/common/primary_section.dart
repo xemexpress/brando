@@ -30,6 +30,9 @@ class PrimarySection extends StatelessWidget {
             : null,
       ),
       child: SafeArea(
+        right: false,
+        bottom: false,
+        top: false,
         child: Stack(
           children: [
             Align(

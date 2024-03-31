@@ -6,6 +6,7 @@ import 'package:brando/src/features/auth/view/auth_screen.dart';
 import 'package:brando/src/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppointmentPage extends ConsumerStatefulWidget {
   const AppointmentPage({super.key});
@@ -48,26 +49,47 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
     required String title,
     Function()? leadingFunction,
   }) _buildAppBar() {
-    return ({required String title, Function()? leadingFunction}) => MyAppBar(
-          title: context.responsive(
+    return ({
+      required String title,
+      Function()? leadingFunction,
+    }) {
+      return AppBar(
+        backgroundColor: context.responsive(
+          Theme.of(context).colorScheme.primary,
+          md: Colors.transparent,
+        ),
+        surfaceTintColor: context.responsive(
+          Theme.of(context).colorScheme.primary,
+          md: Colors.transparent,
+        ),
+        title: Text(
+          context.responsive(
             title,
             md: '',
           ),
-          leading: context.responsive(
-            const MenuButton(),
-            md: leadingFunction != null
-                ? IconButton(
-                    style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                    onPressed: leadingFunction,
-                    icon: Transform.translate(
-                      offset: const Offset(-1, 0),
-                      child: const Icon(Icons.arrow_back_ios_rounded),
-                    ),
-                  )
-                : null,
+          style: GoogleFonts.libreBaskerville(
+            textStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
+                ),
           ),
-          trailing: context.responsive(
-            null,
+        ),
+        leading: context.responsive(
+          const MenuButton(),
+          md: leadingFunction != null
+              ? IconButton(
+                  onPressed: leadingFunction,
+                  icon: Transform.translate(
+                    offset: const Offset(-1, 0),
+                    child: const Icon(Icons.arrow_back_ios_rounded),
+                  ),
+                )
+              : null,
+        ),
+        actions: [
+          context.responsive(
+            Container(),
             md: MouseRegion(
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
@@ -80,11 +102,47 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
               ),
             ),
           ),
-          backgroundColor: context.responsive(
-            null,
-            md: Colors.transparent,
-          ),
-        );
+        ],
+      );
+
+      //   return MyAppBar(
+      //     title: context.responsive(
+      //       title,
+      //       md: '',
+      //     ),
+      //     leading: context.responsive(
+      //       const MenuButton(),
+      //       md: leadingFunction != null
+      //           ? IconButton(
+      //               style: TextButton.styleFrom(padding: EdgeInsets.zero),
+      //               onPressed: leadingFunction,
+      //               icon: Transform.translate(
+      //                 offset: const Offset(-1, 0),
+      //                 child: const Icon(Icons.arrow_back_ios_rounded),
+      //               ),
+      //             )
+      //           : null,
+      //     ),
+      //     trailing: context.responsive(
+      //       null,
+      //       md: MouseRegion(
+      //         cursor: SystemMouseCursors.click,
+      //         child: GestureDetector(
+      //           onTap: goToHomePage,
+      //           child: Icon(
+      //             Icons.person_rounded,
+      //             color: Theme.of(context).colorScheme.primary,
+      //             size: 40,
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //     backgroundColor: context.responsive(
+      //       null,
+      //       md: Colors.transparent,
+      //     ),
+      //   );
+    };
   }
 
   @override
@@ -102,14 +160,13 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
     ];
 
     return Stack(
-      alignment: Alignment.center,
       children: [
-        IndexedStack(
-          alignment: Alignment.topCenter,
-          index: stage.code,
-          children: stages,
-        ),
-        // stages[stage.code],
+        // IndexedStack(
+        //   alignment: Alignment.topCenter,
+        //   index: stage.code,
+        //   children: stages,
+        // ),
+        stages[stage.code],
         if (isLoading) ...[
           const LoaderBackground(),
           const Loader(),

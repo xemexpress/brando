@@ -35,8 +35,7 @@ class _MobileScaffoldState extends ConsumerState<MobileScaffold> {
   void goToHomePage() {
     Navigator.of(context).pop();
     ref.read(appointmentControllerProvider.notifier).resetStage();
-    print(
-        'test ModalRoute.of(context)?.settings.name: ${ModalRoute.of(context)?.settings.name}');
+
     if (ModalRoute.of(context)?.settings.name != AuthScreen.routeName) {
       Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
     }

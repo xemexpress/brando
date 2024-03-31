@@ -53,6 +53,17 @@ dependencies:
     sign_in_with_apple: ^5.0.0
     crypto: ^3.0.3
     cloud_firestore: ^4.15.8
+    flutter_native_splash: ^2.4.0
+    firebase_analytics: ^10.9.0
+
+flutter_native_splash:
+    android: true
+    ios: true
+    web: false
+
+    color: "#ffdbc1"
+    # background_image: assets/images/background_image.png
+    image: images/michelle-yuen-jewelry-logo.png
 
 dev_dependencies:
     flutter_test:

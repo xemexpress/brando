@@ -34,11 +34,9 @@ class _DateTimePageState extends ConsumerState<DateTimePage> {
   @override
   Widget build(BuildContext context) {
     final dateTimeBody = Container(
-      padding: context.responsive(
-        const EdgeInsets.symmetric(horizontal: 40),
-        sm: const EdgeInsets.symmetric(horizontal: 30),
-        md: const EdgeInsets.symmetric(horizontal: 10),
-        lg: const EdgeInsets.symmetric(horizontal: 80),
+      padding: EdgeInsets.symmetric(
+        vertical: 40,
+        horizontal: context.responsive(40, sm: 30, md: 40, lg: 80, xl: 130),
       ),
       child: const DateTimePanel(),
     );
@@ -57,17 +55,13 @@ class _DateTimePageState extends ConsumerState<DateTimePage> {
           ],
         ),
       ),
-      md: Stack(
-        children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: appBar,
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: dateTimeBody,
-          ),
-        ],
+      md: SingleChildScrollView(
+        child: Column(
+          children: [
+            appBar,
+            dateTimeBody,
+          ],
+        ),
       ),
     );
   }
