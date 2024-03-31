@@ -92,7 +92,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   const MenuButton(),
                   md: Container(
                     alignment: Alignment.centerLeft,
-                    // padding: const EdgeInsets.only(left: 15.0),
+                    padding: const EdgeInsets.only(left: 15.0),
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
                       child: GestureDetector(
@@ -128,7 +128,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   context.responsive(
                     const SizedBox(),
                     md: Container(
-                      // padding: const EdgeInsets.only(right: 15),
+                      padding: const EdgeInsets.only(right: 15),
                       child: Icon(
                         Icons.person_rounded,
                         color: Theme.of(context).colorScheme.surface,

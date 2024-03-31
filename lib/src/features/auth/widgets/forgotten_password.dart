@@ -1,4 +1,5 @@
 import 'package:brando/generated/l10n.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,6 +15,7 @@ class ForgotPassword extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           print('Forgotten password');
+          FirebaseAnalytics.instance.logEvent(name: 'forgotten_password');
         },
         child: Stack(
           alignment: Alignment.bottomCenter,

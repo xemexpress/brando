@@ -1,3 +1,4 @@
+import 'package:brando/src/apis/analytics/analytics.dart';
 import 'package:brando/src/common/common.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/appointment/widgets/widgets.dart';
@@ -7,8 +8,9 @@ import 'package:brando/src/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BookingScreen extends ConsumerWidget {
+class BookingScreen extends ConsumerStatefulWidget {
   static const String routeName = '/booking';
+  static const String screenName = 'Booking Screen';
 
   static route() => MaterialPageRoute(
         builder: (context) => const BookingScreen(),
@@ -19,7 +21,23 @@ class BookingScreen extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<BookingScreen> createState() => _BookingScreenState();
+}
+
+class _BookingScreenState extends ConsumerState<BookingScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await ref
+          .read(analyticsAPIProvider)
+          .setCurrentScreen(pageName: BookingScreen.screenName);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return StreamBuilder<AuthUser?>(
       stream: ref.read(authControllerProvider.notifier).userChanges(),
       builder: (context, snapshot) {

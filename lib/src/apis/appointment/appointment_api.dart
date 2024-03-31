@@ -20,9 +20,7 @@ class AppointmentAPI implements AppointmentAPIInterface {
   final CollectionReference _mailCollectionRef;
 
   @override
-  Future<void> cancelAppointment({
-    required String userId,
-  }) async {
+  Future<void> cancelAppointment({required String userId}) async {
     try {
       final bool cancelled =
           await _firestore.runTransaction<bool>((transaction) async {
