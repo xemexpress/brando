@@ -20,9 +20,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await ref
-          .read(analyticsAPIProvider)
-          .setCurrentScreen(pageName: HomeScreen.screenName);
+      if (mounted) {
+        await ref
+            .read(analyticsAPIProvider)
+            .setCurrentScreen(pageName: HomeScreen.screenName);
+      }
     });
   }
 

@@ -1,4 +1,3 @@
-import 'package:brando/src/apis/analytics/analytics.dart';
 import 'package:brando/src/common/common.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/features/auth/controllers/controllers.dart';

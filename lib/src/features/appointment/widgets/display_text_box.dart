@@ -21,6 +21,7 @@ class DisplayTextBox extends StatelessWidget {
         border: Border(
           bottom: BorderSide(width: 0.7),
         ),
+        // color: Colors.red,
       ),
       child: Text(
         content,

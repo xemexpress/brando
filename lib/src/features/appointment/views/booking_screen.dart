@@ -30,9 +30,11 @@ class _BookingScreenState extends ConsumerState<BookingScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await ref
-          .read(analyticsAPIProvider)
-          .setCurrentScreen(pageName: BookingScreen.screenName);
+      if (mounted) {
+        await ref
+            .read(analyticsAPIProvider)
+            .setCurrentScreen(pageName: BookingScreen.screenName);
+      }
     });
   }
 

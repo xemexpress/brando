@@ -1,4 +1,5 @@
 import 'package:brando/src/core/core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Appointment {
@@ -87,7 +88,7 @@ class Appointment {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'date': date.millisecondsSinceEpoch,
+      'date': Timestamp.fromDate(date), // Convert DateTime to Timestamp
       'startTime': {
         'hour': startTime.hour,
         'minute': startTime.minute,
@@ -99,13 +100,14 @@ class Appointment {
       'title': title,
       'name': name,
       'phoneNumber': phoneNumber,
-      'createdAt': DateTime.now().millisecondsSinceEpoch,
+      'createdAt': Timestamp.now(), // Store the current time as a Timestamp
     };
   }
 
   factory Appointment.fromMap(Map<String, dynamic> map) {
     return Appointment(
-      date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
+      date:
+          (map['date'] as Timestamp).toDate(), // Convert Timestamp to DateTime
       startTime: TimeOfDay(
         hour: map['startTime']['hour'],
         minute: map['startTime']['minute'],
@@ -117,7 +119,8 @@ class Appointment {
       title: map['title'] as String,
       name: map['name'] as String,
       phoneNumber: map['phoneNumber'] as String,
-      createdAt: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
+      createdAt: (map['createdAt'] as Timestamp)
+          .toDate(), // Convert Timestamp to DateTime for createdAt
     );
   }
 }

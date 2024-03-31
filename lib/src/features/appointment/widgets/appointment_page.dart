@@ -75,14 +75,18 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
                 ),
           ),
         ),
+        leadingWidth: 70,
         leading: context.responsive(
           const MenuButton(),
           md: leadingFunction != null
-              ? IconButton(
-                  onPressed: leadingFunction,
-                  icon: Transform.translate(
-                    offset: const Offset(-1, 0),
-                    child: const Icon(Icons.arrow_back_ios_rounded),
+              ? Container(
+                  padding: const EdgeInsets.only(left: 15.0),
+                  child: IconButton(
+                    onPressed: leadingFunction,
+                    icon: Transform.translate(
+                      offset: const Offset(-1, 0),
+                      child: const Icon(Icons.arrow_back_ios_rounded),
+                    ),
                   ),
                 )
               : null,
@@ -90,14 +94,17 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
         actions: [
           context.responsive(
             Container(),
-            md: MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: GestureDetector(
-                onTap: goToHomePage,
-                child: Icon(
-                  Icons.person_rounded,
-                  color: Theme.of(context).colorScheme.primary,
-                  size: 40,
+            md: Container(
+              padding: const EdgeInsets.only(right: 15),
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: goToHomePage,
+                  child: Icon(
+                    Icons.person_rounded,
+                    color: Theme.of(context).colorScheme.primary,
+                    size: 40,
+                  ),
                 ),
               ),
             ),

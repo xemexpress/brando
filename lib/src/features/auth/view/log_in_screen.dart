@@ -21,9 +21,11 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await ref
-          .read(analyticsAPIProvider)
-          .setCurrentScreen(pageName: LogInScreen.screenName);
+      if (mounted) {
+        await ref
+            .read(analyticsAPIProvider)
+            .setCurrentScreen(pageName: LogInScreen.screenName);
+      }
     });
   }
 
