@@ -6,12 +6,16 @@ class MenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () => openDrawer(context),
-      icon: Icon(
-        Icons.menu_rounded,
-        color: Theme.of(context).colorScheme.background,
-        size: 35,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: InkWell(
+        onTap: () => openDrawer(context),
+        borderRadius: BorderRadius.circular(40),
+        child: Icon(
+          Icons.menu_rounded,
+          color: Theme.of(context).colorScheme.background,
+          size: 35,
+        ),
       ),
     );
   }

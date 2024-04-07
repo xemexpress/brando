@@ -24,7 +24,7 @@ class _LogInPanelState extends ConsumerState<LogInPanel> {
   final FocusNode _passwordFocusNode = FocusNode();
 
   void goToAuthScreen() {
-    Navigator.of(context).pushNamed(AuthScreen.routeName);
+    Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
   }
 
   void signInUserWithEmailAndPassword() async {

@@ -38,10 +38,8 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
   }
 
   void goToHomePage() {
-    Navigator.of(context).pushReplacementNamed(
-      AuthScreen.routeName,
-      arguments: slideFromLeftTransition,
-    );
+    Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
+
     ref.read(appointmentControllerProvider.notifier).resetStage();
   }
 
@@ -80,7 +78,7 @@ class _AppointmentPageState extends ConsumerState<AppointmentPage> {
           const MenuButton(),
           md: leadingFunction != null
               ? Container(
-                  padding: const EdgeInsets.only(left: 15.0),
+                  padding: const EdgeInsets.only(left: 15.0, top: 5, bottom: 5),
                   child: IconButton(
                     onPressed: leadingFunction,
                     icon: Transform.translate(

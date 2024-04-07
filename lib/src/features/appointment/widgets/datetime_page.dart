@@ -25,10 +25,7 @@ class _DateTimePageState extends ConsumerState<DateTimePage> {
   void goToHomePage() {
     ref.read(appointmentControllerProvider.notifier).resetStage();
 
-    Navigator.of(context).pushReplacementNamed(
-      AuthScreen.routeName,
-      arguments: slideFromLeftTransition,
-    );
+    Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
   }
 
   @override
