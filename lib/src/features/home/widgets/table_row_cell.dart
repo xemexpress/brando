@@ -11,7 +11,7 @@ class TableRowCell extends StatelessWidget {
   final bool rightBordered;
   final double verticalPaddingForHeaderCell = 3;
   final double horizontalPadding = 10;
-  final double cellHeight = 50;
+  final double cellHeight = 30;
   final dynamic child;
 
   @override

@@ -35,6 +35,20 @@ class _ProfilePanelState extends ConsumerState<ProfilePanel> {
     }
   }
 
+  void onSubmitContactNumber(String newContactNumber) async {
+    try {
+      pop();
+
+      await ref
+          .read(authControllerProvider.notifier)
+          .updateContactNumber(contactNumber: newContactNumber);
+
+      showFeedback(message: S.current.home_profile_contactNumberIsUpdated);
+    } on GenericAuthException catch (e) {
+      showFeedback(message: e.message);
+    }
+  }
+
   void onSubmitPassword(String oldPassword, String newPassword) async {
     try {
       pop();
@@ -69,7 +83,7 @@ class _ProfilePanelState extends ConsumerState<ProfilePanel> {
     );
   }
 
-  editEmail() {
+  void editEmail() {
     showDialog(
       context: context,
       builder: (context) => EditProfileDialog(
@@ -82,20 +96,18 @@ class _ProfilePanelState extends ConsumerState<ProfilePanel> {
     );
   }
 
-  editPhoneNumber() {
+  void editPhoneNumber() {
     showDialog(
       context: context,
       builder: (context) => EditProfileDialog(
         title: S.of(context).home_profile_editPhoneNumber,
         hintText: S.of(context).home_profile_enterYourNewPhoneNumberHint,
-        onSubmit: (phoneNumber) {
-          print('Edit phone number.');
-        },
+        onSubmit: onSubmitContactNumber,
       ),
     );
   }
 
-  editPassword() {
+  void editPassword() {
     showDialog(
       context: context,
       builder: (context) => EditProfileDialog(
@@ -114,7 +126,7 @@ class _ProfilePanelState extends ConsumerState<ProfilePanel> {
       stream: ref.read(authControllerProvider.notifier).userChanges(),
       builder: (context, snapshot) {
         final AuthUser? currentUser = snapshot.data;
-
+        print('$currentUser');
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -155,10 +167,10 @@ class _ProfilePanelState extends ConsumerState<ProfilePanel> {
                   isVerified: true,
                 ),
                 ShowAndEdit(
-                  displayText: currentUser?.phoneNumber != null
-                      ? "+852 ${currentUser?.phoneNumber}"
+                  displayText: currentUser?.contactNumber != null
+                      ? "+852 ${currentUser!.contactNumber}"
                       : S.of(context).home_profile_phoneNumberNotAvailable,
-                  // onEdit: editPhoneNumber,
+                  onEdit: editPhoneNumber,
                 ),
                 ShowAndEdit(
                   displayText: S.of(context).home_profile_pwHidden,

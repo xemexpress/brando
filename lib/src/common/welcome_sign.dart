@@ -10,16 +10,19 @@ class WelcomeSign extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      S.of(context).common_greetings,
-      textAlign: TextAlign.center,
-      style: GoogleFonts.libreBaskerville(
-        textStyle: context.responsive(
-          Theme.of(context).textTheme.titleLarge,
-          md: Theme.of(context).textTheme.displaySmall!.copyWith(height: 1.5),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 2),
+      child: Text(
+        S.of(context).common_greetings,
+        textAlign: TextAlign.center,
+        style: GoogleFonts.libreBaskerville(
+          textStyle: context.responsive(
+            Theme.of(context).textTheme.titleLarge,
+            md: Theme.of(context).textTheme.displaySmall!.copyWith(height: 1.5),
+          ),
+          fontStyle: FontStyle.italic,
+          fontWeight: FontWeight.bold,
         ),
-        fontStyle: FontStyle.italic,
-        fontWeight: FontWeight.bold,
       ),
     );
   }

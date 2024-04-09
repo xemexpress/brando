@@ -28,7 +28,7 @@ class MyButton extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(
             horizontal: horizontalPadding ?? context.responsive(10, md: 13),
-            vertical: context.responsive(2, md: 4),
+            vertical: context.responsive(2, md: 3),
           ),
           decoration: BoxDecoration(
             color: backgroundColor,

@@ -173,15 +173,15 @@ class AppointmentAPI implements AppointmentAPIInterface {
               );
 
               // ? Send a notification to the admin
-              // DocumentReference mailRef = _mailCollectionRef.doc();
-              // transaction.set(mailRef, {
-              //   'to': companyEmail,
-              //   'message': {
-              //     'subject': 'An Appointment Has Been Booked',
-              //     'html': generateAdminEmailHtml(
-              //         appointment, S.current.common_locale),
-              //   },
-              // });
+              DocumentReference mailRef = _mailCollectionRef.doc();
+              transaction.set(mailRef, {
+                'to': companyEmail,
+                'message': {
+                  'subject': 'An Appointment Has Been Booked',
+                  'html': generateAdminEmailHtml(
+                      appointment, S.current.common_locale),
+                },
+              });
 
               // Appointment booked successfully
               return true;

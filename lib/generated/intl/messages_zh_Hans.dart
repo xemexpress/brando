@@ -42,6 +42,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "home_makeAnAppointment": MessageLookupByLibrary.simpleMessage("立即预约"),
         "home_personalPanel": MessageLookupByLibrary.simpleMessage("主页"),
         "home_profile_cancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "home_profile_contactNumberIsUpdated":
+            MessageLookupByLibrary.simpleMessage("电话号码已更新！"),
         "home_profile_displayNameIsUpdated":
             MessageLookupByLibrary.simpleMessage("昵称已更新！"),
         "home_profile_editDisplayName":

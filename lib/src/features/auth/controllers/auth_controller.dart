@@ -34,6 +34,16 @@ class AuthController extends StateNotifier<bool> {
     }
   }
 
+  Future<void> updateContactNumber({required String contactNumber}) async {
+    isLoading(true);
+
+    try {
+      await _authAPI.updateContactNumber(contactNumber: contactNumber);
+    } finally {
+      isLoading(false);
+    }
+  }
+
   Future<void> updatePassword(
       {required String oldPassword, required String newPassword}) async {
     isLoading(true);

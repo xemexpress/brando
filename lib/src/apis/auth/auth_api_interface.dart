@@ -4,6 +4,9 @@ abstract class AuthAPIInterface {
   AuthUser? get currentUser;
 
   // Profile related
+  Future<void> initializeProfile({
+    required String uid,
+  });
 
   Future<void> updateDisplayName({
     required String newDisplayName,
@@ -14,9 +17,9 @@ abstract class AuthAPIInterface {
     required String newPassword,
   });
 
-  // Future<void> updatePhoneNumber({
-  //   required String phoneNumber,
-  // });
+  Future<void> updateContactNumber({
+    required String contactNumber,
+  });
 
   // Auth related
 

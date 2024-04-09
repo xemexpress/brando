@@ -449,6 +449,17 @@ class S {
     );
   }
 
+  /// `Contact number is updated!`
+  String get home_profile_contactNumberIsUpdated {
+    return Intl.message(
+      'Contact number is updated!',
+      name: 'home_profile_contactNumberIsUpdated',
+      desc:
+          'Success message for updated contact number on the home profile screen.',
+      args: [],
+    );
+  }
+
   /// `New password is the same as the old password.`
   String get home_profile_newPasswordIsTheSame {
     return Intl.message(

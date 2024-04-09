@@ -151,6 +151,10 @@
     "@home_profile_displayNameIsUpdated": {
         "description": "Success message for updated display name on the home profile screen."
     },
+    "home_profile_contactNumberIsUpdated": "Contact number is updated!",
+    "@home_profile_contactNumberIsUpdated": {
+        "description": "Success message for updated contact number on the home profile screen."
+    },
     "home_profile_newPasswordIsTheSame": "New password is the same as the old password.",
     "@home_profile_newPasswordIsTheSame": {
         "description": "Error message when the new password entered is the same as the old one on the home profile screen."

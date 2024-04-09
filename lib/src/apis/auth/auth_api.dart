@@ -1,16 +1,22 @@
 import 'package:brando/src/apis/apis.dart';
 import 'package:brando/src/core/core.dart';
 import 'package:brando/src/models/models.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AuthAPI implements AuthAPIInterface {
   AuthAPI({
     required FirebaseAuth firebaseAuth,
-  }) : _firebaseAuth = firebaseAuth;
+    required FirebaseFirestore firebaseFirestore,
+  })  : _firebaseAuth = firebaseAuth,
+        _userProfilesCollectionRef =
+            firebaseFirestore.collection('userProfiles');
 
   final FirebaseAuth _firebaseAuth;
+  final CollectionReference _userProfilesCollectionRef;
 
   @override
   AuthUser? get currentUser {
@@ -24,6 +30,22 @@ class AuthAPI implements AuthAPIInterface {
   }
 
   // Profile related
+
+  // @override
+  @override
+  Future<void> initializeProfile({required String uid}) async {
+    try {
+      await _userProfilesCollectionRef.doc(uid).set(
+        {
+          'contactNumber': '',
+        },
+      );
+    } catch (e) {
+      throw GenericAuthException(
+        message: 'Unexpected error when creating user profile. ${e.toString()}',
+      );
+    }
+  }
 
   @override
   Future<void> updateDisplayName({required String newDisplayName}) async {
@@ -71,21 +93,37 @@ class AuthAPI implements AuthAPIInterface {
     }
   }
 
-  // @override
-  // Future<void> updatePhoneNumber({required String phoneNumber}) async {
-  //   try {
-  //     await _firebaseAuth.currentUser?.updatePhoneNumber();
-  //   } on FirebaseAuthException catch (e) {
-  //     throw GenericAuthException(
-  //       message:
-  //           'Met when signing in. Please set an exception for FirebaseAuthException of code ${e.code}.',
-  //     );
-  //   } catch (e) {
-  //     throw GenericAuthException(
-  //       message: 'Unexpected error when signing in. ${e.toString()}',
-  //     );
-  //   }
-  // }
+  @override
+  Future<void> updateContactNumber({required String contactNumber}) async {
+    try {
+      DocumentReference userProfileRef =
+          _userProfilesCollectionRef.doc(currentUser!.id);
+
+      try {
+        await userProfileRef.update({
+          'contactNumber': contactNumber,
+        });
+      } on FirebaseException catch (e) {
+        if (e.code == 'not-found') {
+          await userProfileRef.set({
+            'contactNumber': contactNumber,
+          });
+        } else {
+          rethrow;
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      throw GenericAuthException(
+        message:
+            'Met when signing in. Please set an exception for FirebaseAuthException of code ${e.code}.',
+      );
+    } catch (e) {
+      throw GenericAuthException(
+        message:
+            'Unexpected error when updating the contact number. ${e.toString()}',
+      );
+    }
+  }
 
   // Auth related
 
@@ -100,12 +138,62 @@ class AuthAPI implements AuthAPIInterface {
 
   @override
   Stream<AuthUser?> userChanges() {
-    return _firebaseAuth.userChanges().map((firebaseUser) {
-      return firebaseUser == null
-          ? null
-          : AuthUser.fromFirebaseUser(firebaseUser);
+    Stream<User?> firebaseUserStream = _firebaseAuth.userChanges();
+
+    return firebaseUserStream.switchMap((firebaseUser) {
+      if (firebaseUser == null) {
+        return Stream.value(null);
+      }
+
+      Stream<DocumentSnapshot> userProfileStream =
+          _userProfilesCollectionRef.doc(firebaseUser.uid).snapshots();
+
+      return userProfileStream.map((userProfileSnapshot) {
+        if (userProfileSnapshot.exists) {
+          final userProfile =
+              userProfileSnapshot.data() as Map<String, dynamic>;
+
+          return AuthUser.fromFirebaseUserAndProfileData(
+            firebaseUser,
+            userProfile,
+          );
+        } else {
+          return AuthUser.fromFirebaseUser(firebaseUser);
+        }
+      });
     });
   }
+
+  // @override
+  // Stream<AuthUser?> userChanges() {
+  //   return _firebaseAuth.userChanges().switchMap((firebaseUser) async* {
+  //     if (firebaseUser == null) {
+  //       yield null;
+  //     }
+
+  //     DocumentSnapshot userProfileSnapshot =
+  //         await _userProfilesCollectionRef.doc(firebaseUser!.uid).get();
+  //     if (userProfileSnapshot.exists) {
+  //       final userProfile = userProfileSnapshot.data() as Map<String, dynamic>;
+
+  //       yield AuthUser.fromFirebaseUserAndProfileData(
+  //         firebaseUser,
+  //         userProfile,
+  //       );
+  //     } else {
+  //       yield AuthUser.fromFirebaseUser(firebaseUser);
+  //     }
+  //   });
+  // }
+
+  // @override
+  // Stream<AuthUser?> userChanges() {
+  //   return _firebaseAuth.userChanges().map((firebaseUser) {
+  //     return firebaseUser == null
+  //         ? null
+  //         : AuthUser.fromFirebaseUser(firebaseUser);
+  //   });
+  // }
 
   @override
   Future<AuthUser> signInEmailAndPassword({
@@ -147,38 +235,6 @@ class AuthAPI implements AuthAPIInterface {
   @override
   Future<AuthUser> signInWithGoogle() async {
     try {
-      // final GoogleSignIn gSignIn = GoogleSignIn(
-      //   clientId: kIsWeb ? dotenv.env['GOOGLE_CLIENT_ID'] : null,
-      //   // clientId: const String.fromEnvironment('GOOGLE_CLIENT_ID'),
-      // );
-
-      // GoogleSignInAccount? gUser;
-      // try {
-      //   gUser = await gSignIn.signIn();
-      // } catch (_) {
-      //   gUser = await gSignIn.signInSilently();
-      // }
-
-      // if (gUser == null) {
-      //   throw UserNotLoggedInException();
-      // }
-
-      // final GoogleSignInAuthentication gAuth = await gUser.authentication;
-      // final credential = GoogleAuthProvider.credential(
-      //   accessToken: gAuth.accessToken,
-      //   idToken: gAuth.idToken,
-      // );
-
-      // await _firebaseAuth.signInWithCredential(credential);
-
-      // final user = currentUser;
-      // if (user == null) {
-      //   throw UserNotLoggedInException();
-      // }
-
-      // return user;
-      // The `GoogleAuthProvider` can only be
-      // used while running on the web
       GoogleAuthProvider authProvider = GoogleAuthProvider();
 
       final UserCredential userCredential =
@@ -194,6 +250,9 @@ class AuthAPI implements AuthAPIInterface {
       if (user == null) {
         throw UserNotLoggedInException();
       }
+
+      // Initialize user profile
+      await initializeProfile(uid: user.id);
 
       return user;
     } on FirebaseAuthException catch (e) {

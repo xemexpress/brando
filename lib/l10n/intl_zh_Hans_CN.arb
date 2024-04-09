@@ -37,6 +37,7 @@
     "home_profile_enterYourOldPasswordHint": "请输入您的旧密码",
     "home_profile_enterYourNewPasswordHint": "请输入您的新密码",
     "home_profile_displayNameIsUpdated": "昵称已更新！",
+    "home_profile_contactNumberIsUpdated": "电话号码已更新！",
     "home_profile_newPasswordIsTheSame": "新密码不能与旧密码相同。",
     "home_profile_passwordIsUpdated": "密码已成功更新！",
     "home_profile_oldPasswordIsInvalid": "旧密码错误，请重试。",

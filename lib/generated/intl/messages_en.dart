@@ -45,6 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "home_personalPanel":
             MessageLookupByLibrary.simpleMessage("Personal Panel"),
         "home_profile_cancel": MessageLookupByLibrary.simpleMessage("cancel"),
+        "home_profile_contactNumberIsUpdated":
+            MessageLookupByLibrary.simpleMessage("Contact number is updated!"),
         "home_profile_displayNameIsUpdated":
             MessageLookupByLibrary.simpleMessage("Display name is updated!"),
         "home_profile_editDisplayName":
